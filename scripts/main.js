@@ -1,33 +1,28 @@
 // scripts/main.js
 
-// --- Imports ---
 import { updateMenu } from './menu.js';
-import { showPage } from './navigation.js';
-// Removed calendar imports: import { setupCalendarNavigation, populateCalendar } from './calendar.js';
+import { showPage, showEventsView } from './navigation.js';
+import { setupCalendarNavigation, populateCalendar } from './calendar.js';
 import { SELECTOR_CARD_VIEW_BTN, SELECTOR_CALENDAR_VIEW_BTN, CLASS_ACTIVE, SELECTOR_SIDEBAR_LIST, SELECTOR_BOTTOM_NAV, MOBILE_BREAKPOINT, SELECTOR_PAGE_CONTENT } from './constants.js';
-import './dev-menu.js'; // Import and execute dev-menu.js
+import './dev-menu.js'; // Import the dev-menu (important!)
 
-
-// --- DOMContentLoaded Event Listener ---
 document.addEventListener('DOMContentLoaded', () => {
-    console.log("DOM fully loaded and parsed"); // Debugging log
-
     const userRoleSelect = document.getElementById('user-role');
     if (!userRoleSelect) {
         console.error("Could not find the user-role select element");
-        return; // Exit if the select element is missing
+        return;
     }
 
     // --- Initial Setup ---
     let initialRole = userRoleSelect.value;
-    console.log("Initial role:", initialRole); // Debugging log
     updateMenu(initialRole);	// Call updateMenu *first*
-    console.log("updateMenu called"); // Debugging log
     showPage('dashboard', initialRole); // *Then* show the initial page
-    console.log("showPage called"); // Debugging log
-
     setupNavigationListeners(); // *Then* setup navigation
-    setupEventListeners(); // Setup the view toggle listeners.
+	  setupEventListeners();
+    let currentMonth = new Date().getMonth(); // Get the current month
+    let currentYear = new Date().getFullYear(); // Get the current year
+    populateCalendar(currentMonth, currentYear); // Populate with current month/year
+    setupCalendarNavigation(); // Set up button listeners
 
     // --- Burger Menu Toggle ---
     const burgerMenuBtn = document.querySelector('.burger-menu-btn');
@@ -46,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const selectedRole = userRoleSelect.value;
 
             updateMenu(selectedRole); // Update the menu *first*
-            setupNavigationListeners();
+            setupNavigationListeners(); //re-attach sidebar listeners
             // Find currently active page.  This logic is correct.
             let activePage = document.querySelector('.page-content.active');
             let pageId = 'dashboard'; // Default to dashboard
@@ -55,11 +50,16 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             showPage(pageId, selectedRole); // *Then* show the correct page
+            //reset the calendar
+            let currentMonth = new Date().getMonth(); // Get the current month
+            let currentYear = new Date().getFullYear(); // Get the current year
+            populateCalendar(currentMonth, currentYear); // Populate with current month/year
+
         });
     }
 
-       // --- Event Listeners ---
-       function setupEventListeners() {
+    // --- Event Listeners ---
+    function setupEventListeners() {
       // --- Event Listeners for View Toggle Buttons ---
         const cardViewBtn = document.getElementById(SELECTOR_CARD_VIEW_BTN);
         const calendarViewBtn = document.getElementById(SELECTOR_CALENDAR_VIEW_BTN);
