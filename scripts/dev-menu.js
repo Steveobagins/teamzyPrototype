@@ -4,11 +4,10 @@ const devMenuToggle = document.getElementById('dev-menu-toggle');
 let isDragging = false;
 let offsetX, offsetY;
 
-if (devMenu) { // Ensure devMenu exists
+// Only add dragging if the dev menu exists
+if (devMenu) {
     devMenu.addEventListener('mousedown', (e) => {
-        // CRITICAL: Check if the click target is within the dev menu,
-        // but NOT on the toggle button or select element.  This prevents
-        // clicks on the toggle/select from starting a drag.
+        // Only start dragging if NOT clicking on the toggle button or select element
         if (e.target !== devMenuToggle && e.target.tagName !== 'SELECT' && !e.target.closest('#dev-menu-toggle')) {
             isDragging = true;
             const rect = devMenu.getBoundingClientRect();
@@ -33,45 +32,45 @@ if (devMenu) { // Ensure devMenu exists
 
 
     // --- Dev Menu Toggle ---
-    if (devMenuToggle) { // Ensure devMenuToggle exists
+    // Only add toggle functionality if toggle element exists
+    if (devMenuToggle) {
         devMenuToggle.addEventListener('click', (e) => {
-            e.preventDefault(); // Prevent text selection and any default behavior
+            e.preventDefault(); // Prevent text selection AND prevent drag start
             // No need for stopPropagation here, since the mousedown check prevents drag start
 
             devMenu.classList.toggle('hidden');
             // Change the icon on toggle
             if (devMenu.classList.contains('hidden')) {
-                devMenuToggle.innerHTML = '<i class="fas fa-chevron-up"></i>';
+                devMenuToggle.innerHTML = '<i class="fas fa-chevron-up"></i>'; // Up arrow
             } else {
-                devMenuToggle.innerHTML = '<i class="fas fa-chevron-down"></i>';
+                devMenuToggle.innerHTML = '<i class="fas fa-chevron-down"></i>'; // Down arrow
             }
         });
     }
-}
 
-// --- Dev Menu Role Change and Refresh ---
-const refreshBtn = document.getElementById('refresh-btn');
+	// --- Dev Menu Role Change and Refresh ---
+	// Only add if element exists
+	const refreshBtn = document.getElementById('refresh-btn');
+    const userRoleSelect = document.getElementById('user-role');
+	if (refreshBtn) {
+		refreshBtn.addEventListener('click', (e) => {
+		    e.preventDefault(); // Prevent default behavior.
 
-if (refreshBtn) {
-  refreshBtn.addEventListener('click', (e) => {
-        e.preventDefault(); // Prevent default behavior
+		    const selectedRole = userRoleSelect.value;
 
-        const userRoleSelect = document.getElementById('user-role');
+		    updateMenu(selectedRole); // Update the menu based on selected role
 
-        if (!userRoleSelect) {
-            console.error("Could not find the user-role select element");
-            return;
-        }
+		    // Find currently active page
+		    let activePage = document.querySelector('.page-content.active');
 
-        const selectedRole = userRoleSelect.value;
+		    // If no page is active, default to dashboard
+		    let pageId = 'dashboard';
 
-        updateMenu(selectedRole);
-        let activePage = document.querySelector('.page-content.active');
-        let pageId = 'dashboard';
-
-        if (activePage) {
-          pageId = activePage.id.replace(`-${selectedRole}`, '').replace('-page', '');
-        }
-        showPage(pageId, selectedRole);
-    });
+		     // if there is a page active, get its ID, and conver to base page id (no role)
+		    if (activePage) {
+		        pageId = activePage.id.replace(`-${selectedRole}`,'').replace('-page', ''); //get the base page
+		    }
+		    showPage(pageId, selectedRole); // Show the page for new role
+		});
+	}
 }
