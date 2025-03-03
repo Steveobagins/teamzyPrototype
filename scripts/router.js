@@ -59,6 +59,7 @@ export function initializeRouter() {
   }
 
   // Render the initial view *after* the listener is attached and hash is set.
-  renderView(window.location.hash.slice(1));
+    renderView(window.location.hash.slice(1)); // This was the issue
+
 }
 // End of code
