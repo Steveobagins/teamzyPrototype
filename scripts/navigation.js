@@ -19,13 +19,6 @@ function showPage(pageId, userRole) {
         }
     });
 
-    // Default to card view when events page is shown
-    if (pageId === 'events') {
-			showEventsView('events-card-view');
-			//these are now handled in main.js
-      //document.getElementById(SELECTOR_CARD_VIEW_BTN)?.classList.add(CLASS_ACTIVE);
-      //document.getElementById(SELECTOR_CALENDAR_VIEW_BTN)?.classList.remove(CLASS_ACTIVE);
-    }
 }
 
 
@@ -43,7 +36,7 @@ function showEventsView(viewId) {
     }
 }
 
-// --- Placeholder for Export Functionality (Add to navigation.js) ---
+// --- Placeholder for Export Functionality  ---
 document.addEventListener('click', (event) => {
     if (event.target.id === SELECTOR_EXPORT_PAYMENTS_BTN) {
         //  Implement export logic here (in a real app, this would trigger a backend API call)
