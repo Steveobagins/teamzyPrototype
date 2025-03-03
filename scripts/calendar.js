@@ -8,8 +8,11 @@ import {
     SELECTOR_CURRENT_MONTH_YEAR,
     CLASS_EVENT_MARKER,
     CLASS_WEEKEND,
-    eventsData // Import the events data
+    eventsData,
+    CLASS_HIDDEN // Import the events data
 } from './constants.js';
+
+import { showCalendar } from './navigation.js';
 
 // --- Calendar and Modal Logic ---
 const eventModal = document.getElementById(SELECTOR_EVENT_MODAL);
@@ -124,6 +127,7 @@ function showEventDetails(event) {
 }
 // --- Calendar Navigation Event Listeners ---
 function setupCalendarNavigation() {
+     showCalendar();
     const prevMonthBtn = document.querySelector(SELECTOR_PREV_MONTH_BTN);
     const nextMonthBtn = document.querySelector(SELECTOR_NEXT_MONTH_BTN);
 
