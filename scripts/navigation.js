@@ -1,26 +1,21 @@
-// scripts/navigation.js
-
 import {
     SELECTOR_PAGE_CONTENT,
-    SELECTOR_CARD_VIEW_BTN,
-    SELECTOR_CALENDAR_VIEW_BTN,
-    CLASS_ACTIVE,
-    SELECTOR_EXPORT_PAYMENTS_BTN
+    SELECTOR_EXPORT_PAYMENTS_BTN,
+		CLASS_ACTIVE
 } from './constants.js';
 
 function showPage(pageId, userRole) {
     const pageContents = document.querySelectorAll(SELECTOR_PAGE_CONTENT);
     pageContents.forEach(page => {
         const roles = page.dataset.role.split(" ");
+			  console.log("page id is", pageId, "page is", page.id, roles, userRole);
         if (page.id === `${pageId}-page` && roles.includes(userRole)) {
             page.classList.add(CLASS_ACTIVE);
         } else {
             page.classList.remove(CLASS_ACTIVE);
         }
     });
-
 }
-
 
 // --- View Switching (for Events Page) ---
 function showEventsView(viewId) {
@@ -45,4 +40,4 @@ document.addEventListener('click', (event) => {
     }
 });
 
-export { showPage, showEventsView};
+export { showPage, showEventsView };
