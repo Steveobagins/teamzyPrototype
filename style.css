@@ -1,0 +1,225 @@
+/* style.css */
+
+/* 1. CSS Variables (Custom Properties) - for Theming */
+
+:root {
+  /* Color Palette */
+  --color-primary: #007bff; /* Blue - Replace with your logo's blue */
+  --color-secondary: #ff7f50; /* Coral - Example contrasting color */
+  --color-accent: #ffcc00; /* Yellow - Example accent color */
+  --color-background: #fff; /* White */
+  --color-background-light: #f8f9fa; /* Light Gray */
+  --color-text: #333; /* Dark Gray */
+  --color-text-light: #666; /* Lighter Gray for less important text */
+  --color-border: #ddd; /* Light Gray for borders */
+  --color-error: #dc3545; /* Red for errors */
+  --color-success: #28a745; /* Green for success */
+
+  /* Typography */
+  --font-family-sans: 'Open Sans', sans-serif; /* Or Roboto, Lato, etc. */
+  --font-size-base: 16px;
+  --font-size-small: 0.875rem; /* 14px */
+  --font-size-large: 1.25rem;  /* 20px */
+  --font-weight-normal: 400;
+  --font-weight-bold: 700;
+  --line-height: 1.5;
+
+  /* Spacing */
+  --space-xs: 0.25rem;  /* 4px */
+  --space-sm: 0.5rem;   /* 8px */
+  --space-md: 1rem;    /* 16px */
+  --space-lg: 1.5rem;   /* 24px */
+  --space-xl: 2rem;    /* 32px */
+
+  /* Border Radius */
+  --border-radius: 8px;
+  --border-radius-pill: 50px; /* For pill-shaped buttons */
+
+  /* Box Shadow */
+  --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+  /* Transition */
+  --transition: all 0.2s ease-in-out;
+}
+
+/* 2. Basic Reset and Global Styles */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height);
+  color: var(--color-text);
+  background-color: var(--color-background);
+  -webkit-font-smoothing: antialiased; /* Improve font rendering */
+  -moz-osx-font-smoothing: grayscale;  /* Improve font rendering */
+}
+
+/* 3. Basic Layout (using CSS Grid - can be changed to Flexbox if preferred) */
+
+body {
+  display: grid;
+  grid-template-rows: auto 1fr auto; /* Header, Main Content, Footer */
+  min-height: 100vh; /* Ensure the body takes at least the full viewport height */
+}
+
+header {
+  background-color: var(--color-primary);
+  color: var(--color-background);
+  padding: var(--space-md);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+main {
+  padding: var(--space-md);
+}
+
+footer {
+  background-color: var(--color-background-light);
+  color: var(--color-text-light);
+  padding: var(--space-md);
+  text-align: center;
+}
+
+#app {
+    /* Styles for the main content area where views will be rendered */
+}
+
+/* 4. Basic Styles for Common UI Elements (Placeholders) */
+
+/* --- Buttons --- */
+.button {
+  display: inline-block; /* Allows setting width/height */
+  padding: var(--space-sm) var(--space-md);
+  background-color: var(--color-primary);
+  color: var(--color-background);
+  text-decoration: none;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: var(--transition);
+  font-weight: var(--font-weight-bold);
+}
+
+.button:hover {
+  background-color: darken(var(--color-primary), 10%); /* Slightly darker on hover */
+}
+
+.button-secondary {
+  background-color: var(--color-secondary);
+}
+.button-secondary:hover {
+     background-color: darken(var(--color-secondary), 10%);
+}
+
+/* --- Forms --- */
+/* (Add styles for input fields, labels, textareas, etc. later) */
+.form-group {
+  margin-bottom: var(--space-md);
+}
+
+label {
+    display: block;
+    margin-bottom: var(--space-xs);
+    font-weight: var(--font-weight-bold);
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="date"],
+input[type="number"],
+textarea,
+select
+ {
+  width: 100%;
+  padding: var(--space-sm);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius);
+  font-size: var(--font-size-base);
+  font-family: var(--font-family-sans);
+  transition: border-color var(--transition); /* Smooth border color change */
+}
+
+/* Focus style for form inputs */
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+textarea:focus, select:focus{
+  outline: none;
+  border-color: var(--color-primary); /* Highlight on focus */
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25); /* Add a subtle glow */
+}
+
+/* --- Cards --- */
+.card {
+  background-color: var(--color-background);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  padding: var(--space-md);
+  margin-bottom: var(--space-md);
+}
+
+/* --- Navigation ---*/
+#main-nav ul {
+    list-style: none;
+    display:flex;
+    gap: var(--space-md);
+}
+
+#main-nav a {
+    color: var(--color-background);
+    text-decoration: none;
+    padding: var(--space-sm);
+    border-radius: var(--border-radius);
+}
+
+#main-nav a:hover {
+    background-color: rgba(255, 255, 255, 0.2); /* Light background on hover*/
+}
+
+
+/* --- Headings --- */
+h1, h2, h3, h4, h5, h6 {
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--space-sm);
+    line-height: 1.2;
+}
+
+h1 { font-size: 2rem; }
+h2 { font-size: 1.75rem; }
+h3 { font-size: 1.5rem; }
+h4 { font-size: 1.25rem; }
+h5 { font-size: 1rem; }
+h6 { font-size: 0.875rem; }
+
+/* --- Utility Classes --- */
+
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+.text-muted { color: var(--color-text-light); }
+.mb-0 { margin-bottom: 0; } /* Remove bottom margin */
+.mb-sm { margin-bottom: var(--space-sm); }
+.mb-md { margin-bottom: var(--space-md); }
+.mb-lg { margin-bottom: var(--space-lg); }
+
+.visually-hidden { /* For accessibility - hides elements visually but keeps them accessible to screen readers */
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
