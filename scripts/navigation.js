@@ -20,9 +20,9 @@ function showPage(pageId, userRole) {
     });
 
     // Default to card view when events page is shown
-    if (pageId === 'events') {
-        showEventsView('events-card-view');
-    }
+    if (pageId === 'events') {
+        showEventsView('events-card-view');
+    }
 }
 
 
