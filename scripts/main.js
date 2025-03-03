@@ -3,14 +3,11 @@
 import { updateMenu } from './menu.js';
 import { showPage, showEventsView } from './navigation.js';
 import { setupCalendarNavigation, populateCalendar } from './calendar.js';
-import { SELECTOR_CARD_VIEW_BTN, SELECTOR_CALENDAR_VIEW_BTN, CLASS_ACTIVE, SELECTOR_SIDEBAR_LIST, SELECTOR_BOTTOM_NAV, MOBILE_BREAKPOINT, menuItems } from './constants.js';
-import './dev-menu.js';
+import { SELECTOR_CARD_VIEW_BTN, SELECTOR_CALENDAR_VIEW_BTN, CLASS_ACTIVE, SELECTOR_SIDEBAR_LIST, SELECTOR_BOTTOM_NAV, MOBILE_BREAKPOINT } from './constants.js';
+import './dev-menu.js'; // Import the dev-menu (important!)
 
 document.addEventListener('DOMContentLoaded', () => {
     const userRoleSelect = document.getElementById('user-role');
-    const burgerMenuBtn = document.querySelector('.burger-menu-btn'); // Get the burger menu button
-    const sidebar = document.querySelector('.sidebar'); // Get the sidebar
-
     if (!userRoleSelect) {
         console.error("Could not find the user-role select element");
         return;
@@ -18,29 +15,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Initial Setup ---
     let initialRole = userRoleSelect.value;
-    updateMenu(initialRole); // Call updateMenu *first*
+    updateMenu(initialRole);	// Call updateMenu *first*
     showPage('dashboard', initialRole); // *Then* show the initial page
     setupNavigationListeners(); // *Then* setup navigation
-    setupEventListeners();
-    let currentMonth = new Date().getMonth();
-    let currentYear = new Date().getFullYear();
-    populateCalendar(currentMonth, currentYear);
-    setupCalendarNavigation();
+	  setupEventListeners();
+    let currentMonth = new Date().getMonth(); // Get the current month
+    let currentYear = new Date().getFullYear(); // Get the current year
+    populateCalendar(currentMonth, currentYear); // Populate with current month/year
+    setupCalendarNavigation(); // Set up button listeners
 
     // --- Burger Menu Toggle ---
-    if (burgerMenuBtn && sidebar) {
-        burgerMenuBtn.addEventListener('click', () => {
-            sidebar.classList.toggle('open');
-        });
-    }
+   const burgerMenuBtn = document.querySelector('.burger-menu-btn');
+	const sidebar = document.querySelector('.sidebar');
+
+	if (burgerMenuBtn && sidebar) { // Check for null
+		burgerMenuBtn.addEventListener('click', () => {
+			 sidebar.classList.toggle('open');
+		});
+	}
 
     // --- Refresh Functionality (Now in main.js) ---
     const refreshBtn = document.getElementById('refresh-btn');
     if (refreshBtn) {
-        refreshBtn.addEventListener('click', () => {
+        refreshBtn.addEventListener('click', (e) => {
+            e.preventDefault(); // Prevent default button behavior
             const selectedRole = userRoleSelect.value;
-            updateMenu(selectedRole); // Update the menu *first*
 
+            updateMenu(selectedRole); // Update the menu *first*
+            setupNavigationListeners();
+            // Find currently active page.  This logic is correct.
             let activePage = document.querySelector('.page-content.active');
             let pageId = 'dashboard'; // Default to dashboard
             if (activePage) {
@@ -48,16 +51,15 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             showPage(pageId, selectedRole); // *Then* show the correct page
-            setupNavigationListeners();
-            //reset the calendar
-            let currentMonth = new Date().getMonth(); // Get the current month
-            let currentYear = new Date().getFullYear(); // Get the current year
-            populateCalendar(currentMonth, currentYear); // Populate with current month/year
+
+				//reset the calendar
+				let currentMonth = new Date().getMonth(); // Get the current month
+				let currentYear = new Date().getFullYear(); // Get the current year
+				populateCalendar(currentMonth, currentYear); // Populate with current month/year
 
         });
     }
-
-        // --- Event Listeners ---
+	 // --- Event Listeners ---
     function setupEventListeners() {
       // --- Event Listeners for View Toggle Buttons ---
         const cardViewBtn = document.getElementById(SELECTOR_CARD_VIEW_BTN);
@@ -77,7 +79,6 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
     }
-
     // --- Navigation Setup Function (for re-use) ---
     function setupNavigationListeners() {
         // Event delegation for sidebar and bottom nav
@@ -86,13 +87,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Remove existing listeners first to prevent duplicates
         if (sidebarMenuList) {
-          sidebarMenuList.removeEventListener('click', handleSidebarClick);
-          sidebarMenuList.addEventListener('click', handleSidebarClick); // Attach the new listener
+			  sidebarMenuList.removeEventListener('click', handleSidebarClick);
+			  sidebarMenuList.addEventListener('click', handleSidebarClick); // Attach the new listener
 
         }
 
         if (bottomNavMenuList) {
-             bottomNavMenuList.removeEventListener('click', handleBottomNavClick);
+				 bottomNavMenuList.removeEventListener('click', handleBottomNavClick);
              bottomNavMenuList.addEventListener('click', handleBottomNavClick);
         }
     }
@@ -102,23 +103,25 @@ document.addEventListener('DOMContentLoaded', () => {
         if (event.target.tagName === 'A') {
             event.preventDefault();
             const pageId = event.target.dataset.page;
-             const userRole = document.querySelector('#user-role').value;
+				 const userRole = document.querySelector('#user-role').value;
             showPage(pageId, userRole);
-             if (window.innerWidth <= MOBILE_BREAKPOINT) {
+				 if (window.innerWidth <= MOBILE_BREAKPOINT) {
                 const sidebar = document.querySelector('.sidebar');
-                 sidebar.classList.remove('open');
+					 const mainContent = document.querySelector('main');
+                sidebar.classList.remove('open');
+					 mainContent.classList.remove('sidebar-open');
             }
         }
     }
 
-      function handleBottomNavClick(event) {
+	  function handleBottomNavClick(event) {
 
-        const link = event.target.closest('a');
-        if (link) { // Check if the clicked element or its parent is an anchor tag
-            event.preventDefault();
-            const pageId = link.dataset.page;
-            const userRole = document.querySelector('#user-role').value; // Get the current user role
-            showPage(pageId, userRole);
-        }
+			const link = event.target.closest('a');
+			if (link) { // Check if the clicked element or its parent is an anchor tag
+				 event.preventDefault();
+				 const pageId = link.dataset.page;
+				 const userRole = document.querySelector('#user-role').value; // Get the current user role
+				 showPage(pageId, userRole);
+			}
     }
 });

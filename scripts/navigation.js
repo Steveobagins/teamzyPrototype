@@ -7,9 +7,8 @@ import {
     CLASS_ACTIVE,
     SELECTOR_EXPORT_PAYMENTS_BTN
 } from './constants.js';
-import { setupCalendarNavigation, populateCalendar } from './calendar.js';
 
- function showPage(pageId, userRole) {
+function showPage(pageId, userRole) {
     const pageContents = document.querySelectorAll(SELECTOR_PAGE_CONTENT);
     pageContents.forEach(page => {
         const roles = page.dataset.role.split(" ");
@@ -22,9 +21,10 @@ import { setupCalendarNavigation, populateCalendar } from './calendar.js';
 
     // Default to card view when events page is shown
     if (pageId === 'events') {
-        showEventsView('events-card-view');
-        document.getElementById(SELECTOR_CARD_VIEW_BTN)?.classList.add(CLASS_ACTIVE);
-        document.getElementById(SELECTOR_CALENDAR_VIEW_BTN)?.classList.remove(CLASS_ACTIVE);
+			showEventsView('events-card-view');
+			//these are now handled in main.js
+      //document.getElementById(SELECTOR_CARD_VIEW_BTN)?.classList.add(CLASS_ACTIVE);
+      //document.getElementById(SELECTOR_CALENDAR_VIEW_BTN)?.classList.remove(CLASS_ACTIVE);
     }
 }
 

@@ -49,6 +49,8 @@
 /* --- View Toggle Styles --- */
 .view-toggle {
     margin-bottom: 1rem;
+    display: flex;
+    gap: 0.5rem;
 }
 
 .view-toggle button {
@@ -57,7 +59,7 @@
     border: 1px solid #ccc;
     border-radius: 8px;
     cursor: pointer;
-    margin-right: 0.5rem;
+   /*remove margin:  margin-right: 0.5rem; */
 }
 
 .view-toggle button.active {
@@ -73,8 +75,8 @@
     grid-gap: 5px;
     border: 1px solid #ccc;
     padding: 10px;
-     background-color: #fff;
-     border-radius: 12px;
+    background-color: #fff;
+    border-radius: 12px;
 }
 
 .calendar-day {
@@ -82,7 +84,16 @@
     padding: 5px;
     text-align: center;
     min-height: 60px; /*  Give each day some height */
-     background-color: #f9f9f9;
+    background-color: #f9f9f9;
+}
+
+/* Style for day labels (Sun, Mon, Tue, etc.) */
+.calendar-day-label {
+    text-align: center;
+    font-weight: bold;
+    padding: 5px;
+    background-color: #f0f0f0; /* Light background for labels */
+    border-bottom: 1px solid #ddd; /* subtle seperator */
 }
 
 .calendar-day.event-marker {
@@ -94,11 +105,10 @@
    filter: brightness(0.9);
 }
 .calendar-day.weekend {
-    background-color: #f5e0e0; /* Or your weekend color */
+    background-color: #cce5ff; /* Or your weekend color */
     color: #303030;
     cursor: pointer;
 }
-
 
 /* --- Modal Styles --- */
 .modal {
@@ -136,6 +146,18 @@
 .close-button:focus {
     color: black;
     text-decoration: none;
+}
+#event-modal-buttons{
+    margin-top: 20px;
+}
+
+#event-modal-buttons button{
+    background-color: #4CAF50;
+    color: white;
+    padding: 5px;
+    border: none;
+    border-radius: 5px;
+     margin-right: 5px;
     cursor: pointer;
 }
 
@@ -155,19 +177,15 @@
 .warning-card strong {
     font-weight: bold;
 }
-.warning-card button{
+
+.warning-card button {
     background-color: #ffc107;
     color: #333;
     border-radius: 5px;
     padding: 5px 10px;
-    border: 1px solid #b8860b; /* add border */
-    cursor: pointer; /* change cursor on hover */
+    border: 1px solid #b8860b;
+    cursor: pointer;
 }
-.warning-card button:hover{
-     background-color: #ddd; /* Add a hover effect */
-    color: #b8860b; /* Darker blue on hover */
-}
-
 /* --- Team Item Styles --- */
 .team-item {
     background-color: #fff;
@@ -185,52 +203,4 @@
 .team-item p {
     margin-bottom: 0.25rem;
     color: #555;
-}
-
-/* --- Payments table Styles --- */
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 1rem;
-}
-
-th, td {
-    padding: 0.75rem;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-}
-
-th {
-    background-color: #f2f2f2;
-    font-weight: bold;
-}
-
-tr:nth-child(even) {
-    background-color: #f9f9f9;
-}
-
-/* --- Calendar Navigation Styles --- */
-.calendar-navigation {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
-}
-
-.calendar-navigation button {
-    padding: 0.5rem 1rem;
-    background-color: #eee;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 1rem;
-}
-.calendar-navigation button:hover {
-    background-color: #ddd;
-}
-
-.calendar-navigation h3 {
-    margin: 0;
-    font-size: 1.2rem;
 }
