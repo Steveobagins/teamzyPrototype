@@ -2,36 +2,22 @@
 
 import {
     SELECTOR_PAGE_CONTENT,
-    SELECTOR_EXPORT_PAYMENTS_BTN,
-		CLASS_ACTIVE
+    SELECTOR_CARD_VIEW_BTN,
+    SELECTOR_CALENDAR_VIEW_BTN,
+    CLASS_ACTIVE,
+    SELECTOR_EXPORT_PAYMENTS_BTN
 } from './constants.js';
 
 function showPage(pageId, userRole) {
     const pageContents = document.querySelectorAll(SELECTOR_PAGE_CONTENT);
     pageContents.forEach(page => {
         const roles = page.dataset.role.split(" ");
-			  console.log("page id is", pageId, "page is", page.id, roles, userRole);
         if (page.id === `${pageId}-page` && roles.includes(userRole)) {
             page.classList.add(CLASS_ACTIVE);
         } else {
             page.classList.remove(CLASS_ACTIVE);
         }
     });
-}
-
-// --- View Switching (for Events Page) ---
-function showEventsView(viewId) {
-    const views = document.querySelectorAll('.events-view');
-    views.forEach(view => {
-        view.classList.add('hidden'); // Hide all views using the 'hidden' class
-    });
-
-    const viewToShow = document.getElementById(viewId);
-    if (viewToShow) {
-        viewToShow.classList.remove('hidden'); // Show the selected view by removing 'hidden'
-    } else {
-        console.error(`Event view with ID '${viewId}' not found.`);
-    }
 }
 
 // --- Placeholder for Export Functionality  ---
@@ -43,4 +29,4 @@ document.addEventListener('click', (event) => {
     }
 });
 
-export { showPage, showEventsView };
+export { showPage };

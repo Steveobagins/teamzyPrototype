@@ -8,21 +8,21 @@ export const SELECTOR_BOTTOM_NAV_LINKS = '.bottom-nav a';
 export const SELECTOR_PAGE_CONTENT = '.page-content';
 export const SELECTOR_SIDEBAR_LIST = '.sidebar ul';
 export const SELECTOR_BOTTOM_NAV = '.bottom-nav';
-export const SELECTOR_EVENT_MODAL = '#event-modal';
-export const SELECTOR_CLOSE_BUTTON = '.close-button';
-export const SELECTOR_CALENDAR_DIV = '.calendar';
+//export const SELECTOR_EVENT_MODAL = '#event-modal'; // Removed
+//export const SELECTOR_CLOSE_BUTTON = '.close-button'; // Removed
+//export const SELECTOR_CALENDAR_DIV = '.calendar'; // Removed
 export const SELECTOR_CARD_VIEW_BTN = '#card-view-btn';
-export const SELECTOR_CALENDAR_VIEW_BTN = '#calendar-view-btn';
+//export const SELECTOR_CALENDAR_VIEW_BTN = '#calendar-view-btn'; // Removed
 export const SELECTOR_EXPORT_PAYMENTS_BTN = '#export-payments-btn';
-export const SELECTOR_PREV_MONTH_BTN = '#prev-month-btn';
-export const SELECTOR_NEXT_MONTH_BTN = '#next-month-btn';
-export const SELECTOR_CURRENT_MONTH_YEAR = '#current-month-year';
+//export const SELECTOR_PREV_MONTH_BTN = '#prev-month-btn'; // Removed
+//export const SELECTOR_NEXT_MONTH_BTN = '#next-month-btn'; // Removed
+//export const SELECTOR_CURRENT_MONTH_YEAR = '#current-month-year'; // Removed
 export const ID_DASHBOARD_PAGE = 'dashboard';
 export const CLASS_ACTIVE = 'active';
 export const CLASS_OPEN = 'open';
 export const CLASS_SIDEBAR_OPEN = 'sidebar-open';
-export const CLASS_EVENT_MARKER = 'event-marker';
-export const CLASS_WEEKEND = 'weekend';
+//export const CLASS_EVENT_MARKER = 'event-marker'; // Removed
+//export const CLASS_WEEKEND = 'weekend'; // Removed
 export const MOBILE_BREAKPOINT = 768;
 
 //Menu Items
@@ -73,8 +73,8 @@ export const menuItems = {
     ],
 };
 
-// Placeholder event data (replace with real data later)
-export const eventsData = [
+// Placeholder event data (replace with real data later)  -- REMOVED, as calandar is removed
+/*export const eventsData = [
     {
         date: '2024-03-22',
         title: 'County Championships',
@@ -102,4 +102,4 @@ export const eventsData = [
         fee: '$10',
         button: 'Pay Now'
     }
-];
+];*/

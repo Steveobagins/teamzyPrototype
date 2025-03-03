@@ -68,48 +68,7 @@
     border-color: #007bff;
 }
 
-/* --- Calendar Styles --- */
-.calendar {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr); /* 7 columns for days of the week */
-    grid-gap: 5px;
-    border: 1px solid #ccc;
-    padding: 10px;
-    background-color: #fff;
-    border-radius: 12px;
-}
-
-.calendar-day {
-    border: 1px solid #ddd;
-    padding: 5px;
-    text-align: center;
-    min-height: 60px; /*  Give each day some height */
-    background-color: #f9f9f9;
-}
-
-/* Style for day labels (Sun, Mon, Tue, etc.) */
-.calendar-day-label {
-    text-align: center;
-    font-weight: bold;
-    padding: 5px;
-    background-color: #f0f0f0; /* Light background for labels */
-    border-bottom: 1px solid #ddd; /* subtle seperator */
-}
-
-.calendar-day.event-marker {
-    background-color: #007bff; /*  Or your primary color */
-    color: #fff;
-    cursor: pointer;
-}
-.calendar-day.event-marker:hover {
-   filter: brightness(0.9);
-}
-.calendar-day.weekend {
-    background-color: #cce5ff; /* Or your weekend color */
-    color: #303030;
-    cursor: pointer;
-}
-
+/* --- Removed Calendar Styles --- */
 /* --- Modal Styles --- */
 .modal {
     display: none; /* Hidden by default */
