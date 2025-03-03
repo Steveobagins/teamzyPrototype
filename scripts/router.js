@@ -50,6 +50,7 @@ export function initializeRouter() {
   // Listen for hash changes
   window.addEventListener('hashchange', () => {
     const path = window.location.hash.slice(1); // Remove the '#'
+	console.log("hashchange event - path:", path)
     renderView(path);
   });
 
