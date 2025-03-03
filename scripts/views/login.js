@@ -3,6 +3,8 @@
 import { login } from '../auth.js';
 import { createInput } from '../components/input.js';
 import { createButton } from '../components/button.js';
+import { navigateTo } from '../router.js';  // Import navigateTo
+
 
 export function renderLogin() {
   const appContainer = document.getElementById('app');
@@ -65,9 +67,9 @@ export function renderLogin() {
         await login(email, password);  //AWAIT call the login function from auth.js
     });
 
-    // Add event listener for register button
+    // Add event listener for register button.  Use navigateTo
     document.getElementById('register-button').addEventListener('click', () => {
-        window.location.hash = '/register';
+        navigateTo('/register');
     });
 }
 

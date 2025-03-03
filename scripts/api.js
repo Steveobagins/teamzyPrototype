@@ -7,15 +7,15 @@ const API_DELAY = 500; // milliseconds
 
 // Helper function to simulate an API call with a delay
 function simulateApiCall(data, shouldReject = false) {
-  return new Promise((resolve, reject) => {
+return new Promise((resolve, reject) => {
     setTimeout(() => {
-      if (shouldReject) {
+    if (shouldReject) {
         reject(new Error('Simulated API Error'));
-      } else {
+    } else {
         resolve(data);
-      }
+    }
     }, API_DELAY);
-  });
+});
 }
 
 // --- Authentication API ---
@@ -36,7 +36,7 @@ export async function register(userData) {
 
     // Check if email already exists
     if (users.find(u => u.email === userData.email)) {
-        return simulateApiCall(null, true); // Reject: email exists
+        return simulateApiCall(Error('Email already exists'), true); // Return Error object.
     }
     const newUser = createUser(userData);
     users.push(newUser);

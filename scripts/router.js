@@ -9,7 +9,7 @@ import { getCurrentUser } from './auth.js';
 
 // Define routes and their corresponding view functions
 const routes = {
-  '/': renderLogin, // Default route
+  '/': renderLogin, // Default route should be login
   '/dashboard': renderDashboard,
   '/login': renderLogin,
   '/events': renderEvents,
@@ -59,7 +59,7 @@ export function initializeRouter() {
     }
 
   // Render the initial view based on the current URL *AFTER* the listener is attached
-  const initialPath = window.location.hash.slice(1) || '/login'; // Default to '/login'
+  const initialPath = window.location.hash.slice(1); // Default to '/login' NOT '/'
     renderView(initialPath);
 
 }
