@@ -18,6 +18,25 @@ function showPage(pageId, userRole) {
             page.classList.remove(CLASS_ACTIVE);
         }
     });
+	 // Default to card view when events page is shown
+    if (pageId === 'events') {
+        showEventsView('events-card-view');
+    }
+}
+
+
+// --- View Switching (for Events Page) ---
+function showEventsView(viewId) {
+    const views = document.querySelectorAll('.events-view');
+    views.forEach(view => {
+       view.classList.add('hidden')
+    });
+    const viewToShow = document.getElementById(viewId);
+    if (viewToShow) {
+        viewToShow.classList.remove('hidden'); // Show the selected view
+    } else {
+        console.error(`Event view with ID '${viewId}' not found.`);
+    }
 }
 
 // --- Placeholder for Export Functionality  ---
@@ -29,4 +48,4 @@ document.addEventListener('click', (event) => {
     }
 });
 
-export { showPage };
+export { showPage, showEventsView };

@@ -1,16 +1,16 @@
-  // scripts/menu.js
-    import {
-        SELECTOR_SIDEBAR_LIST,
-        SELECTOR_BOTTOM_NAV,
-        SELECTOR_SIDEBAR_LINKS,
-        SELECTOR_BOTTOM_NAV_LINKS,
-        MOBILE_BREAKPOINT,
-        menuItems
-    } from './constants.js';
+// scripts/menu.js
+import {
+  SELECTOR_SIDEBAR_LIST,
+  SELECTOR_BOTTOM_NAV,
+  SELECTOR_SIDEBAR_LINKS,
+  SELECTOR_BOTTOM_NAV_LINKS,
+  MOBILE_BREAKPOINT,
+  menuItems
+} from './constants.js';
 
-    import { showPage } from './navigation.js';
+import { showPage } from './navigation.js';
 
-    function updateMenu(userRole) {
+function updateMenu(userRole) {
     const sidebarList = document.querySelector(SELECTOR_SIDEBAR_LIST);
     if (!sidebarList) {
         console.error("Sidebar list element not found. Check your HTML structure and selector.");
@@ -28,6 +28,8 @@
         a.innerHTML = `<i class="${item.icon}"></i> ${item.text}`;
         li.appendChild(a);
         sidebarList.appendChild(li);
+
+        //Event listener removed from here
     });
 
     // --- Bottom Nav (Mobile) ---
@@ -44,8 +46,9 @@
                 a.dataset.page = item.page;
                 a.innerHTML = `<i class="${item.icon}"></i>${item.text}`;
                 bottomNav.appendChild(a);
+                 //Removed event listener
             }
         }
     }
-    }
-    export { updateMenu };
+}
+export { updateMenu };
