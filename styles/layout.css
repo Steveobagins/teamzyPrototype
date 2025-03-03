@@ -1,0 +1,273 @@
+/* --- General Styles --- */
+body {
+    font-family: sans-serif; /* Replace with a specific font later */
+    background-color: #f4f4f4; /* Light gray background */
+    color: #333; /* Dark gray text */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensure full viewport height */
+    margin: 0; /* Remove default body margin */
+}
+
+header {
+    background-color: #fff;
+    padding: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: margin-left 0.3s ease; /* Smooth transition for sidebar */
+    z-index: 100; /* Ensure header is above other content */
+}
+
+.logo img {
+    height: 50px;
+    width: auto;
+}
+
+.burger-menu-btn {
+    cursor: pointer;
+    font-size: 1.5rem;
+    background: none;
+    border: none;
+    padding: 0.5rem;
+    display: block; /* Show on all screen sizes initially */
+    z-index: 102; /* Above sidebar */
+}
+
+
+/* --- Main Content --- */
+main {
+    flex-grow: 1; /* Take up remaining vertical space */
+    padding: 1rem;
+    margin-left: 0; /* Initially no margin */
+    transition: margin-left 0.3s ease; /* Smooth transition for sidebar */
+}
+
+/* Sidebar Open (Desktop) */
+main.sidebar-open {
+    margin-left: 0px; /* Reset margin on mobile when sidebar is open */
+}
+
+/* --- Card Styles --- */
+.card {
+    background-color: #fff;
+    padding: 1rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1rem;
+}
+
+/* --- Sidebar Styles --- */
+.sidebar {
+    position: fixed; /* Fixed position, stays in place on scroll */
+    top: 0;
+    left: -250px; /* Initially hidden off-screen */
+    width: 250px;
+    height: 100%;
+    background-color: #333; /* Dark background */
+    color: #fff; /* White text */
+    overflow-y: auto; /* Allow scrolling if content overflows */
+    transition: left 0.3s ease; /* Smooth transition for showing/hiding */
+    z-index: 101; /* Below burger menu button, but above main content */
+}
+
+.sidebar.open {
+    left: 0; /* Slide in from the left */
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar li {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #444; /* Subtle separator */
+}
+
+.sidebar a {
+    display: block; /* Make the whole area clickable */
+    color: #fff;
+    text-decoration: none;
+    transition: background-color 0.2s ease; /* Smooth hover effect */
+}
+
+.sidebar a:hover,
+.sidebar a.active {
+    background-color: #555; /* Highlight on hover/active */
+}
+.sidebar a i{
+	margin-right: 10px;
+}
+
+/* --- Bottom Navigation Styles --- */
+.bottom-nav {
+    display: none; /* Hidden by default (shown on mobile) */
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #333;
+    color: #fff;
+    display: flex;
+    justify-content: space-around;
+    z-index: 100; /* Above content, below sidebar */
+}
+
+.bottom-nav a {
+    padding: 0.75rem;
+    color: #fff;
+    text-decoration: none;
+    text-align: center;
+    flex: 1; /* Distribute space evenly */
+    transition: background-color 0.2s;
+}
+
+.bottom-nav a:hover,
+.bottom-nav a.active {
+    background-color: #555;
+}
+
+/* --- Page Content Styles --- */
+.page-content {
+    display: none; /* Hide all page content by default */
+}
+
+.page-content.active {
+    display: block; /* Show the active page content */
+}
+
+/* --- Event Modal Styles --- */
+#event-modal {
+    display: none;
+    position: fixed;
+    z-index: 103; /* Above everything else */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent background */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px; /* Limit width on larger screens */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: black;
+    text-decoration: none;
+}
+
+#event-modal-buttons{
+    margin-top: 20px;
+}
+
+#event-modal-buttons button{
+	margin-right: 10px;
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* --- Calendar Styles --- */
+.calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr); /* 7 columns for days of the week */
+    gap: 5px; /* Spacing between days */
+    margin-top: 1rem;
+}
+
+.calendar-day {
+    background-color: #eee;
+    border: 1px solid #ddd;
+    padding: 0.5rem;
+    text-align: center;
+    min-height: 40px; /* Ensure consistent height */
+    cursor: pointer;
+}
+.calendar-day:hover {
+	background-color: #ddd;
+}
+
+.calendar-day.empty {
+    background-color: transparent; /* Make empty days transparent */
+    border: none;
+    cursor: default;
+}
+
+.calendar-day.event-marker {
+    background-color: #4CAF50; /* Green for event days */
+    color: white;
+}
+.calendar-day.weekend {
+    background-color: #cce5ff; /* Light blue for weekends */
+}
+/* --- View Toggle Buttons (Card/Calendar) --- */
+.view-toggle-buttons {
+    margin-bottom: 1rem;
+}
+
+.view-toggle-buttons button {
+    padding: 0.5rem 1rem;
+    margin-right: 0.5rem;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.view-toggle-buttons button.active,
+.view-toggle-buttons button:hover {
+    background-color: #ddd;
+}
+
+/* --- Media Queries --- */
+@media (min-width: 769px) {
+    main {
+        margin-left: 250px; /* Push content to the right */
+    }
+
+    header {
+        margin-left: 250px; /* Push content to the right */
+        width: calc(100% - 250px); /* Adjust width to account for sidebar */
+    }
+
+    .burger-menu-btn {
+        display: none; /* Hide burger menu on larger screens */
+    }
+		.sidebar{
+				left: 0px;
+		}
+}
+
+@media (max-width: 768px) {
+		/* Mobile Styles */
+    .bottom-nav {
+        display: flex; /* Show bottom nav on mobile */
+    }
+    main.sidebar-open {
+        margin-left: 0px;
+    }
+}

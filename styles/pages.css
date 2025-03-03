@@ -1,0 +1,236 @@
+/* --- Page Content Styles --- */
+.page-content {
+    display: none; /* Hidden by default */
+}
+
+.page-content.active {
+    display: block; /* Show when active */
+}
+
+/* --- Event Card Styles --- */
+.event-card {
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    margin-bottom: 1rem; /* Space between cards */
+}
+
+.event-card h3 {
+    margin-bottom: 0.5rem;
+    color: #333; /* Or use your primary color */
+}
+
+.event-card p {
+    margin-bottom: 0.25rem;
+    color: #555; /* Slightly lighter text for details */
+}
+
+.event-card i {
+    margin-right: 0.5rem;
+    color: #666; /* Icon color */
+}
+
+.event-card button{
+      margin-left: 5px;
+    background-color: #007bff;/* set button colour */
+    color: #333;
+    border-radius: 5px;
+     padding: 5px 10px; /* add padding for better click area */
+    border: 1px solid #666; /* add border */
+    cursor: pointer; /* change cursor on hover */
+    white-space: nowrap; /* prevent text wrapping */
+}
+.event-card button:hover{
+     background-color: #ddd; /* Add a hover effect */
+    color: #0056b3; /* Darker blue on hover */
+}
+
+/* --- View Toggle Styles --- */
+.view-toggle {
+    margin-bottom: 1rem;
+}
+
+.view-toggle button {
+    padding: 0.5rem 1rem;
+    background-color: #eee;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-right: 0.5rem;
+}
+
+.view-toggle button.active {
+    background-color: #007bff; /* Or your primary color */
+    color: #fff;
+    border-color: #007bff;
+}
+
+/* --- Calendar Styles --- */
+.calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr); /* 7 columns for days of the week */
+    grid-gap: 5px;
+    border: 1px solid #ccc;
+    padding: 10px;
+     background-color: #fff;
+     border-radius: 12px;
+}
+
+.calendar-day {
+    border: 1px solid #ddd;
+    padding: 5px;
+    text-align: center;
+    min-height: 60px; /*  Give each day some height */
+     background-color: #f9f9f9;
+}
+
+.calendar-day.event-marker {
+    background-color: #007bff; /*  Or your primary color */
+    color: #fff;
+    cursor: pointer;
+}
+.calendar-day.event-marker:hover {
+   filter: brightness(0.9);
+}
+.calendar-day.weekend {
+    background-color: #f5e0e0; /* Or your weekend color */
+    color: #303030;
+    cursor: pointer;
+}
+
+
+/* --- Modal Styles --- */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1001; /*  Above the dev menu */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4); /*  Semi-transparent background */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /*  Centered vertically and horizontally */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px; /* Limit width */
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* --- Warning Card --- */
+.warning-card {
+    background-color: #fff3cd; /* Light yellow background */
+    border-left: 5px solid #ffc107; /* Yellow border */
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+}
+
+.warning-card p {
+    color: #856404; /* Darker yellow text */
+}
+
+.warning-card strong {
+    font-weight: bold;
+}
+.warning-card button{
+    background-color: #ffc107;
+    color: #333;
+    border-radius: 5px;
+    padding: 5px 10px;
+    border: 1px solid #b8860b; /* add border */
+    cursor: pointer; /* change cursor on hover */
+}
+.warning-card button:hover{
+     background-color: #ddd; /* Add a hover effect */
+    color: #b8860b; /* Darker blue on hover */
+}
+
+/* --- Team Item Styles --- */
+.team-item {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.team-item h3 {
+    margin-bottom: 0.5rem;
+    color: #007bff; /* Use your primary color */
+}
+
+.team-item p {
+    margin-bottom: 0.25rem;
+    color: #555;
+}
+
+/* --- Payments table Styles --- */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+th, td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* --- Calendar Navigation Styles --- */
+.calendar-navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.calendar-navigation button {
+    padding: 0.5rem 1rem;
+    background-color: #eee;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+.calendar-navigation button:hover {
+    background-color: #ddd;
+}
+
+.calendar-navigation h3 {
+    margin: 0;
+    font-size: 1.2rem;
+}
