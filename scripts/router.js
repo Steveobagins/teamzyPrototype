@@ -49,17 +49,16 @@ export function navigateTo(path) {
 export function initializeRouter() {
   // Listen for hash changes
   window.addEventListener('hashchange', () => {
-    const path = window.location.hash.slice(1); // Remove the '#'
+    const path = window.location.hash.slice(1) || '/login'; // Get path, default to /login
     renderView(path);
   });
 
-  // Ensure we start at /login if there's no hash
-  if (!window.location.hash) {
-      window.location.hash = '/login';
-  }
-
-  // Render the initial view *after* the listener is attached and hash is set.
-    renderView(window.location.hash.slice(1)); // This was the issue
-
+    // Set initial hash to '/login' if it is blank
+    if (!window.location.hash) {
+        window.location.hash = '/login';
+    } else {
+        // Call renderView with the current hash *immediately*
+        renderView(window.location.hash.slice(1));
+    }
 }
 // End of code
