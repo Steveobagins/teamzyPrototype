@@ -7,8 +7,9 @@ import { navigateTo } from '../router.js';
 import * as api from '../api.js'; // Import api
 
 export function renderRegister() {
-    const appContainer = document.getElementById('app');
 
+    const appContainer = document.getElementById('app');
+console.log("register.js: renderRegister called"); // Add this line
     // Create form elements using component functions
     const firstNameInput = createInput({ type: 'text', id: 'firstName', name: 'firstName', placeholder: 'Enter your first name', label: 'First Name', required: true });
     const lastNameInput = createInput({ type: 'text', id: 'lastName', name: 'lastName', placeholder: 'Enter your last name', label: 'Last Name', required: true });

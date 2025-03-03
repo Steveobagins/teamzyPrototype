@@ -7,6 +7,7 @@ import { navigateTo } from '../router.js';  // Import navigateTo
 
 
 export function renderLogin() {
+ console.log("login.js: renderLogin called"); // Add this line
   const appContainer = document.getElementById('app');
 
   // Create form elements using component functions
