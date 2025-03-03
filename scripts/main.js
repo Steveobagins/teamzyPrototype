@@ -1,4 +1,4 @@
-// scripts/main.js
+// scripts/main.js 1
 
 import { updateMenu } from './menu.js';
 import { showPage } from './navigation.js'; //  Removed showEventsView
