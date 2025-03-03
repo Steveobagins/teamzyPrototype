@@ -60,7 +60,7 @@ function populateCalendar(month, year) {
     const dayLabels = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
     for (const dayLabel of dayLabels) {
         const dayLabelDiv = document.createElement('div');
-        dayLabelDiv.classList.add('day-label'); // Add a class for styling
+        dayLabelDiv.classList.add('calendar-day-label'); // Add a class for styling.  Crucial!
         dayLabelDiv.textContent = dayLabel;
         calendarDiv.appendChild(dayLabelDiv);
     }

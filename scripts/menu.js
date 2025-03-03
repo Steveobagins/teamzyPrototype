@@ -1,16 +1,16 @@
-// scripts/menu.js
-import {
-    SELECTOR_SIDEBAR_LIST,
-    SELECTOR_BOTTOM_NAV,
-    SELECTOR_SIDEBAR_LINKS,
-    SELECTOR_BOTTOM_NAV_LINKS,
-    MOBILE_BREAKPOINT,
-    menuItems
-} from './constants.js';
+  // scripts/menu.js
+    import {
+        SELECTOR_SIDEBAR_LIST,
+        SELECTOR_BOTTOM_NAV,
+        SELECTOR_SIDEBAR_LINKS,
+        SELECTOR_BOTTOM_NAV_LINKS,
+        MOBILE_BREAKPOINT,
+        menuItems
+    } from './constants.js';
 
-import { showPage } from './navigation.js';
+    import { showPage } from './navigation.js';
 
-function updateMenu(userRole) {
+    function updateMenu(userRole) {
     const sidebarList = document.querySelector(SELECTOR_SIDEBAR_LIST);
     if (!sidebarList) {
         console.error("Sidebar list element not found. Check your HTML structure and selector.");
@@ -28,13 +28,11 @@ function updateMenu(userRole) {
         a.innerHTML = `<i class="${item.icon}"></i> ${item.text}`;
         li.appendChild(a);
         sidebarList.appendChild(li);
-
-        // Add click event listener to the new link -- MOVED TO MAIN.JS
     });
 
     // --- Bottom Nav (Mobile) ---
     const bottomNav = document.querySelector(SELECTOR_BOTTOM_NAV);
-    if (bottomNav) { //check exists
+    if(bottomNav){ //check exists
         bottomNav.innerHTML = ''; // Clear existing items
         if (window.innerWidth <= MOBILE_BREAKPOINT) {
             const bottomItems = menuItems[userRole] || [];
@@ -44,11 +42,10 @@ function updateMenu(userRole) {
                 const a = document.createElement('a');
                 a.href = '#';
                 a.dataset.page = item.page;
-                a.innerHTML = `<i class="<span class="math-inline">\{item\.icon\}"\></i\></span>{item.text}`;
+                a.innerHTML = `<i class="${item.icon}"></i>${item.text}`;
                 bottomNav.appendChild(a);
-                //Removed Event Listener - added to Main.js
             }
         }
     }
-}
-export { updateMenu };
+    }
+    export { updateMenu };
