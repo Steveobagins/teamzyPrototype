@@ -56,6 +56,7 @@ if (devMenu) {
 		refreshBtn.addEventListener('click', (e) => {
 		    e.preventDefault(); // Prevent default behavior.
 
+
 		    const selectedRole = userRoleSelect.value;
 
 		    updateMenu(selectedRole); // Update the menu based on selected role

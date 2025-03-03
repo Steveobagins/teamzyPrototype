@@ -1,181 +1,154 @@
 // scripts/calendar.js
+import {
+    SELECTOR_EVENT_MODAL,
+    SELECTOR_CLOSE_BUTTON,
+    SELECTOR_CALENDAR_DIV,
+    SELECTOR_PREV_MONTH_BTN,
+    SELECTOR_NEXT_MONTH_BTN,
+    SELECTOR_CURRENT_MONTH_YEAR,
+    CLASS_EVENT_MARKER,
+    CLASS_WEEKEND,
+    eventsData // Import the events data
+} from './constants.js';
 
-import { SELECTOR_CALENDAR, SELECTOR_CURRENT_MONTH_YEAR, SELECTOR_PREV_MONTH_BTN, SELECTOR_NEXT_MONTH_BTN, SELECTOR_EVENT_MODAL, SELECTOR_EVENT_MODAL_CLOSE, SELECTOR_EVENT_MODAL_TITLE, SELECTOR_EVENT_MODAL_DATE, SELECTOR_EVENT_MODAL_VENUE, SELECTOR_EVENT_MODAL_TRAVEL, SELECTOR_EVENT_MODAL_TICKETS, SELECTOR_EVENT_MODAL_FEE, SELECTOR_EVENT_MODAL_BUTTONS} from './constants.js';
+// --- Calendar and Modal Logic ---
+const eventModal = document.getElementById(SELECTOR_EVENT_MODAL);
+const closeButton = document.querySelector(SELECTOR_CLOSE_BUTTON);
 
-// --- Calendar Functionality ---
+// Check if elements exist before adding event listeners
+if (closeButton) {
+    closeButton.addEventListener('click', () => {
+        eventModal.style.display = 'none';
+    });
+}
+if(eventModal){
+    window.addEventListener('click', (event) => {
+        if (event.target === eventModal) {
+            eventModal.style.display = 'none';
+        }
+    });
+}
 
-let currentMonth;
-let currentYear; // Define currentYear in the module scope
-// Function to populate the calendar with dates
+// --- Calendar Navigation Variables ---
+let currentMonth = new Date().getMonth(); // Start with the current month
+let currentYear = new Date().getFullYear(); // Start with the current year
+
 function populateCalendar(month, year) {
-    currentMonth = month; // Update the module-scope variable
-    currentYear = year;
-    const calendar = document.querySelector(SELECTOR_CALENDAR);
-    if(!calendar) {
-        console.error("Could not find the calendar element");
+    const calendarDiv = document.querySelector(SELECTOR_CALENDAR_DIV);
+     if (!calendarDiv) {
+        console.error("Calendar element not found. Check your HTML structure and selector.");
         return;
     }
-    const currentMonthYear = document.querySelector(SELECTOR_CURRENT_MONTH_YEAR);
-     if(!currentMonthYear) {
-        console.error("Could not find the current-month-year element");
+    calendarDiv.innerHTML = ''; // Clear previous content
+
+    // --- Display Month and Year ---
+    const monthYearDisplay = document.getElementById(SELECTOR_CURRENT_MONTH_YEAR);
+    if (monthYearDisplay) {
+        const monthNames = ["January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"
+        ];
+        monthYearDisplay.textContent = `${monthNames[month]} ${year}`;
+    } else {
+        console.error("Could not find the element to display the month and year.");
         return;
     }
-    calendar.innerHTML = ''; // Clear previous content
 
-    const firstDay = new Date(year, month, 1);
-    const lastDay = new Date(year, month + 1, 0);
-    const daysInMonth = lastDay.getDate();
-    const startingDayOfWeek = firstDay.getDay(); // 0 (Sunday) to 6 (Saturday)
-
-    // Set month and year in the header
-    currentMonthYear.textContent = `${firstDay.toLocaleString('default', { month: 'long' })} ${year}`;
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+    const firstDayOfMonth = new Date(year, month, 1).getDay(); // Day of the week (0-6)
 
     // Create day labels (Sun, Mon, Tue, etc.)
     const dayLabels = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
     for (const dayLabel of dayLabels) {
         const dayLabelDiv = document.createElement('div');
-        dayLabelDiv.classList.add('day-label');
+        dayLabelDiv.classList.add('day-label'); // Add a class for styling
         dayLabelDiv.textContent = dayLabel;
-        calendar.appendChild(dayLabelDiv);
+        calendarDiv.appendChild(dayLabelDiv);
     }
 
-    // Add empty divs for days before the first day of the month
-    for (let i = 0; i < startingDayOfWeek; i++) {
+    // Create day cells, accounting for the first day of the month
+    for (let i = 0; i < firstDayOfMonth; i++) {
         const emptyDayDiv = document.createElement('div');
-        emptyDayDiv.classList.add('day', 'empty');
-        calendar.appendChild(emptyDayDiv);
+        emptyDayDiv.classList.add('calendar-day', 'empty'); // Add 'empty' class
+        calendarDiv.appendChild(emptyDayDiv);
     }
 
-    // Add divs for each day of the month
-    for (let day = 1; day <= daysInMonth; day++) {
+    for (let i = 1; i <= daysInMonth; i++) {
         const dayDiv = document.createElement('div');
-        dayDiv.classList.add('day');
-        dayDiv.textContent = day;
-        dayDiv.dataset.date = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`; // Store date in YYYY-MM-DD format
+        dayDiv.classList.add('calendar-day');
+        dayDiv.textContent = i; // Display day number
 
-        // Add sample events (this is just a placeholder, replace with your actual event data)
-        if (year === 2024 && month === 2 && day === 22) {
-            addEvent(dayDiv, 'County Championships', '2024-03-22', 'County Sports Arena', '45 minutes', '#', '$35');
-        }
-        if (year === 2024 && month === 3 && day === 5) {
-            addEvent(dayDiv, 'Regional Qualifier', '2024-04-05', 'Regional Athletics Center', '1 hour 30 minutes', '#', '$40');
+        //check if date is a weekend
+        const date = new Date(year, month, i);
+        if(date.getDay() == 0 || date.getDay() == 6) {
+             dayDiv.classList.add(CLASS_WEEKEND);
         }
 
-        calendar.appendChild(dayDiv);
-    }
-    // Add event listeners to day divs
-    const dayDivs = calendar.querySelectorAll('.day'); // Select all day divs
-    dayDivs.forEach(dayDiv => {
-        dayDiv.addEventListener('click', () => {
-            const eventDetails = dayDiv.querySelector('.event');
-            const modal = document.querySelector(SELECTOR_EVENT_MODAL);
-
-            if(modal && eventDetails) {
-                const title = eventDetails.dataset.title;
-                const date = eventDetails.dataset.date;
-                const venue = eventDetails.dataset.venue;
-                const travel = eventDetails.dataset.travel;
-                const ticketsLink = eventDetails.dataset.tickets;
-                const fee = eventDetails.dataset.fee;
-
-                // Populate modal content
-                document.querySelector(SELECTOR_EVENT_MODAL_TITLE).textContent = title;
-                document.querySelector(SELECTOR_EVENT_MODAL_DATE).textContent = date;
-                document.querySelector(SELECTOR_EVENT_MODAL_VENUE).textContent = venue;
-                document.querySelector(SELECTOR_EVENT_MODAL_TRAVEL).textContent = travel;
-
-                const ticketsLinkElement = document.querySelector(SELECTOR_EVENT_MODAL_TICKETS);
-                ticketsLinkElement.href = ticketsLink;
-                ticketsLinkElement.textContent = 'More Info';
-
-                document.querySelector(SELECTOR_EVENT_MODAL_FEE).textContent = fee;
-
-                // Add Pay Now button
-                const payNowButton = document.createElement('button');
-                payNowButton.id = "pay-now-btn";
-                payNowButton.textContent = 'Pay Now';
-                const modalButtons = document.querySelector(SELECTOR_EVENT_MODAL_BUTTONS);
-                modalButtons.innerHTML = '';
-                modalButtons.appendChild(payNowButton);
-
-
-                // Display modal
-                 if(modal) {
-                   modal.style.display = 'block';
-                 }
-
-
-                // --- Placeholder: Pay Now Button Click (Modal) ---
-                payNowButton.addEventListener('click', () => {
-                    alert(`Placeholder: Implement payment processing for ${title}.`);
-                    // Add your payment processing logic here (integration with Stripe, PayPal, etc.)
-                });
-            } else {
-                //if there is no event, clear and close the modal
-                 if(modal) {
-                   modal.style.display = 'none';
-                 }
+        // Check for events on this day
+        eventsData.forEach(event => {
+             const eventDate = new Date(event.date);
+            // Corrected date comparison:
+            if (eventDate.getFullYear() === year &&
+                eventDate.getMonth() === month &&
+                eventDate.getDate() + 1 === i) { //getDate is zero indexed
+                dayDiv.classList.add(CLASS_EVENT_MARKER);
+                dayDiv.addEventListener('click', () => showEventDetails(event));
             }
         });
-    });
+
+        calendarDiv.appendChild(dayDiv);
+    }
 }
 
-// Function to add an event to a day div
-function addEvent(dayDiv, title, date, venue, travel, ticketsLink, fee) {
-    const eventDiv = document.createElement('div');
-    eventDiv.classList.add('event');
-    eventDiv.dataset.title = title;
-    eventDiv.dataset.date = date;
-    eventDiv.dataset.venue = venue;
-    eventDiv.dataset.travel = travel;
-    eventDiv.dataset.tickets = ticketsLink;
-    eventDiv.dataset.fee = fee;
-    dayDiv.appendChild(eventDiv);
-}
+function showEventDetails(event) {
+    document.getElementById('event-modal-title').textContent = event.title;
+    document.getElementById('event-modal-date').textContent = event.date;
+    document.getElementById('event-modal-venue').textContent = event.venue;
+    document.getElementById('event-modal-travel').textContent = event.travelTime;
+    document.getElementById('event-modal-tickets').href = event.ticketsLink;
+    document.getElementById('event-modal-fee').textContent = event.fee;
 
+     // Clear any existing buttons
+    const buttonContainer = document.getElementById('event-modal-buttons');
+    buttonContainer.innerHTML = '';
+
+    // Create a new button element
+    if(event.button){
+        const payButton = document.createElement('button');
+        payButton.textContent = event.button;
+        payButton.id = 'pay-now-btn';
+         // Add the button to the container
+        buttonContainer.appendChild(payButton);
+    }
+
+    eventModal.style.display = 'block';
+}
+// --- Calendar Navigation Event Listeners ---
 function setupCalendarNavigation() {
-    const prevMonthBtn = document.getElementById(SELECTOR_PREV_MONTH_BTN); // Corrected ID
-    const nextMonthBtn = document.getElementById(SELECTOR_NEXT_MONTH_BTN); // Corrected ID
-    const modal = document.querySelector(SELECTOR_EVENT_MODAL);
-    const closeButton = document.querySelector(SELECTOR_EVENT_MODAL_CLOSE);
+    const prevMonthBtn = document.querySelector(SELECTOR_PREV_MONTH_BTN);
+    const nextMonthBtn = document.querySelector(SELECTOR_NEXT_MONTH_BTN);
 
-    if (prevMonthBtn) {
-      prevMonthBtn.addEventListener('click', () => {
-          currentMonth--;
-          if (currentMonth < 0) {
-              currentMonth = 11;
-              currentYear--;
-          }
-          populateCalendar(currentMonth, currentYear);
-      });
+    if (!prevMonthBtn || !nextMonthBtn) {
+        console.error("Calendar navigation buttons not found.");
+        return;
     }
 
-    if(nextMonthBtn){
-      nextMonthBtn.addEventListener('click', () => {
-          currentMonth++;
-          if (currentMonth > 11) {
-              currentMonth = 0;
-              currentYear++;
-          }
-          populateCalendar(currentMonth, currentYear);
-      });
-    }
-     // Close modal when close button is clicked
-    if(closeButton){
-       closeButton.addEventListener('click', () => {
-         if (modal){
-           modal.style.display = 'none';
-         }
-       });
-    }
-
-    // Close modal when clicking outside of it
-    window.addEventListener('click', (event) => {
-      if(modal) {
-        if (event.target === modal) {
-            modal.style.display = 'none';
+    prevMonthBtn.addEventListener('click', () => {
+        currentMonth--;
+        if (currentMonth < 0) {
+            currentMonth = 11;
+            currentYear--;
         }
-      }
+        populateCalendar(currentMonth, currentYear);
+    });
+
+    nextMonthBtn.addEventListener('click', () => {
+        currentMonth++;
+        if (currentMonth > 11) {
+            currentMonth = 0;
+            currentYear++;
+        }
+        populateCalendar(currentMonth, currentYear);
     });
 }
-export { setupCalendarNavigation, populateCalendar};
+
+export { populateCalendar, setupCalendarNavigation };
