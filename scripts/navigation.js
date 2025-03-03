@@ -18,10 +18,11 @@ function showPage(pageId, userRole) {
             page.classList.remove(CLASS_ACTIVE);
         }
     });
-	 // Default to card view when events page is shown
-    if (pageId === 'events') {
-        showEventsView('events-card-view');
-    }
+
+    // Default to card view when events page is shown
+    if (pageId === 'events') {
+        showEventsView('events-card-view');
+    }
 }
 
 

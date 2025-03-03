@@ -1,14 +1,11 @@
 // scripts/menu.js
 import {
-  SELECTOR_SIDEBAR_LIST,
-  SELECTOR_BOTTOM_NAV,
-  SELECTOR_SIDEBAR_LINKS,
-  SELECTOR_BOTTOM_NAV_LINKS,
-  MOBILE_BREAKPOINT,
-  menuItems
-} from './constants.js';
+    SELECTOR_SIDEBAR_LIST,
+    SELECTOR_BOTTOM_NAV,
+    MOBILE_BREAKPOINT,
+    menuItems
+  } from './constants.js';
 
-import { showPage } from './navigation.js';
 
 function updateMenu(userRole) {
     const sidebarList = document.querySelector(SELECTOR_SIDEBAR_LIST);
@@ -28,8 +25,6 @@ function updateMenu(userRole) {
         a.innerHTML = `<i class="${item.icon}"></i> ${item.text}`;
         li.appendChild(a);
         sidebarList.appendChild(li);
-
-        //Event listener removed from here
     });
 
     // --- Bottom Nav (Mobile) ---
@@ -46,9 +41,9 @@ function updateMenu(userRole) {
                 a.dataset.page = item.page;
                 a.innerHTML = `<i class="${item.icon}"></i>${item.text}`;
                 bottomNav.appendChild(a);
-                 //Removed event listener
             }
         }
     }
 }
+
 export { updateMenu };

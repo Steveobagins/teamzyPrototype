@@ -1,90 +1,109 @@
-/* --- Basic Reset --- */
-*, *::before, *::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
+/* --- General Styles --- */
 body {
-    font-family: sans-serif;
-    background-color: #f0f2f5;
-    color: #333;
-    line-height: 1.6;
+    font-family: sans-serif; /* Replace with a more specific font later */
+    background-color: #f4f4f4; /* Light gray background */
+    color: #333; /* Dark gray text */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensure full viewport height */
+    margin: 0; /* Remove default body margin */
 }
 
-.container {
-    display: grid;
-    grid-template-columns: 250px 1fr; /* Sidebar width, main content flexible */
-    grid-template-rows: 1fr auto; /* Main content height, bottom nav fixed height */
-    min-height: 100vh;
-}
-
-/* --- Sidebar --- */
-.sidebar {
-    background-color: #333;
-    color: #fff;
+header {
+    background-color: #fff;
     padding: 1rem;
-    grid-row: 1 / -1; /* Span all rows */
-    z-index: 100; /* Ensure it's above the main content */
-	 width: 250px; /* Fixed width */
-    overflow-y: auto; /* Scrollable if content overflows */
-    transition: transform 0.3s ease; /* Smooth transition for mobile */
-}
- .sidebar.open {
-    transform: translateX(0); /* Show sidebar */
-}
-
-.logo {
-    margin-bottom: 1rem;
-    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: margin-left 0.3s ease; /* Smooth transition for sidebar */
+    z-index: 100; /* Ensure header is above other content */
 }
 
 .logo img {
-    max-width: 100%; /* Make sure the logo doesn't overflow */
-    height: auto;
+    height: 50px;
+    width: auto;
 }
 
-.sidebar ul {
+.burger-menu-btn {
+    cursor: pointer;
+    font-size: 1.5rem;
+    background: none;
+    border: none;
+    padding: 0.5rem;
+    display: block; /* Show on all screen sizes initially */
+    z-index: 102; /* Above sidebar */
+}
+
+
+/* --- Main Content --- */
+main {
+    flex-grow: 1; /* Take up remaining vertical space */
+    padding: 1rem;
+    margin-left: 0;  /* Initially no margin */
+    transition: margin-left 0.3s ease; /* Smooth transition for sidebar */
+}
+
+/* Sidebar Open (Desktop) */
+main.sidebar-open {
+    margin-left: 0px; /* Reset margin on mobile when sidebar is open */
+}
+
+/* --- Card Styles --- */
+.card {
+    background-color: #fff;
+    padding: 1rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1rem;
+}
+
+/* --- Sidebar Styles --- */
+.sidebar {
+    position: fixed; /* Fixed position, stays in place on scroll */
+    top: 0;
+    left: -250px; /* Initially hidden off-screen */
+    width: 250px;
+    height: 100%;
+    background-color: #333; /* Dark background */
+    color: #fff; /* White text */
+    overflow-y: auto; /* Allow scrolling if content overflows */
+    transition: left 0.3s ease; /* Smooth transition for showing/hiding */
+    z-index: 101; /* Below burger menu button, but above main content */
+}
+
+ .sidebar.open {
+    left: 0; /* Slide in from the left */
+}
+
+.sidebar-menu {
     list-style: none;
     padding: 0;
     margin: 0;
 }
 
-.sidebar li {
-    margin-bottom: 0.5rem;
+.sidebar-menu li {
+     padding: 0.75rem 1rem;
+    border-bottom: 1px solid #444;
 }
-
-.sidebar a {
-    color: #fff;
+.sidebar-menu li a {
+    color: inherit;
     text-decoration: none;
-    display: block;
-    padding: 0.5rem;
-    border-radius: 8px;
+     display: block;
 }
 
-.sidebar a:hover,
-.sidebar a.active {
-    background-color: #007bff; /* Or your primary color */
-}
-.sidebar a i {
-	 margin-right: 5px;
-}
-
-/* --- Main Content --- */
-main {
-    padding: 1rem;
-	 background-color: #f0f2f5;
-    overflow-x: hidden; /* Hide horizontal scrollbar */
-}
-
-/* --- Bottom Navigation --- */
+/* --- Bottom Navigation Styles --- */
 .bottom-nav {
     background-color: #333;
     color: #fff;
     padding: 0.5rem;
     text-align: center;
-    grid-column: 1 / -1; /* Span all columns */
-    display: none; /* Hidden by default, shown on mobile */
+     display: none; /* Hidden by default */
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index:99;
 }
 
 .bottom-nav ul {
@@ -98,134 +117,46 @@ main {
 .bottom-nav a {
     color: #fff;
     text-decoration: none;
-	 display: flex; /* Use flexbox for vertical centering */
+    display: flex; /* Use flexbox for vertical centering */
     flex-direction: column; /* Stack icon and text vertically */
     align-items: center; /* Center horizontally */
+    padding: 0.5rem;
 }
-.bottom-nav a i {
-	 margin-bottom: 5px;
+
+/* --- Media Queries --- */
+/* Larger screens */
+@media (min-width: 769px) {
+  .sidebar {
+    left: 0;
+  }
+
+  main {
+    margin-left: 250px;
+  }
+
+ .bottom-nav {
+    display: none; /* Hide on larger screens */
+  }
+
+  .burger-menu-btn {
+    display: none;
+  }
+  header {
+        margin-left: 250px; /* Push content to the right */
+        width: calc(100% - 250px); /* Adjust width to account for sidebar */
+    }
 }
 
 /* --- Mobile Styles (using media query) --- */
 @media (max-width: 768px) {
-    .container {
-        grid-template-columns: 1fr; /* Single column on mobile */
-    }
-
-    .sidebar {
-        position: fixed; /* Fixed position */
-		  width: 250px;
-        left: 0;
-        top: 0;
-        bottom: 0;
-        transform: translateX(-100%); /* Initially hidden off-screen */
-        z-index: 1000; /* Higher z-index to be on top */
-    }
-     .sidebar.open {
-        transform: translateX(0);
-    }
-	  main.sidebar-open {
-        margin-left: 0; /* Adjust as needed */
-    }
-    main {
-        padding-bottom: 3rem; /*  Space for bottom nav */
-		 transition: margin-left 0.3s ease;
-    }
-
-    .bottom-nav {
-        display: block; /*  Show on mobile */
-		  position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        z-index: 1000;
-    }
-
-    .dev-menu{
-        left: auto;
-        right: 10px;
-    }
-}
-/* --- Burger Menu Button --- */
-.burger-menu-btn {
-  display: none; /* Hidden by default */
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  color: #fff;
-  cursor: pointer;
-  padding: 0.25rem 0.5rem;
-}
-/*-- Events Page  --*/
-/*.events-view{
-	display:none;
-}
-.events-view.active{
-	display:block;
-}*/
-@media (max-width: 768px) {
-	 .burger-menu-btn {
-		 display: block;
-	 }
-}
-
-/* --- Dev Menu Styles --- */
-
-#dev-menu {
-    position: fixed;
-    top: 10px;
-    left: 10px;
-    background-color: #f8f9fa;
-    border: 1px solid #ddd;
-    padding: 10px;
-    border-radius: 8px;
-    z-index: 1000;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-	 max-width: 90%; /*limit width */
-	 width: auto; /*  Adjust width based on content */
-}
-
-#dev-menu-toggle {
-    cursor: pointer;
-    text-align: center;
-}
-
-#dev-menu > div {
-    margin-top: 10px;
-	 /*display: block;  Ensure each item takes full width */
-    /* Remove fixed width to make the input field responsive */
-    /*width: 200px;  Fixed width for the container */
-}
-
-#dev-menu label {
-    display: block; /*  Label takes full width */
-   /* margin-bottom: 5px;  Space between label and select */
-}
-
-#dev-menu select, #dev-menu button {
-  /*  width: 100%;   Select takes full width of its container */
-   /* padding: 8px;   Padding inside the select */
-   /* border-radius: 4px;   Rounded corners */
-   /* border: 1px solid #ddd;   Border */
-   /* margin-bottom: 10px;  Space between select and other elements */
-}
-#user-role{
-   width: auto;
-	min-width: 50px;
-	padding: 5px;
-   border-radius: 5px;
-   border: 1px solid #b8860b;
-}
-#refresh-btn {
-    background-color: #007bff;
-    color: #fff;
-    padding: 8px 15px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 5px;
-}
-
-#refresh-btn:hover {
-    background-color: #0056b3;
+	.sidebar {
+		width: 80%; /* Wider sidebar on smaller screens */
+		left: -100%;  /* Hide more completely */
+	}
+  .bottom-nav {
+    display: flex;
+  }
+	main.sidebar-open{
+	  margin-left: 0px;
+	}
 }

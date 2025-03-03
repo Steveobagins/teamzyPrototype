@@ -3,127 +3,228 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Team Management</title>
+    <title>TEAMZY Platform Prototype</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="styles/reset.css">
     <link rel="stylesheet" href="styles/layout.css">
+    <link rel="stylesheet" href="styles/navigation.css">
     <link rel="stylesheet" href="styles/pages.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles/dev-menu.css">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <button class="burger-menu-btn">
-                <i class="fas fa-bars"></i>
-            </button>
-            <div class="logo">
-                <img src="images/logo.png" alt="Company Logo">
-            </div>
-        </header>
-        <aside class="sidebar">
-            <div class="logo">
+    <header>
+        <div class="logo">
+            <img src="platformlogo.png" alt="TEAMZY Logo" height="50">
+        </div>
+        <button class="burger-menu-btn" aria-label="Open Menu">&#9776;</button>
+    </header>
 
-            </div>
-           <ul class="sidebar-menu">
-                </ul>
-        </aside>
-        <main>
-           <div id="dashboard-page" class="page-content" data-role="manager admin">
-                <h1>Dashboard</h1>
-                <div class="dashboard-cards">
-                  <div class="dashboard-card"> <h3>Total Employees</h3>
-                     <p>50</p>
-                    </div>
-                  <div class="dashboard-card">
-                    <h3>Pending Payments</h3>
-                    <p>5</p>
-                </div>
-                 <div class="dashboard-card">
-                    <h3>Processed Payments</h3>
-                     <p>45</p>
-                </div>
-                </div>
-            </div>
-            <div id="payments-page" class="page-content" data-role="manager admin">
-                <h1>Payments</h1>
-					 <button id="export-payments-btn">Export Data</button>
-                <div class="payment-item">
-                    <h3>Alice Smith</h3>
-                    <p>Invoice #12345</p>
-                    <p>Due Date: 2024-03-15</p>
-                    <p>Amount: $100.00</p>
-                    <button>Mark as Paid</button>
-                </div>
+    <aside class="sidebar">
+        <ul>
+            </ul>
+    </aside>
 
-            </div>
-
-            <div id="team-page" class="page-content" data-role="admin">
-                <h1>Team</h1>
-					 <div class="team-item">
-                <h3>Bob Johnson</h3>
-                 <p>Role: Developer</p>
-                 <p>Department: IT</p>
-                <p>Email: bob.johnson@example.com</p>
+    <main>
+        <div id="dashboard-page" class="page-content" data-role="member coach club-admin finance-manager parent platform-admin">
+            <div class="card">
+                <h2>Member Dashboard</h2>
+                <p>Welcome, Member!</p>
+                <div class="warning-card">
+                    <p><strong>Upcoming Payment Due:</strong> Training Block - $100 due on 2024-03-15</p>
+                    <button>Pay Now</button>
                 </div>
-            </div>
-
-            <div id="events-page" class="page-content" data-role="manager admin employee">
-                <h1>Events</h1>
                  <div class="warning-card">
-                    <p><strong>Warning:</strong> There are overdue payments that require your attention.</p>
-                    <button>View Overdue Payments</button>
-                </div>
-					  <div class="view-toggle">
-                    <button id="card-view-btn" class="active">Card View</button>
-                    <button id="calendar-view-btn">Calendar View</button>
-                </div>
-                <div id="events-card-view" class="events-view active">
-                    <div class="event-card">
-                       <h3>Event Title 1</h3>
-                        <p><i class="fas fa-calendar"></i> Date: March 8, 2024</p>
-                        <p><i class="fas fa-map-marker-alt"></i> Venue: Conference Hall A</p>
-                        <p><i class="fas fa-clock"></i> Travel Time: 30 mins</p>
-                        <p><i class="fas fa-ticket-alt"></i> <a href="#">Buy Tickets</a></p>
-                    </div>
-                </div>
-					 <div id="events-calendar-view" class="events-view hidden">
-                </div>
-            </div>
-
-        </main>
-
-          <nav class="bottom-nav">
-            </nav>
-
-			  <div id="event-modal" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2 id="event-modal-title"></h2>
-                <p><strong>Date:</strong> <span id="event-modal-date"></span></p>
-                <p><strong>Venue:</strong> <span id="event-modal-venue"></span></p>
-                <p><strong>Travel Time:</strong> <span id="event-modal-travel"></span></p>
-					 <p><i class="fas fa-ticket-alt"></i> <a id="event-modal-tickets" href="#">Buy Tickets</a></p>
-                <p><strong>Fee:</strong> <span id="event-modal-fee"></span></p>
-					 <div id="event-modal-buttons">
+                    <p><strong>Event Fee Due:</strong> County Championships - $35 due on 2024-03-22</p>
+                    <button>Pay Now</button>
                 </div>
             </div>
         </div>
-    </div>
+        <div id="events-page" class="page-content" data-role="member coach club-admin finance-manager parent platform-admin">
+           <div class="card">
+              <h2>Events</h2>
+              <div class="view-toggle">
+                  <button id="card-view-btn" class="active">Card View</button>
+                  <button id="calendar-view-btn">Calendar View</button>
+              </div>
+            </div>
 
-    <div id="dev-menu" class="dev-menu">
-      <button id="refresh-btn">Refresh</button>
-        <div id="dev-menu-toggle">
-            <i class="fas fa-chevron-down"></i>
-      </div>
-        <div>
+            <div id="events-card-view" class="events-view active">
+                <div class="event-card">
+                    <h3><i class="fas fa-calendar-alt"></i> County Championships</h3>
+                    <p><i class="fas fa-calendar"></i> <strong>Date:</strong> 2024-03-22 - 2024-03-23</p>
+                    <p><i class="fas fa-map-marker-alt"></i> <strong>Venue:</strong> County Sports Arena</p>
+                    <p><i class="fas fa-clock"></i> <strong>Travel Time:</strong> 45 minutes from club base</p>
+                    <p><i class="fas fa-ticket-alt"></i> <strong>Spectator Tickets:</strong> <a href="#">Buy Tickets</a></p>
+                    <p><i class="fas fa-dollar-sign"></i> <strong>Event Fee:</strong> $35</p>
+                    <button>Pay Now</button>
+                </div>
+
+                <div class="event-card">
+                    <h3><i class="fas fa-calendar-alt"></i> Regional Qualifier</h3>
+                    <p><i class="fas fa-calendar"></i> <strong>Date:</strong> 2024-04-05</p>
+                    <p><i class="fas fa-map-marker-alt"></i> <strong>Venue:</strong> Regional Athletics Center</p>
+                    <p><i class="fas fa-clock"></i> <strong>Travel Time:</strong> 1 hour 30 minutes from club base</p>
+                    <p><i class="fas fa-ticket-alt"></i> <strong>Spectator Tickets:</strong> <a href="#">More Info</a></p>
+                     <p><i class="fas fa-dollar-sign"></i> <strong>Event Fee:</strong> $40</p>
+                    <button>Pay Now</button>
+                </div>
+            </div>
+
+             <div id="events-calendar-view" class="events-view" style="display: none;">
+                <div class="card">
+                    <h2>Events Calendar</h2>
+                     <div class="calendar-navigation">
+                        <button id="prev-month-btn">&lt;</button>
+                        <h3 id="current-month-year"></h3>
+                        <button id="next-month-btn">&gt;</button>
+                    </div>
+                    <div class="calendar">
+                        </div>
+
+                    <div id="event-modal" class="modal">
+                        <div class="modal-content">
+                            <span class="close-button">&times;</span>
+                            <h3 id="event-modal-title"></h3>
+                            <p><strong>Date:</strong> <span id="event-modal-date"></span></p>
+                            <p><strong>Venue:</strong> <span id="event-modal-venue"></span></p>
+                            <p><strong>Travel Time:</strong> <span id="event-modal-travel"></span></p>
+                            <p><strong>Spectator Tickets:</strong> <a href="#" id="event-modal-tickets">More Info</a></p>
+                            <p><strong>Event Fee:</strong> <span id="event-modal-fee"></span></p>
+                             <div id="event-modal-buttons"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="team-page" class="page-content" data-role="member coach club-admin finance-manager parent platform-admin">
+             <div class="card">
+                <h2>My Teams</h2>
+                <div class="team-item">
+                    <h3>Team Alpha</h3>
+                    <p><strong>Training Schedule:</strong> Mondays & Wednesdays, 6:00 PM - 7:30 PM</p>
+                    <p><strong>Coach:</strong> John Smith</p>
+                    <p><strong>Cost:</strong> $100 per block (10 sessions)</p>
+
+                </div>
+                <div class="team-item">
+                    <h3>Team Beta</h3>
+                    <p><strong>Training Schedule:</strong> Tuesdays & Thursdays, 5:30 PM - 7:00 PM</p>
+                    <p><strong>Coach:</strong> Jane Doe</p>
+                      <p><strong>Cost:</strong> $120 per block (10 sessions)</p>
+                </div>
+            </div>
+        </div>
+        <div id="messages-page" class="page-content" data-role="member coach club-admin finance-manager parent platform-admin">
+            <div class="card"><h2>Messages</h2><p>Inbox and messaging features.</p></div>
+        </div>
+        <div id="settings-page" class="page-content" data-role="member coach club-admin finance-manager parent platform-admin">
+           <div class="card"> <h2>Settings</h2><p>User settings and preferences.</p></div>
+        </div>
+        <div id="payments-history-page" class="page-content" data-role="member parent">
+           <div class="card">
+                <h2>Payment History</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Description</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>2024-02-15</td>
+                            <td>Training Block - Team Alpha</td>
+                            <td>$100.00</td>
+                            <td>Paid</td>
+                        </tr>
+                        <tr>
+                            <td>2024-02-22</td>
+                            <td>Event Fee - County Championships</td>
+                            <td>$35.00</td>
+                            <td>Paid</td>
+                        </tr>
+                        <tr>
+                            <td>2024-03-01</td>
+                            <td>Training Block - Team Beta</td>
+                            <td>$120.00</td>
+                            <td>Paid</td>
+                        </tr>
+                         <tr>
+                            <td>2024-03-15</td>
+                            <td>Training Block - Team Alpha</td>
+                            <td>$100.00</td>
+                            <td>Due</td>
+                        </tr>
+                         <tr>
+                            <td>2024-03-22</td>
+                            <td>Event Fee - County Championships - cross over </td>
+                            <td>$10.00</td>
+                            <td>Due</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+        <div id="coach-dashboard-page" class="page-content" data-role="coach club-admin platform-admin">
+           <div class="card"> <h2>Coach Dashboard</h2><p>Welcome, Coach!</p></div>
+        </div>
+        <div id="manage-team-page" class="page-content" data-role="coach club-admin platform-admin">
+           <div class="card"> <h2>Manage Team</h2>
+           <p>Add/remove members, assign training plans, manage attendance, etc.</p>
+           </div>
+        </div>
+
+        <div id="admin-dashboard-page" class="page-content" data-role="club-admin platform-admin">
+           <div class="card"><h2>Admin Dashboard</h2><p>Welcome, Admin!</p></div>
+        </div>
+        <div id="manage-members-page" class="page-content" data-role="club-admin platform-admin">
+          <div class="card">  <h2>Manage Members</h2><p>Add, edit, remove members.</p></div>
+        </div>
+        <div id="club-settings-page" class="page-content" data-role="club-admin platform-admin">
+           <div class="card"> <h2>Club Settings</h2><p>Configure club settings, branding, etc.</p></div>
+        </div>
+
+         <div id="finman-dashboard-page" class="page-content" data-role="finance-manager platform-admin">
+           <div class="card"> <h2>Finance Dashboard</h2><p>Welcome, Finance Manager!</p></div>
+        </div>
+
+        <div id="payments-page" class="page-content" data-role="finance-manager platform-admin">
+            <div class="card">
+                <h2>Payments</h2>
+                <p>This is the payments administration and reporting area.</p>
+                <button id="export-payments-btn">Export Payments Data</button>
+                <p>(Placeholder for payments list, filtering, reporting tools, and integration settings.)</p>
+            </div>
+        </div>
+
+          <div id="platform-dashboard-page" class="page-content" data-role="platform-admin">
+          <div class="card">  <h2>Platform Dashboard</h2><p>Welcome, Super Admin!</p></div>
+        </div>
+
+    </main>
+
+    <nav class="bottom-nav">
+      </nav>
+
+    <div id="dev-menu">
+       <div class="content">
             <label for="user-role">User Role:</label>
             <select id="user-role">
-                <option value="admin">Admin</option>
-                <option value="manager">Manager</option>
-                <option value="employee">Employee</option>
+                <option value="member">Member</option>
+                <option value="coach">Coach</option>
+                <option value="club-admin">Club Admin</option>
+                <option value="finance-manager">Finance Manager</option>
+                <option value="parent">Parent</option>
+                <option value="platform-admin">Platform Admin</option>
             </select>
+            <button id="refresh-btn">Refresh</button>
         </div>
-
+        <div id="dev-menu-toggle"><i class="fas fa-chevron-down"></i></div>
     </div>
     <script type="module" src="scripts/main.js"></script>
-  
 </body>
 </html>
