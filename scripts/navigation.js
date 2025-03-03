@@ -1,3 +1,5 @@
+// scripts/navigation.js
+
 import {
     SELECTOR_PAGE_CONTENT,
     SELECTOR_EXPORT_PAYMENTS_BTN,
@@ -21,11 +23,12 @@ function showPage(pageId, userRole) {
 function showEventsView(viewId) {
     const views = document.querySelectorAll('.events-view');
     views.forEach(view => {
-        view.style.display = 'none'; // Hide all views
+        view.classList.add('hidden'); // Hide all views using the 'hidden' class
     });
+
     const viewToShow = document.getElementById(viewId);
     if (viewToShow) {
-        viewToShow.style.display = 'block'; // Show the selected view
+        viewToShow.classList.remove('hidden'); // Show the selected view by removing 'hidden'
     } else {
         console.error(`Event view with ID '${viewId}' not found.`);
     }
