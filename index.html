@@ -10,9 +10,17 @@
 </head>
 <body>
     <div class="container">
-        <aside class="sidebar">
+        <header>
+            <button class="burger-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
             <div class="logo">
                 <img src="images/logo.png" alt="Company Logo">
+            </div>
+        </header>
+        <aside class="sidebar">
+            <div class="logo">
+
             </div>
            <ul class="sidebar-menu">
                 </ul>
@@ -63,9 +71,10 @@
                     <p><strong>Warning:</strong> There are overdue payments that require your attention.</p>
                     <button>View Overdue Payments</button>
                 </div>
-					 <div class="view-toggle">
+					  <div class="view-toggle">
                     <button id="card-view-btn" class="active">Card View</button>
-                    <button id="calendar-view-btn">Calendar View</button> </div>
+                    <button id="calendar-view-btn">Calendar View</button>
+                </div>
                 <div id="events-card-view" class="events-view active">
                     <div class="event-card">
                        <h3>Event Title 1</h3>
@@ -75,7 +84,10 @@
                         <p><i class="fas fa-ticket-alt"></i> <a href="#">Buy Tickets</a></p>
                     </div>
                 </div>
+					 <div id="events-calendar-view" class="events-view hidden">
                 </div>
+            </div>
+
         </main>
 
           <nav class="bottom-nav">
@@ -111,7 +123,7 @@
         </div>
 
     </div>
-
     <script type="module" src="scripts/main.js"></script>
+  
 </body>
 </html>
