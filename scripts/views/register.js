@@ -3,6 +3,7 @@
 import { register } from '../auth.js';
 import { createInput } from '../components/input.js';
 import { createButton } from '../components/button.js';
+import { navigateTo } from '../router.js'; // Import
 
 export function renderRegister() {
     const appContainer = document.getElementById('app');

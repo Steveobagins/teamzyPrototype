@@ -1,58 +1,58 @@
-// scripts/auth.js
+// scripts/api.js
+import { updateState, getState } from "./state.js";
+import { createUser } from "./models/user.js";
 
-import { updateState, getState } from './state.js';
-import { navigateTo } from './router.js';
-import * as api from './api.js';
+// Simulated delay for API calls
+const API_DELAY = 500; // milliseconds
 
-// Function to handle user login (simulated)
+// Helper function to simulate an API call with a delay
+function simulateApiCall(data, shouldReject = false) {
+return new Promise((resolve, reject) => {
+    setTimeout(() => {
+    if (shouldReject) {
+        reject(new Error('Simulated API Error'));
+    } else {
+        resolve(data);
+    }
+    }, API_DELAY);
+});
+}
+
+// --- Authentication API ---
+
 export async function login(email, password) {
-    try {
-        const user = await api.login(email, password); // Use the simulated API
-        if (user) {
-            updateState({ currentUser: user });
-            localStorage.setItem('isLoggedIn', 'true'); // Simple login flag
-            navigateTo('/dashboard'); // Redirect to dashboard on success
-        } else {
-            // Handle login failure (e.g., show an error message)
-            alert('Invalid credentials'); // Replace with a better UI element later
-        }
-    } catch (error) {
-        console.error('Login error:', error);
-        alert('Login failed: ' + error.message);
+    const users = getUsers(); // Get all users
+    const user = users.find(u => u.email === email && u.password === password);
+
+    if(user) {
+        return simulateApiCall(user);
+    } else {
+        return simulateApiCall(null, true); // Reject if user not found
     }
 }
-// Function to handle user registration
+
 export async function register(userData) {
-    try{
-        const newUser = await api.register(userData);
-        if (newUser) {
-            updateState({ currentUser: newUser });
-            localStorage.setItem('isLoggedIn', 'true');
-            navigateTo('/dashboard');
-        } else {
-            alert ('Registration Failed');
-        }
-    } catch (error) {
-        console.error('Registration Error', error);
-        alert('Registration failed: ' + error.message);
+    const users = getUsers();
+
+    // Check if email already exists
+    if (users.find(u => u.email === userData.email)) {
+        return simulateApiCall(Error('Email already exists'), true); // Return Error object.
     }
+    const newUser = createUser(userData);
+    users.push(newUser);
+    saveUsers(users); // Save to local storage
+    return simulateApiCall(newUser);
 }
 
-// Function to handle user logout (simulated)
-export function logout() {
-  updateState({ currentUser: null });
-  localStorage.removeItem('isLoggedIn'); // Clear the login flag
-  navigateTo('/login'); // Redirect to login page
+// --- User data ---
+// Helper functions to manage users in local storage
+function getUsers() {
+    const storedUsers = localStorage.getItem('users');
+    return storedUsers ? JSON.parse(storedUsers) : [];
 }
 
-// Function to get the currently logged-in user (simulated)
-export function getCurrentUser() {
-  return getState().currentUser;
-}
-
-// Function to set up authentication related items.
-export function setupAuthentication() {
-    //Currently does nothing, but could be used for auto-login, etc.
+function saveUsers(users) {
+    localStorage.setItem('users', JSON.stringify(users));
 }
 
 // End of code
