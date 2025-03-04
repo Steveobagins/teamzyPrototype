@@ -36,9 +36,9 @@ function setupGlobalEventListeners() {
 
     // Logout button event listener
     const logoutButton = document.getElementById('logout-button');
-    if (logoutButton) { //Crucial check!
+    if (logoutButton) {
         logoutButton.addEventListener('click', () => {
-            logout(); // Call the logout function from auth.js
+            logout();
         });
     }
 }
@@ -46,17 +46,31 @@ function setupGlobalEventListeners() {
 function updateUI(state) {
     const logoutContainer = document.getElementById('logout-container');
     const loginLinkContainer = document.getElementById('login-link-container');
-    const homeLinkContainer = document.getElementById('home-link-container');
+    const currentPath = window.location.hash.slice(1) || '/'; // Get current route
 
 
     if (state.currentUser) {
-        logoutContainer.style.display = 'block'; // Show logout button
-        loginLinkContainer.style.display = 'none'; // Hide login link
-        homeLinkContainer.style.display = 'inline'; //Show Home Link
+        // Logged in: Show Logout, hide Login
+       if (logoutContainer) {
+            logoutContainer.style.display = 'block';
+        }
+        if (loginLinkContainer){
+            loginLinkContainer.style.display = 'none';
+        }
     } else {
-        logoutContainer.style.display = 'none'; // Hide logout button
-        loginLinkContainer.style.display = 'inline'; // Show login link
-        homeLinkContainer.style.display = 'none'; //Hide Home Link
+        // Logged out
+        if (logoutContainer) {
+            logoutContainer.style.display = 'none';
+        }
+         if (currentPath === '/login' || currentPath === '/register') {
+            if (loginLinkContainer){
+                loginLinkContainer.style.display = 'none'; //Hide on login screen
+            }
+         } else {
+            if (loginLinkContainer){
+                loginLinkContainer.style.display = 'inline'; // Show login link
+            }
+         }
     }
 }
 

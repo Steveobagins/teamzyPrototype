@@ -57,8 +57,7 @@ export function initializeRouter() {
     if (!window.location.hash) {
         window.location.hash = '/login';
     }
-        // Call renderView with the current hash *immediately*
-        renderView(window.location.hash.slice(1));
-
+      // Call renderView with the current hash *immediately*
+      renderView(window.location.hash.slice(1));
 }
 // End of code

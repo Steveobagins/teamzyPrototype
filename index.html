@@ -9,9 +9,9 @@
 <body>
     <header>
         <h1>Teamzy</h1>
-        <nav id="main-nav">
-            <ul>
-                <span id="home-link-container"><li><a href="#">Home</a></li></span>
+        <button id="hamburger-button" aria-label="Menu" style="display: none;">
+            <span>&#9776;</span> </button>
+        <nav id="main-nav">  <ul>
                 <span id="login-link-container"><li><a href="#/login">Login</a></li></span>
                 <li id="logout-container" style="display: none;"><button id="logout-button" class="nav-button">Logout</button></li>
             </ul>
@@ -26,7 +26,12 @@
     <footer>
         <p>&copy; 2023 Teamzy</p>
     </footer>
-
+     <nav id="bottom-nav" style="display: none">
+        <ul>
+            <li><a href="#">Quick Link 1</a></li>
+            <li><a href="#">Quick Link 2</a></li>
+        </ul>
+     </nav>
     <script type="module" src="scripts/app.js"></script>
 </body>
 </html>
