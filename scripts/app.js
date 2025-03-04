@@ -59,7 +59,8 @@ function updateUI(state) {
     const menuItemsContainer = document.getElementById('menu-items-container');
     const bottomMenuItemsContainer = document.getElementById('bottom-menu-items-container');
     const hamburgerButton = document.getElementById('hamburger-button');
-  const bottomNav = document.getElementById('bottom-nav');
+    const bottomNav = document.getElementById('bottom-nav');
+    const mainNav = document.getElementById('main-nav'); // Get main-nav
     const currentPath = window.location.hash.slice(1) || '/'; // Get current route
 
     if (state.currentUser) {
@@ -69,6 +70,8 @@ function updateUI(state) {
         if(loginLinkContainer) loginLinkContainer.style.display = 'none';
         if(hamburgerButton) hamburgerButton.style.display = 'block'; // Show on mobile
       if(bottomNav) bottomNav.style.display = 'flex';
+        if(mainNav) mainNav.style.display = 'block'; // Ensure menu is visible
+
 
     } else {
         // Logged out
@@ -80,6 +83,7 @@ function updateUI(state) {
             if(loginLinkContainer) loginLinkContainer.style.display = 'none';
             if(hamburgerButton) hamburgerButton.style.display = 'none'; // Hide on login
           if(bottomNav) bottomNav.style.display = 'none';
+            if(mainNav) mainNav.style.display = 'none';
         } else {
             if(loginLinkContainer) loginLinkContainer.style.display = 'inline'; // Show login link
         }
