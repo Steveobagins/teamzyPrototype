@@ -94,7 +94,7 @@ footer {
 }
 
 #app {
-    width: 100%; /* Ensure it takes full width available */
+     width: 100%; /* Ensure it takes full width available */
 }
 
 /* 4. Basic Styles for Common UI Elements */
@@ -123,8 +123,8 @@ footer {
 }
 
 .button-secondary:hover {
-    background-color: darken(var(--color-secondary), 10%);
-    color: var(--color-text); /* Set text color on hover */
+     background-color: darken(var(--color-secondary), 10%);
+     color: var(--color-text); /* Set text color on hover */
 }
 
 /* --- Forms --- */
@@ -145,7 +145,7 @@ input[type="date"],
 input[type="number"],
 textarea,
 select
-{
+ {
   width: 100%;
   padding: var(--space-sm);
   border: 1px solid var(--color-border);
@@ -213,7 +213,7 @@ textarea:focus, select:focus{
 }
 
 .nav-button:hover {
-    background-color: rgba(255, 255, 255, 0.2);
+     background-color: rgba(255, 255, 255, 0.2);
 }
 
 /* Hamburger button (mobile) */
@@ -259,7 +259,7 @@ textarea:focus, select:focus{
     margin-bottom: var(--space-xs); /* Space between icon and text */
     font-size: 1.25rem;
 }
- /* Slide-out menu styles (mobile) */
+/*  Slide-out menu styles (mobile) */
 #main-nav {
   transition: transform 0.3s ease-in-out;
   background-color: var(--color-primary);
@@ -271,11 +271,12 @@ textarea:focus, select:focus{
   z-index: 100;
   overflow-y: auto;
   padding-top: var(--space-md); /* Add some top padding*/
-    outline: none; /* Remove the focus outline WHEN HIDDEN*/
+  outline: none; /* Remove the focus outline WHEN HIDDEN */
 }
 
 #main-nav.menu-open {
-    transform: translateX(100%); /* Corrected: Slide in from the LEFT */
+  transform: translateX(100%); /* Corrected: Slide in from the LEFT */
+    display: block !important;
 }
 
 #main-nav ul {
@@ -283,10 +284,9 @@ textarea:focus, select:focus{
   display: flex;
     flex-direction: column;
     gap: var(--space-md);
-  align-items: flex-start; /* Align items to the start (left) */
-    padding-left: var(--space-md); /* Add some left padding */
+  align-items: flex-start;
+    padding-left: var(--space-md);
 }
-
 /* --- Headings --- */
 h1, h2, h3, h4, h5, h6 {
     font-weight: var(--font-weight-bold);
@@ -340,18 +340,18 @@ h6 { font-size: 0.875rem; }
 @media (max-width: 767px) {
     /* Mobile Styles */
     #hamburger-button {
-        display: block;
+        display: block; /* Show hamburger button on mobile */
     }
 
     #main-nav {
       display: none; /* Hide top nav on mobile */
     }
     #main-nav.menu-open{
-        display: block;
+        display: block; /* Show when menu is open */
     }
 
     #bottom-nav {
-        display: flex;
+        display: flex; /* Show bottom nav on mobile */
     }
   footer {
         margin-bottom: 60px; /*Adjust the amount of space as needed*/
@@ -384,7 +384,7 @@ h6 { font-size: 0.875rem; }
         width: 33.33%; /* Take up 1/3 of the width on larger screens */
     }
     #hamburger-button {
-        display: none !important;
+        display: none !important; /* Hide on larger screens */
     }
     #bottom-nav {
         display: none !important;

@@ -56,15 +56,16 @@ export function initializeRouter() {
   // Listen for hash changes
   window.addEventListener('hashchange', () => {
       console.log("hash change");
-    const path = window.location.hash.slice(1) || '/login'; // Get path, default to /login
+    const path = window.location.hash.slice(1) || '/'; // Get path, default to / now
     renderView(path);
   });
 
-  // Ensure we start at /login if there's no hash
-    if (!window.location.hash) {
-        window.location.hash = '/login';
-    }
+  // Removed setting to '/login'.
+    // Ensure we start at /login if there's no hash
+    // if (!window.location.hash) {
+    //     window.location.hash = '/login';
+    // }
       // Call renderView with the current hash *immediately*
-      renderView(window.location.hash.slice(1));
+      renderView(window.location.hash.slice(1) || '/'); //Added || '/'
 }
 // End of code

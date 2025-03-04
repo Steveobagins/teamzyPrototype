@@ -19,11 +19,11 @@ function initializeApp() {
     // 4. Set up global event listeners
     setupGlobalEventListeners();
 
-    // 5. Subscribe to state changes to update UI - MUST BE BEFORE INITIAL RENDER
+    // 5. Subscribe to state changes to update UI
     subscribeToStateChanges(updateUI);
 
-    // Initial UI update - MUST BE AFTER subscribeToStateChanges
-    updateUI(getState());
+    // Initial UI update
+    updateUI(getState()); //NOW WE UPDATE
 }
 
 function setupGlobalEventListeners() {
@@ -53,7 +53,6 @@ function setupGlobalEventListeners() {
     }
 }
 function updateUI(state) {
-
     const logoutContainer = document.getElementById('logout-container');
     const loginLinkContainer = document.getElementById('login-link-container');
     const menuItemsContainer = document.getElementById('menu-items-container');
@@ -64,17 +63,17 @@ function updateUI(state) {
     const currentPath = window.location.hash.slice(1) || '/'; // Get current route
 
     if (state.currentUser) {
-        // Logged in
+        // Logged in.  Render menu items, and ensure correct elements are visible
         renderMenuItems(state.currentUser.role, currentPath);
         if(logoutContainer) logoutContainer.style.display = 'block';
         if(loginLinkContainer) loginLinkContainer.style.display = 'none';
-        if(hamburgerButton) hamburgerButton.style.display = 'block'; // Show on mobile
-      if(bottomNav) bottomNav.style.display = 'flex';
+        if(hamburgerButton && window.innerWidth <= 767) hamburgerButton.style.display = 'block'; // Show on mobile
+      if(bottomNav && window.innerWidth <= 767) bottomNav.style.display = 'flex';
         if(mainNav) mainNav.style.display = 'block'; // Ensure menu is visible
 
 
     } else {
-        // Logged out
+        // Logged out.
         if(logoutContainer) logoutContainer.style.display = 'none';
         if(menuItemsContainer) menuItemsContainer.innerHTML = ""; // Clear main menu
         if(bottomMenuItemsContainer) bottomMenuItemsContainer.innerHTML = ""; //Clear bottom menu

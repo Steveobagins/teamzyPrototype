@@ -1,0 +1,41 @@
+/dashboard
+app.js:56 updateUI called with state: {currentUser: {…}, events: Array(0), clubs: Array(0)}clubs: []currentUser: {userId: 'c8f8f146-7be6-457b-ad30-d33185d32713', firstName: 'steve', lastName: 'parmenter', email: 'steve@steve.com', password: 'test', …}events: [][[Prototype]]: Object
+app.js:69 User is logged in. Calling renderMenuItems.
+app.js:97 renderMenuItems called with: {userRole: 'member', currentPath: '/dashboard'}currentPath: "/dashboard"userRole: "member"[[Prototype]]: Object
+navigation.js:6 renderNavigation called with: {userRole: 'member', currentPath: '/dashboard', navType: 'main'}
+navigation.js:8 menuItems: (6) [{…}, {…}, {…}, {…}, {…}, {…}]0: {label: 'Home', path: '/dashboard', showOnMain: true, showOnBottom: false, icon: null}1: {label: 'Events', path: '/events', showOnMain: true, showOnBottom: true, icon: 'fa-solid fa-calendar-days'}2: {label: 'Payments', path: '/payments', showOnMain: false, showOnBottom: true, icon: 'fa-solid fa-money-bill'}3: {label: 'Chat', path: '/chat', showOnMain: true, showOnBottom: true, icon: 'fa-solid fa-comments'}4: {label: 'My Profile', path: '/profile', showOnMain: true, showOnBottom: true, icon: 'fa-solid fa-user'}5: {label: 'Logout', path: '/login', showOnMain: true, showOnBottom: false}length: 6[[Prototype]]: Array(0)
+navigation.js:14 mainItems: (5) [{…}, {…}, {…}, {…}, {…}]0: {label: 'Home', path: '/dashboard', showOnMain: true, showOnBottom: false, icon: null}1: {label: 'Events', path: '/events', showOnMain: true, showOnBottom: true, icon: 'fa-solid fa-calendar-days'}2: {label: 'Chat', path: '/chat', showOnMain: true, showOnBottom: true, icon: 'fa-solid fa-comments'}3: {label: 'My Profile', path: '/profile', showOnMain: true, showOnBottom: true, icon: 'fa-solid fa-user'}4: {label: 'Logout', path: '/login', showOnMain: true, showOnBottom: false}length: 5[[Prototype]]: Array(0)
+navigation.js:35 navItemsHTML: 
+                <li><a href="#/dashboard" class="active" data-path="/dashboard">Home</a></li>
+            
+                <li><a href="#/events" class="" data-path="/events">Events</a></li>
+            
+                <li><a href="#/chat" class="" data-path="/chat">Chat</a></li>
+            
+                <li><a href="#/profile" class="" data-path="/profile">My Profile</a></li>
+            
+                <li><a href="#/login" class="" data-path="/login">Logout</a></li>
+            
+app.js:103 menuItemsContainer.innerHTML: 
+                <li><a href="#/dashboard" class="active" data-path="/dashboard">Home</a></li>
+            
+                <li><a href="#/events" class="" data-path="/events">Events</a></li>
+            
+                <li><a href="#/chat" class="" data-path="/chat">Chat</a></li>
+            
+                <li><a href="#/profile" class="" data-path="/profile">My Profile</a></li>
+            
+                <li><a href="#/login" class="" data-path="/login">Logout</a></li>
+            
+navigation.js:6 renderNavigation called with: {userRole: 'member', currentPath: '/dashboard', navType: 'bottom'}
+navigation.js:8 menuItems: (6) [{…}, {…}, {…}, {…}, {…}, {…}]
+navigation.js:25 bottomItems: (4) [{…}, {…}, {…}, {…}]
+navigation.js:35 navItemsHTML: 
+                <li><a href="#/events" class="" data-path="/events"><i class="fa-solid fa-calendar-days"></i><span>Events</span></a></li>
+            
+                <li><a href="#/payments" class="" data-path="/payments"><i class="fa-solid fa-money-bill"></i><span>Payments</span></a></li>
+            
+                <li><a href="#/chat" class="" data-path="/chat"><i class="fa-solid fa-comments"></i><span>Chat</span></a></li>
+            
+                <li><a href="#/profile" class="" data-path="/profile"><i class="fa-solid fa-user"></i><span>My Profile</span></a></li>
+            
