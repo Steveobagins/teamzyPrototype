@@ -100,10 +100,6 @@ export function renderLogin() {
         });
 
     function displayErrors(errors) {
-        // Remove any existing error messages
-        const existingErrors = appContainer.querySelectorAll('.error-message');
-        existingErrors.forEach(error => error.remove());
-
         // Add new error messages
         for (const field in errors) {
             if (errors.hasOwnProperty(field)) {
