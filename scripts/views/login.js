@@ -3,12 +3,15 @@
 import { login } from '../auth.js';
 import { createInput } from '../components/input.js';
 import { createButton } from '../components/button.js';
-import { navigateTo } from '../router.js';  // Import navigateTo
-
+import { navigateTo } from '../router.js';
+import { isRequired, isValidEmail } from '../utils/validationUtils.js'; // Import validation
+import { createErrorMessage } from '../components/errorMessage.js'; // Import error message
 
 export function renderLogin() {
- console.log("login.js: renderLogin called"); // Add this line
   const appContainer = document.getElementById('app');
+
+  // Clear any previous content
+  appContainer.innerHTML = '';
 
   // Create form elements using component functions
   const emailInput = createInput({
@@ -60,18 +63,59 @@ export function renderLogin() {
 
     // Add event listener for form submission
     const loginForm = document.getElementById('login-form');
-    loginForm.addEventListener('submit', async (event) => { // Added async
+    loginForm.addEventListener('submit', async (event) => {
         event.preventDefault(); // Prevent default form submission
         const email = document.getElementById('email').value;
         const password = document.getElementById('password').value;
 
-        await login(email, password);  //AWAIT call the login function from auth.js
+        // --- Validation ---
+        let isValid = true;
+        const errors = {};
+
+        // Email
+        if (!isRequired(email)) {
+            errors.email = 'Email is required.';
+            isValid = false;
+        } else if (!isValidEmail(email)) {
+            errors.email = 'Invalid email format.';
+            isValid = false;
+        }
+
+        // Password
+        if (!isRequired(password)) {
+            errors.password = 'Password is required.';
+            isValid = false;
+        }
+
+        if (!isValid) {
+            displayErrors(errors);
+        } else {
+            await login(email, password);  //AWAIT call the login function from auth.js
+        }
     });
 
-    // Add event listener for register button.  Use navigateTo
-    document.getElementById('register-button').addEventListener('click', () => {
-        navigateTo('/register');
-    });
+        // Add event listener for register button.  Use navigateTo
+        document.getElementById('register-button').addEventListener('click', () => {
+            navigateTo('/register');
+        });
+
+    function displayErrors(errors) {
+        // Remove any existing error messages
+        const existingErrors = appContainer.querySelectorAll('.error-message');
+        existingErrors.forEach(error => error.remove());
+
+        // Add new error messages
+        for (const field in errors) {
+            if (errors.hasOwnProperty(field)) {
+                const errorMessage = errors[field];
+                const inputElement = document.getElementById(field);
+
+                if(inputElement){
+                    inputElement.insertAdjacentHTML('afterend', createErrorMessage(errorMessage));
+                }
+            }
+        }
+    }
 }
 
 // End of code
