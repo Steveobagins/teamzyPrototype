@@ -3,46 +3,46 @@
 /* 1. CSS Variables (Custom Properties) - for Theming */
 
 :root {
-  /* Color Palette */
-  --color-primary: #007bff; /* Blue */
-  --color-secondary: #ff7f50; /* Coral */
-  --color-accent: #ffcc00; /* Yellow */
-  --color-background: #fff; /* White */
-  --color-background-light: #f8f9fa; /* Light Gray */
-  --color-text: #333; /* Dark Gray */
-  --color-text-light: #666; /* Lighter Gray */
-  --color-border: #ddd; /* Light Gray for borders */
-  --color-error: #dc3545; /* Red */
-  --color-success: #28a745; /* Green */
+    /* Color Palette */
+    --color-primary: #007bff;  /* Blue */
+    --color-secondary: #ff7f50; /* Coral */
+    --color-accent: #ffcc00;   /* Yellow */
+    --color-background: #fff;   /* White */
+    --color-background-light: #f8f9fa; /* Light Gray */
+    --color-text: #333;      /* Dark Gray */
+    --color-text-light: #666;  /* Lighter Gray */
+    --color-border: #ddd;    /* Light Gray for borders */
+    --color-error: #dc3545;   /* Red */
+    --color-success: #28a745; /* Green */
 
-  /* Typography */
-  --font-family-sans: 'Open Sans', sans-serif;
-  --font-size-base: 16px;
-  --font-size-small: 0.875rem; /* 14px */
-  --font-size-large: 1.25rem;  /* 20px */
-  --font-weight-normal: 400;
-  --font-weight-bold: 700;
-  --line-height: 1.5;
+    /* Typography */
+    --font-family-sans: 'Open Sans', sans-serif;
+    --font-size-base: 16px;
+    --font-size-small: 0.875rem;  /* 14px */
+    --font-size-large: 1.25rem;   /* 20px */
+    --font-weight-normal: 400;
+    --font-weight-bold: 700;
+    --line-height: 1.5;
 
-  /* Spacing */
-  --space-xs: 0.25rem;
-  --space-sm: 0.5rem;
-  --space-md: 1rem;
-  --space-lg: 1.5rem;
-  --space-xl: 2rem;
+    /* Spacing */
+    --space-xs: 0.25rem;
+    --space-sm: 0.5rem;
+    --space-md: 1rem;
+    --space-lg: 1.5rem;
+    --space-xl: 2rem;
 
-  /* Border Radius */
-  --border-radius: 8px;
-  --border-radius-pill: 50px;
+    /* Border Radius */
+    --border-radius: 8px;
+    --border-radius-pill: 50px; /* For pill-shaped buttons */
 
-  /* Box Shadow */
-  --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Box Shadow */
+    --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
-  /* Transition */
-  --transition: all 0.2s ease-in-out;
+    /* Transition */
+    --transition: all 0.2s ease-in-out;
 
     /* Menu */
-    --menu-width: 80%; /* Width of the slide-out menu */
+    --menu-width: 80%;
 }
 
 /* 2. Basic Reset and Global Styles */
@@ -177,71 +177,70 @@ textarea:focus, select:focus{
 }
 
 /* --- Navigation ---*/
-/*  Base styles for top nav (desktop) */
-#main-nav ul {
-    list-style: none;
-    display:flex;
-    gap: var(--space-md);
-    align-items: center; /* Vertical alignment */
+
+#profile-picture-container {
+    /* Removed positioning styles */
 }
 
-#main-nav a {
-    color: var(--color-background);
-    text-decoration: none;
+#profile-picture {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--color-background-light);
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Keep other styles, but remove positioning */
+}
+
+#profile-dropdown {
+    position: absolute; /* Keep absolute positioning */
+    top: 60px;        /* Position it below header */
+    left: 0;          /* Now aligned to the left */
+    background-color: var(--color-background);
+    border: 1px solid var(--color-border);
+    border-radius: 0;  /* Remove border-radius */
+    box-shadow: var(--box-shadow);
     padding: var(--space-sm);
-    border-radius: var(--border-radius);
-    display: block; /* For consistent sizing */
+    min-width: 150px;
+    z-index: 101;     /* Ensure it's above bottom-nav, and other content */
+    display: none;     /* Initially hidden */
 }
 
-#main-nav a:hover {
-    background-color: rgba(255, 255, 255, 0.2);
+
+#profile-dropdown ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
-#main-nav a:visited { /* Add visited style */
-    color: var(--color-background);
+#profile-dropdown li {
+    padding: var(--space-xs) 0;
 }
 
-.nav-button {
+/* Style the logout button within the dropdown */
+#profile-dropdown button#logout-button {
     background: none;
     border: none;
-    color: var(--color-background);
+    color: var(--color-text);
     padding: var(--space-sm);
     cursor: pointer;
     font-size: inherit;
     font-family: inherit;
     text-decoration: none;
     border-radius: var(--border-radius);
+    display: block; /* Ensure it takes up full width */
+    width: 100%;
+    text-align: left; /* Align text to the left */
 }
 
-.nav-button:hover {
-     background-color: rgba(255, 255, 255, 0.2);
+#profile-dropdown button#logout-button:hover {
+    background-color: rgba(255, 255, 255, 0.2); /* Or any hover effect */
 }
 
-/* Hamburger button (mobile) */
-#hamburger-button {
-    background: none;
-    border: none;
-    color: var(--color-background);
-    font-size: 1.5rem;
-    cursor: pointer;
-    padding: var(--space-sm);
-    display: none; /* Initially hidden (desktop first) */
-    position: absolute; /* Position absolutely within header */
-    left: var(--space-md); /* Align to the left edge */
-    top: 50%;           /* Center vertically */
-    transform: translateY(-50%); /* Center vertically */
+/* --- Bottom Nav --- */
 
-}
-#close-menu-button{
-    background: none;
-    border: none;
-    font-size: 2rem;
-    cursor: pointer;
-  position: absolute; /* Position inside the menu */
-  top: var(--space-xs);  /*  right top corner */
-  right: var(--space-md);
-    color: var(--color-background);
-}
 /* Bottom Navigation (mobile) */
 #bottom-nav {
     background-color: var(--color-primary);
@@ -250,7 +249,6 @@ textarea:focus, select:focus{
     bottom: 0;
     left: 0;
     width: 100%;
-    display: none; /* Hidden by default (desktop first) */
     z-index: 100; /* Ensure it's above other content */
 }
 
@@ -274,34 +272,7 @@ textarea:focus, select:focus{
     margin-bottom: var(--space-xs); /* Space between icon and text */
     font-size: 1.25rem;
 }
-/*  Slide-out menu styles (mobile) */
-#main-nav {
-  transition: transform 0.3s ease-in-out;
-  background-color: var(--color-primary);
-  position: fixed;
-  top: 0;
-  left: -100%; /* Initially hide menu off-screen to the left */
-  width: var(--menu-width);
-  height: 100vh;
-  z-index: 100;
-  overflow-y: auto;
-  padding-top: var(--space-md); /* Add some top padding*/
-  outline: none; /* Remove the focus outline WHEN HIDDEN */
-}
 
-#main-nav.menu-open {
-  transform: translateX(100%); /* Corrected: Slide in from the LEFT */
-    display: block !important;
-}
-
-#main-nav ul {
-    list-style: none;
-  display: flex;
-    flex-direction: column;
-    gap: var(--space-md);
-  align-items: flex-start;
-    padding-left: var(--space-md);
-}
 /* --- Headings --- */
 h1, h2, h3, h4, h5, h6 {
     font-weight: var(--font-weight-bold);
@@ -354,59 +325,8 @@ h6 { font-size: 0.875rem; }
 /* Media Queries */
 @media (max-width: 767px) {
     /* Mobile Styles */
-    #hamburger-button {
-        display: block; /* Show hamburger button on mobile */
-    }
-
-    /* #main-nav {
-      display: none;
-    }
-    #main-nav.menu-open{
-        display: block;
-    } */
-
-    #bottom-nav {
-        display: flex; /* Show bottom nav on mobile */
-    }
   footer {
         margin-bottom: 60px; /*Adjust the amount of space as needed*/
-    }
-}
-
-@media (min-width: 768px) {
-    /* Desktop Styles */
-    #main-nav {
-        display: flex !important; /* Always show as flex on desktop */
-        position: static; /* Remove fixed positioning */
-        width: auto; /* Let it take natural width */
-        height: auto; /* Let it take natural height */
-        overflow-y: visible; /* Remove scrollbar */
-        padding-top: 0;
-        background-color: transparent; /* Remove background */
-        left: 0; /* Reset position*/
-      transform: none !important;
-    outline: none; /*Remove outline*/
-
-    }
-  #main-nav ul {
-      flex-direction: row; /* Horizontal layout on desktop */
-      padding-left: 0;
-        align-items: flex-start;
-  }
-
-    .login-container,
-    .register-container {
-        width: 33.33%; /* Take up 1/3 of the width on larger screens */
-    }
-    #hamburger-button {
-        display: none !important; /* Hide on larger screens */
-    }
-    #bottom-nav {
-        display: none !important;
-    }
-    main {
-        margin-left: 0; /* Reset margin */
-        transition: margin-left: 0.3s ease-in-out; /* Smooth transition for main content */
     }
 }
 /* End of code */

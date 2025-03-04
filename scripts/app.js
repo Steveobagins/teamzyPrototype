@@ -11,93 +11,84 @@ function initializeApp() {
     setupAuthentication();
     setupGlobalEventListeners();
     subscribeToStateChanges(updateUI);
-    updateUI(getState()); // Initial UI update.  Critical.
+    updateUI(getState()); // Initial UI update.
 }
 
 function setupGlobalEventListeners() {
-  document.body.addEventListener('click', (event) => {
-    // Use event delegation for navigation links
-    if (event.target.tagName === 'A' && event.target.closest('nav')) {
-        event.preventDefault();
-        navigateTo(event.target.getAttribute('href'));
-    }
-    // Handle clicks on the logout button (delegated to body)
-    else if (event.target.id === 'logout-button') {
-        logout();
-    }
-    // Handle clicks on the hamburger button (delegated to body)
-    else if(event.target.id === 'hamburger-button') {
-      const mainNav = document.getElementById('main-nav');
-        mainNav.classList.toggle('menu-open');
-    }
-    // Close profile drop down menu
-    else if (!event.target.closest('#profile-picture-container')){
-        const dropdown = document.getElementById('profile-dropdown');
-        if (dropdown) {
-              dropdown.style.display = 'none';
-          }
-    }
-  });
+    document.body.addEventListener('click', (event) => {
+        if (event.target.tagName === 'A' && event.target.closest('nav')) {
+            event.preventDefault();
+            navigateTo(event.target.getAttribute('href'));
+        }
+    });
 
-  const profilePicture = document.getElementById('profile-picture');
+    // Logout button event listener (delegated to body)
+    document.body.addEventListener('click', (event) => {
+        if (event.target.id === 'logout-button') {
+            logout();
+        }
+    });
+
+    // Profile picture dropdown toggle
+    const profilePicture = document.getElementById('profile-picture');
     if (profilePicture) {
         profilePicture.addEventListener('click', (event) => {
             const dropdown = document.getElementById('profile-dropdown');
             if (dropdown) {
                 dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
-              event.stopPropagation();
+                event.stopPropagation(); // Prevent click from immediately closing.
             }
         });
     }
+
+      // Close the dropdown if a click occurs outside of it
+    document.addEventListener('click', (event) => {
+      const dropdown = document.getElementById('profile-dropdown');
+      const profilePic = document.getElementById('profile-picture')
+      if (dropdown && !profilePic.contains(event.target)) {
+          dropdown.style.display = 'none';
+      }
+    });
+
 }
-
 function updateUI(state) {
-    console.log("updateUI called. Current state:", state);
-
-    const logoutContainer = document.getElementById('logout-container'); // Note: logout is *inside* dropdown now
+    const logoutContainer = document.getElementById('logout-container'); // Still needed for logout button *inside* dropdown
     const loginLinkContainer = document.getElementById('login-link-container');
-    const menuItemsContainer = document.getElementById('menu-items-container');
     const bottomMenuItemsContainer = document.getElementById('bottom-menu-items-container');
-    const hamburgerButton = document.getElementById('hamburger-button');
+    const profilePicture = document.getElementById('profile-picture-container');
     const bottomNav = document.getElementById('bottom-nav');
-    const profilePictureContainer = document.getElementById('profile-picture-container');
     const currentPath = window.location.hash.slice(1) || '/';
 
     if (state.currentUser) {
-        // Logged in: Show profile picture, render menu items, hide login link.
-        console.log("User is logged in. Role:", state.currentUser.role);
-        renderMenuItems(state.currentUser.role, currentPath);
-        if (profilePictureContainer) profilePictureContainer.style.display = 'inline-block'; // Show profile pic
-        if(bottomNav) bottomNav.style.display = 'flex'; // Show bottom nav on mobile
-      if(hamburgerButton) hamburgerButton.style.display = 'block'; // Show on mobile
+        // Logged in
+        renderMenuItems(state.currentUser.role, currentPath); // Render bottom nav
+        if (logoutContainer) logoutContainer.style.display = 'none'; // Correctly hide.
         if (loginLinkContainer) loginLinkContainer.style.display = 'none';
+        if (profilePicture) profilePicture.style.display = 'inline-block'; // Show profile
+        if (bottomNav) bottomNav.style.display = 'flex'; // Show bottom nav
 
     } else {
-        // Logged out: Hide profile picture, clear menu, and show login link if not on login/register
-        if (profilePictureContainer) profilePictureContainer.style.display = 'none'; // Hide profile pic
-        if (menuItemsContainer) menuItemsContainer.innerHTML = "";  // Clear main menu
-        if (bottomMenuItemsContainer) bottomMenuItemsContainer.innerHTML = "";
-        if (hamburgerButton) hamburgerButton.style.display = 'none'; // Hide on login
-        if(bottomNav) bottomNav.style.display = 'none';
+        // Logged out
+        if (profilePicture) profilePicture.style.display = 'none'; // Hide profile
+        if (bottomMenuItemsContainer) bottomMenuItemsContainer.innerHTML = ""; // Clear bottom menu
+        if (logoutContainer) logoutContainer.style.display = 'none';
+        if(bottomNav) bottomNav.style.display = 'none'; // Hide bottom nav
 
         if (currentPath === '/login' || currentPath === '/register') {
             if (loginLinkContainer) loginLinkContainer.style.display = 'none';
         } else {
+            // On any other page (should be redirected by router, but handle it)
             if (loginLinkContainer) loginLinkContainer.style.display = 'inline';
         }
-         renderMenuItems('guest', currentPath); // Show guest menu
+        // Do NOT renderMenuItems for guests.  No menu when logged out.
     }
 }
 
-function renderMenuItems(userRole, currentPath){
-    const menuItemsContainer = document.getElementById('menu-items-container');
+function renderMenuItems(userRole, currentPath) {
     const bottomMenuItemsContainer = document.getElementById('bottom-menu-items-container');
 
-    if(menuItemsContainer) {
-        menuItemsContainer.innerHTML = renderNavigation(userRole, currentPath);
-    }
-    if (bottomMenuItemsContainer){
-        bottomMenuItemsContainer.innerHTML = renderNavigation(userRole, currentPath, "bottom"); //For bottom nav
+    if (bottomMenuItemsContainer) {
+        bottomMenuItemsContainer.innerHTML = renderNavigation(userRole, currentPath, "bottom");
     }
 }
 

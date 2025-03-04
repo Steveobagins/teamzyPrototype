@@ -2,13 +2,13 @@
 
 const menuConfig = {
     mainNavigation: [ //This can be deleted, but keep for now, in case we revert
-      { path: '/', label: 'Home', roles: ['guest', 'user', 'admin'] },
+      { path: '/', label: 'Home', roles: ['user', 'admin'] },
       { path: '/dashboard', label: 'Dashboard', roles: ['user', 'admin'] },
       { path: '/events', label: 'Events', roles: ['user', 'admin'] },
       { path: '/login', label: 'Logout', roles: ['user', 'admin'] }, // Add Logout here
     ],
      bottomNavigation: [
-      { path: '/', label: 'Home', roles: ['guest', 'user', 'admin'], icon: 'fa-solid fa-house' },
+      { path: '/', label: 'Home', roles: ['user', 'admin'], icon: 'fa-solid fa-house' },
       { path: '/dashboard', label: 'Dashboard', roles: ['user', 'admin'], icon: 'fa-solid fa-gauge' },
       { path: '/events', label: 'Events', roles: ['user', 'admin'], icon: 'fa-solid fa-calendar-days' },
      { path: '/profile', label: 'My Profile', roles: ['user', 'admin'], icon: 'fa-solid fa-user' },
@@ -16,7 +16,7 @@ const menuConfig = {
      { path: '/payments', label: 'Payments', roles: ['user', 'admin'], icon: 'fa-solid fa-money-bill'}
     ],
     sideNavigation: [  // ADD THIS!  This is for the hamburger menu.
-      { path: '/', label: 'Home', roles: ['guest', 'user', 'admin'] },
+      { path: '/', label: 'Home', roles: ['user', 'admin'] },
       { path: '/dashboard', label: 'Dashboard', roles: ['user', 'admin'] },
       { path: '/events', label: 'Events', roles: ['user', 'admin'] },
       { path: '/profile', label: 'My Profile', roles: ['user', 'admin'] },
@@ -27,11 +27,8 @@ const menuConfig = {
 };
 
 const roles = {
-  guest: 'guest',
   user: 'user',
   admin: 'admin',
     member: 'user', //CRITICAL
 };
-export { menuConfig, roles };
-
-// End of code
+export { menuConfig, roles }; // Corrected export
