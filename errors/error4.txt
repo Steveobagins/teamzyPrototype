@@ -1,0 +1,17 @@
+updateUI called. Current state: {currentUser: {…}, events: Array(0), clubs: Array(0)}clubs: []currentUser: createdAt: "2025-03-04T18:02:38.980Z"email: "testuser@example.com"firstName: "Test"lastName: "User"password: "password123"role: "member"updatedAt: "2025-03-04T18:02:38.980Z"userId: "8da53d21-d53e-436d-accb-f49b1b948849"[[Prototype]]: Objectevents: [][[Prototype]]: Object
+app.js:66 Current path: /dashboard
+app.js:70 User is logged in. Role: member
+navigation.js:17 allowed menu items: []
+app.js:98 bottomMenuItemsContainer.innerHTML 
+favicon.ico:1 
+            
+            
+            GET http://192.168.6.113:8080/favicon.ico 404 (Not Found)
+app.js:57 updateUI called. Current state: {currentUser: null, events: Array(0), clubs: Array(0)}
+app.js:66 Current path: /dashboard
+app.js:79 User is NOT logged in.
+app.js:57 updateUI called. Current state: {currentUser: {…}, events: Array(0), clubs: Array(0)}
+app.js:66 Current path: /register
+app.js:70 User is logged in. Role: member
+navigation.js:17 allowed menu items: []
+app.js:98 bottomMenuItemsContainer.innerHTML 

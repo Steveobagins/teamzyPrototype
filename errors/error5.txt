@@ -1,0 +1,7 @@
+renderView called with path: /dashboard
+router.js:41 Rendering view for path: /dashboard
+app.js:57 updateUI called. Current state: {currentUser: {…}, events: Array(0), clubs: Array(0)}clubs: []currentUser: createdAt: "2025-03-03T23:54:42.071Z"email: "steve@steve.com"firstName: "steve"lastName: "parmenter"password: "test"role: "member"updatedAt: "2025-03-03T23:54:42.071Z"userId: "c8f8f146-7be6-457b-ad30-d33185d32713"[[Prototype]]: Objectevents: [][[Prototype]]: Object
+app.js:66 Current path: /dashboard
+app.js:70 User is logged in. Role: member
+navigation.js:17 allowed menu items: []
+app.js:98 bottomMenuItemsContainer.innerHTML 

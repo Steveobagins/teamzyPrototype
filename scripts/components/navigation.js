@@ -1,8 +1,8 @@
 // scripts/components/navigation.js
 
-import { menuConfig, roles } from '../config.js';
+import { menuConfig, roles } from '../config.js'; // Corrected import
 
-export function renderNavigation(userRole, currentPath, navType = "main") {
+function renderNavigation(userRole, currentPath, navType = "main") {
     let menu;
 
     // Select the correct set of menu items based on location.
@@ -40,5 +40,5 @@ export function renderNavigation(userRole, currentPath, navType = "main") {
 
     return menuItems;
 }
-export { renderNavigation };
+export { renderNavigation }; // Corrected export
 // End of code

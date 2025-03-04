@@ -7,13 +7,13 @@ import { renderProfile } from './views/profile.js';
 import { renderRegister } from './views/register.js';
 import { renderPayments } from './views/payments.js';
 import { renderChat } from './views/chat.js';
+import { renderHome } from './views/home.js';
 import { getCurrentUser } from './auth.js';
-//import { updateUI } from './app.js'; // REMOVED - Not needed
-//import { getState } from './state.js'; // REMOVED
 
 // Define routes and their corresponding view functions
 const routes = {
-  '/': renderLogin, // Default route should be login
+  '/': renderLogin,
+  '/home': renderHome,
   '/dashboard': renderDashboard,
   '/login': renderLogin,
   '/events': renderEvents,
@@ -26,48 +26,47 @@ const routes = {
 
 // Function to render a view based on the current route
 function renderView(path) {
-    const viewFunction = routes[path]; // Look up the view function
+    console.log("renderView called with path:", path); // Debug log
+    const viewFunction = routes[path];
 
     if (viewFunction) {
-        // Route Guard (Simulated Authentication Check)
-        // Check if the route requires authentication, *excluding* login and register
-        const requiresAuth = ['/dashboard', '/profile', '/events','/payments','/chat'].includes(path);
+        const requiresAuth = ['/dashboard', '/profile', '/events','/payments','/chat', '/home'].includes(path);
         const user = getCurrentUser();
 
-      //  REMOVED updateUI call
-
         if (requiresAuth && !user) {
-            // If authentication is required and the user is not logged in, redirect to login
+            console.log("Requires auth and user not logged in. Redirecting to /login"); // Debug log
             navigateTo('/login');
-            return; // Stop execution
+            return;
         }
-    viewFunction(); // Call the view function to render the content
+        console.log("Rendering view for path:", path); // Debug log
+        viewFunction();
     } else {
-    // Handle 404 Not Found (optional)
+        console.log("404 Not Found for path:", path); // Debug log
         document.getElementById('app').innerHTML = '<h1>404 Not Found</h1>';
     }
 }
 
 // Function to handle navigation
 export function navigateTo(path) {
-  window.location.hash = path; // Change the URL hash
+    console.log("navigateTo called with path:", path); // Add this for debugging!
+  window.location.hash = path;
 }
 
 // Function to initialize the router
 export function initializeRouter() {
   // Listen for hash changes
   window.addEventListener('hashchange', () => {
-    const path = window.location.hash.slice(1) || '/'; // Get path, default to / (login)
+    const path = window.location.hash.slice(1) || '/login';
+        console.log("Hash changed to:", path); // Debug log
     renderView(path);
   });
 
-    //Ensure that if there is no current user, always start at login
-    if (!getCurrentUser()){
-      navigateTo('/login');
-        return;
+  // Initial render (important for initial load)
+  if (!window.location.hash) {
+    console.log("No initial hash.  Setting to /login")
+        window.location.hash = '/login'; // Force /login on initial load if no hash present.
+
     }
-  // Initial render
-  const path = window.location.hash.slice(1) || '/'; // Get path, default to / (login)
-    renderView(path);
+    renderView(window.location.hash.slice(1) || '/login');
 }
 // End of code
