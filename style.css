@@ -276,6 +276,7 @@ textarea:focus, select:focus{
 
 #main-nav.menu-open {
   transform: translateX(100%); /* Corrected: Slide in from the LEFT */
+    display: block !important;
 }
 
 #main-nav ul {
@@ -368,7 +369,7 @@ h6 { font-size: 0.875rem; }
         padding-top: 0;
         background-color: transparent; /* Remove background */
         left: 0; /* Reset position*/
-      transform: translateX(0) !important; /* Reset mobile styles */
+      transform: none !important;
     outline: none; /*Remove outline*/
 
     }
