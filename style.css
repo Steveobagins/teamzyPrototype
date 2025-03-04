@@ -276,15 +276,14 @@ textarea:focus, select:focus{
 
 #main-nav.menu-open {
   transform: translateX(100%); /* Corrected: Slide in from the LEFT */
-  display: block !important; /* Ensure it's displayed when open */
 }
 
 #main-nav ul {
     list-style: none;
-    display: flex;
+  display: flex;
     flex-direction: column;
     gap: var(--space-md);
-    align-items: flex-start;
+  align-items: flex-start;
     padding-left: var(--space-md);
 }
 /* --- Headings --- */
@@ -361,7 +360,7 @@ h6 { font-size: 0.875rem; }
 @media (min-width: 768px) {
     /* Desktop Styles */
     #main-nav {
-        display: flex !important; /* Always show as block on desktop */
+        display: flex !important; /* Always show as flex on desktop */
         position: static; /* Remove fixed positioning */
         width: auto; /* Let it take natural width */
         height: auto; /* Let it take natural height */
@@ -369,7 +368,7 @@ h6 { font-size: 0.875rem; }
         padding-top: 0;
         background-color: transparent; /* Remove background */
         left: 0; /* Reset position*/
-    transform: none !important;
+      transform: translateX(0) !important; /* Reset mobile styles */
     outline: none; /*Remove outline*/
 
     }

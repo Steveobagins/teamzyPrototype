@@ -69,7 +69,7 @@ function updateUI(state) {
         if(logoutContainer) logoutContainer.style.display = 'block';
         if(loginLinkContainer) loginLinkContainer.style.display = 'none';
         if(hamburgerButton) hamburgerButton.style.display = 'block'; // Show on mobile
-      if(bottomNav) bottomNav.style.display = 'flex';
+        if(bottomNav) bottomNav.style.display = 'flex';
         if(mainNav) mainNav.style.display = 'block'; // Ensure menu is visible
 
 
@@ -82,7 +82,7 @@ function updateUI(state) {
         if (currentPath === '/login' || currentPath === '/register') {
             if(loginLinkContainer) loginLinkContainer.style.display = 'none';
             if(hamburgerButton) hamburgerButton.style.display = 'none'; // Hide on login
-          if(bottomNav) bottomNav.style.display = 'none';
+            if(bottomNav) bottomNav.style.display = 'none';
             if(mainNav) mainNav.style.display = 'none';
         } else {
             if(loginLinkContainer) loginLinkContainer.style.display = 'inline'; // Show login link
