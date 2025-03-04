@@ -1,24 +1,20 @@
 // scripts/data/menuConfig.js
+
 export const menuConfig = {
-    member: [
-      { label: 'Home', path: '/dashboard', showOnMain: false, showOnBottom: false},
-      { label: 'Events', path: '/events', showOnMain: true, showOnBottom: true, icon: 'fa-solid fa-calendar-days' },
-      { label: 'Payments', path: '/payments', showOnMain: false, showOnBottom: true, icon: 'fa-solid fa-money-bill' },
-      { label: 'Chat', path: '/chat', showOnMain: true, showOnBottom: true, icon: 'fa-solid fa-comments' },
-      { label: 'My Profile', path: '/profile', showOnMain: true, showOnBottom: true, icon: 'fa-solid fa-user' },
-      { label: 'Logout', path: '/login', showOnMain: true, showOnBottom: false} // Special case for logout
+    user: [
+        { path: '/', label: 'Home', showOnMain: true, showOnBottom: true, icon: 'fas fa-home' },
+        { path: '/events', label: 'Events', showOnMain: true, showOnBottom: true, icon: 'fas fa-calendar' },
+        { path: '/profile', label: 'Profile', showOnMain: true, showOnBottom: true, icon: 'fas fa-user' },
     ],
     admin: [
-      { label: 'Home', path: '/dashboard', showOnMain: false, showOnBottom: false },
-      { label: 'Events', path: '/events', showOnMain: true, showOnBottom: true, icon: 'fa-solid fa-calendar-days' },
-      { label: 'Payments', path: '/payments', showOnMain: false, showOnBottom: true, icon: 'fa-solid fa-money-bill' },
-      { label: 'Chat', path: '/chat', showOnMain: true, showOnBottom: true, icon: 'fa-solid fa-comments' },
-      { label: 'My Profile', path: '/profile', showOnMain: true, showOnBottom: true, icon: 'fa-solid fa-user' },
-        { label: 'Users', path: '/users', showOnMain: true, showOnBottom: false},
-        { label: 'Settings', path: '/settings', showOnMain: true, showOnBottom: false },
-        { label: 'Logout', path: '/login', showOnMain: true, showOnBottom: false } // Special case for logout
+        { path: '/', label: 'Home', showOnMain: true, showOnBottom: true, icon: 'fas fa-home' },
+        { path: '/events', label: 'Events', showOnMain: true, showOnBottom: true, icon: 'fas fa-calendar' },
+        { path: '/profile', label: 'Profile', showOnMain: true, showOnBottom: true, icon: 'fas fa-user' },
+        { path: '/users', label: 'Users', showOnMain: true, showOnBottom: false },
+        { path: '/admin', label: 'Admin', showOnMain: true, showOnBottom: false },
+        { path: '/chat', label: 'Chat', showOnMain: true, showOnBottom: true, icon: 'fas fa-comments' }, // Example with icon
+        { path: '/payments', label: 'Payments', showOnMain: true, showOnBottom: true, icon: 'fas fa-credit-card' }
     ],
-    // Add other roles as needed
-  };
+};
 
 // End of code

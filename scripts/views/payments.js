@@ -9,4 +9,4 @@ export function renderPayments() {
   `;
 }
 
-// End of code 1
+// End of code

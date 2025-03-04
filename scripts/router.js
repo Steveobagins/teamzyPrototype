@@ -6,7 +6,7 @@ import { renderEvents } from './views/events.js';
 import { renderProfile } from './views/profile.js';
 import { renderRegister } from './views/register.js';
 import { renderPayments } from './views/payments.js';
-import { renderChat } from './views/chat.js';
+import { renderChat } from './views/chat.js'; // Correct import
 import { getCurrentUser } from './auth.js';
 //import { renderNavigation } from './components/navigation.js'; // No longer needed
 
