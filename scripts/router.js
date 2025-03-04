@@ -9,17 +9,18 @@ import { getCurrentUser } from './auth.js';
 //import { renderNavigation } from './components/navigation.js'; // No longer needed
 
 // Define routes and their corresponding view functions
-  const routes = {
-      '/': renderLogin, // Default route should be login
-      '/dashboard': renderDashboard,
-      '/login': renderLogin,
-      '/events': renderEvents,
-        '/profile': renderProfile,
-        '/register': renderRegister,
-        '/payments': renderDashboard, //TEMP
-        '/chat': renderDashboard, //TEMP
-      // Add more routes as needed
-    };
+const routes = {
+  '/': renderLogin, // Default route should be login
+  '/dashboard': renderDashboard,
+  '/login': renderLogin,
+  '/events': renderEvents,
+    '/profile': renderProfile,
+    '/register': renderRegister,
+    '/payments': renderDashboard, //TEMP
+    '/chat': renderDashboard, //TEMP
+  // Add more routes as needed
+};
+
 // Function to render a view based on the current route
 function renderView(path) {
   const viewFunction = routes[path]; // Look up the view function
