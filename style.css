@@ -3,84 +3,84 @@
 /* 1. CSS Variables (Custom Properties) - for Theming */
 
 :root {
-    /* Color Palette */
-    --color-primary: #007bff;
-    --color-secondary: #ff7f50;
-    --color-accent: #ffcc00;
-    --color-background: #fff;
-    --color-background-light: #f8f9fa;
-    --color-text: #333;
-    --color-text-light: #666;
-    --color-border: #ddd;
-    --color-error: #dc3545;
-    --color-success: #28a745;
+  /* Color Palette */
+  --color-primary: #007bff; /* Blue */
+  --color-secondary: #ff7f50; /* Coral */
+  --color-accent: #ffcc00; /* Yellow */
+  --color-background: #fff; /* White */
+  --color-background-light: #f8f9fa; /* Light Gray */
+  --color-text: #333; /* Dark Gray */
+  --color-text-light: #666; /* Lighter Gray */
+  --color-border: #ddd; /* Light Gray for borders */
+  --color-error: #dc3545; /* Red */
+  --color-success: #28a745; /* Green */
 
-    /* Typography */
-    --font-family-sans: 'Open Sans', sans-serif;
-    --font-size-base: 16px;
-    --font-size-small: 0.875rem; /* 14px */
-    --font-size-large: 1.25rem;  /* 20px */
-    --font-weight-normal: 400;
-    --font-weight-bold: 700;
-    --line-height: 1.5;
+  /* Typography */
+  --font-family-sans: 'Open Sans', sans-serif;
+  --font-size-base: 16px;
+  --font-size-small: 0.875rem; /* 14px */
+  --font-size-large: 1.25rem;  /* 20px */
+  --font-weight-normal: 400;
+  --font-weight-bold: 700;
+  --line-height: 1.5;
 
-    /* Spacing */
-    --space-xs: 0.25rem;
-    --space-sm: 0.5rem;
-    --space-md: 1rem;
-    --space-lg: 1.5rem;
-    --space-xl: 2rem;
+  /* Spacing */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
 
-    /* Border Radius */
-    --border-radius: 8px;
-    --border-radius-pill: 50px;
+  /* Border Radius */
+  --border-radius: 8px;
+  --border-radius-pill: 50px;
 
-    /* Box Shadow */
-    --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  /* Box Shadow */
+  --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
-    /* Transition */
-    --transition: all 0.2s ease-in-out;
+  /* Transition */
+  --transition: all 0.2s ease-in-out;
 
     /* Menu */
-    --menu-width: 80%; /* Width of the slide-out menu - NO LONGER USED, but kept for now*/
+    --menu-width: 80%; /* Width of the slide-out menu */
 }
 
 /* 2. Basic Reset and Global Styles */
 
 *, *::before, *::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-    font-family: var(--font-family-sans);
-    font-size: var(--font-size-base);
-    font-weight: var(--font-weight-normal);
-    line-height: var(--line-height);
-    color: var(--color-text);
-    background-color: var(--color-background);
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height);
+  color: var(--color-text);
+  background-color: var(--color-background);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 /* 3. Basic Layout */
 
 header {
-    background-color: var(--color-primary);
-    color: var(--color-background);
-    padding: var(--space-md);
-    display: flex;
-    justify-content: space-between; /* Space out title and profile */
-    align-items: center;
-    position: relative; /* For dropdown positioning */
+  background-color: var(--color-primary);
+  color: var(--color-background);
+  padding: var(--space-md);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+    position: relative; /* Added for absolute positioning of hamburger */
 }
 
 main {
-    padding: var(--space-md);
+  padding: var(--space-md);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -88,18 +88,19 @@ main {
 }
 
 footer {
-    background-color: var(--color-background-light);
-    color: var(--color-text-light);
-    padding: var(--space-md);
-    text-align: center;
+  background-color: var(--color-background-light);
+  color: var(--color-text-light);
+  padding: var(--space-md);
+  text-align: center;
 }
 
 #app {
-    width: 100%;
+     width: 100%; /* Ensure it takes full width available */
 }
 
-/* 4. Common UI Elements */
+/* 4. Basic Styles for Common UI Elements */
 
+/* --- Buttons --- */
 .button {
   display: inline-block;
   padding: var(--space-sm) var(--space-md);
@@ -123,10 +124,11 @@ footer {
 }
 
 .button-secondary:hover {
-    background-color: darken(var(--color-secondary), 10%);
-    color: var(--color-text);
+     background-color: darken(var(--color-secondary), 10%);
+     color: var(--color-text); /* Set text color on hover */
 }
 
+/* --- Forms --- */
 .form-group {
   margin-bottom: var(--space-md);
 }
@@ -143,16 +145,18 @@ input[type="password"],
 input[type="date"],
 input[type="number"],
 textarea,
-select {
-    width: 100%;
-    padding: var(--space-sm);
-    border: 1px solid var(--color-border);
-    border-radius: var(--border-radius);
-    font-size: var(--font-size-base);
-    font-family: var(--font-family-sans);
-    transition: border-color var(--transition);
+select
+ {
+  width: 100%;
+  padding: var(--space-sm);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius);
+  font-size: var(--font-size-base);
+  font-family: var(--font-family-sans);
+  transition: border-color var(--transition);
 }
 
+/* Focus style for form inputs */
 input[type="text"]:focus,
 input[type="email"]:focus,
 input[type="password"]:focus,
@@ -162,6 +166,7 @@ textarea:focus, select:focus{
   box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
 }
 
+/* --- Cards --- */
 .card {
   background-color: var(--color-background);
   border: 1px solid var(--color-border);
@@ -171,68 +176,73 @@ textarea:focus, select:focus{
   margin-bottom: var(--space-md);
 }
 
-/* --- Navigation --- */
-
-/* Profile Picture and Dropdown */
-#profile-picture-container {
-    position: relative; /* Make this a positioning context */
-    display: inline-block; /*  to wrap the content tightly*/
-}
-
-#profile-picture {
-    width: 40px; /* Example size - adjust as needed */
-    height: 40px;
-    border-radius: 50%; /* Circular image */
-    background-color: var(--color-background-light); /* Placeholder background */
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    /* Add more styles as needed for your actual profile pictures */
-}
-
-#profile-dropdown {
-    position: absolute;
-    top: 100%; /* Position below the profile picture */
-    right: 0;     /* Align to the right edge */
-    background-color: var(--color-background);
-    border: 1px solid var(--color-border);
-    border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow);
-    padding: var(--space-sm);
-    min-width: 150px; /* Set a minimum width */
-    z-index: 101;      /* Ensure its above bottom nav */
-}
-
-#profile-dropdown ul {
+/* --- Navigation ---*/
+/*  Base styles for top nav (desktop) */
+#main-nav ul {
     list-style: none;
-    padding: 0;
-    margin: 0;
+    display:flex;
+    gap: var(--space-md);
+    align-items: center; /* Vertical alignment */
 }
 
-#profile-dropdown li {
-    padding: var(--space-xs) 0;
+#main-nav a {
+    color: var(--color-background);
+    text-decoration: none;
+    padding: var(--space-sm);
+    border-radius: var(--border-radius);
+    display: block; /* For consistent sizing */
 }
-#profile-dropdown a, .nav-button{
+
+#main-nav a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+#main-nav a:visited { /* Add visited style */
+    color: var(--color-background);
+}
+
+.nav-button {
     background: none;
     border: none;
-    color: var(--color-text);
+    color: var(--color-background);
     padding: var(--space-sm);
     cursor: pointer;
     font-size: inherit;
     font-family: inherit;
     text-decoration: none;
     border-radius: var(--border-radius);
-    display: block;
-    width: 100%;
-    text-align: left;
 }
-#profile-dropdown a:hover, .nav-button:hover {
+
+.nav-button:hover {
      background-color: rgba(255, 255, 255, 0.2);
 }
 
-/* Bottom Navigation */
+/* Hamburger button (mobile) */
+#hamburger-button {
+    background: none;
+    border: none;
+    color: var(--color-background);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: var(--space-sm);
+    display: none; /* Initially hidden (desktop first) */
+    position: absolute; /* Position absolutely within header */
+    left: var(--space-md); /* Align to the left edge */
+    top: 50%;           /* Center vertically */
+    transform: translateY(-50%); /* Center vertically */
+
+}
+#close-menu-button{
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+  position: absolute; /* Position inside the menu */
+  top: var(--space-xs);  /*  right top corner */
+  right: var(--space-md);
+    color: var(--color-background);
+}
+/* Bottom Navigation (mobile) */
 #bottom-nav {
     background-color: var(--color-primary);
     color: var(--color-background);
@@ -240,8 +250,8 @@ textarea:focus, select:focus{
     bottom: 0;
     left: 0;
     width: 100%;
-    display: none; /* Hidden by default */
-    z-index: 100;
+    display: none; /* Hidden by default (desktop first) */
+    z-index: 100; /* Ensure it's above other content */
 }
 
 #bottom-nav ul {
@@ -249,22 +259,49 @@ textarea:focus, select:focus{
     display: flex;
     justify-content: space-around;
     padding: var(--space-sm);
+    margin: 0;
 }
 
 #bottom-nav a {
     color: var(--color-background);
     text-decoration: none;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: var(--space-sm);
+    display: flex; /* Use flexbox for centering */
+    flex-direction: column; /* Stack icon and text vertically */
+    align-items: center; /* Center horizontally */
 }
 
 #bottom-nav i {
-    margin-bottom: var(--space-xs);
+    margin-bottom: var(--space-xs); /* Space between icon and text */
     font-size: 1.25rem;
 }
+/*  Slide-out menu styles (mobile) */
+#main-nav {
+  transition: transform 0.3s ease-in-out;
+  background-color: var(--color-primary);
+  position: fixed;
+  top: 0;
+  left: -100%; /* Initially hide menu off-screen to the left */
+  width: var(--menu-width);
+  height: 100vh;
+  z-index: 100;
+  overflow-y: auto;
+  padding-top: var(--space-md); /* Add some top padding*/
+  outline: none; /* Remove the focus outline WHEN HIDDEN */
+}
 
+#main-nav.menu-open {
+  transform: translateX(100%); /* Corrected: Slide in from the LEFT */
+    display: block !important;
+}
+
+#main-nav ul {
+    list-style: none;
+  display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  align-items: flex-start;
+    padding-left: var(--space-md);
+}
 /* --- Headings --- */
 h1, h2, h3, h4, h5, h6 {
     font-weight: var(--font-weight-bold);
@@ -291,7 +328,7 @@ h6 { font-size: 0.875rem; }
 .text-center { text-align: center; }
 .text-right { text-align: right; }
 .text-muted { color: var(--color-text-light); }
-.mb-0 { margin-bottom: 0; }
+.mb-0 { margin-bottom: 0; } /* Remove bottom margin */
 .mb-sm { margin-bottom: var(--space-sm); }
 .mb-md { margin-bottom: var(--space-md); }
 .mb-lg { margin-bottom: var(--space-lg); }
@@ -307,27 +344,69 @@ h6 { font-size: 0.875rem; }
   white-space: nowrap !important;
   border: 0 !important;
 }
-
 .login-container,
 .register-container {
-    width: 100%;
-    max-width: 400px;
-    margin: 0 auto;
+    width: 100%; /* Take full width initially */
+    max-width: 400px; /* Limit width on larger screens*/
+    margin: 0 auto; /* Center horizontally */
 }
 
-/* --- Active Menu Item --- */
-.active {
-  font-weight: bold; /* Example: make active link bold */
-  /* Add any other styling you want for the active link */
-}
 /* Media Queries */
 @media (max-width: 767px) {
     /* Mobile Styles */
+    #hamburger-button {
+        display: block; /* Show hamburger button on mobile */
+    }
+
+    /* #main-nav {
+      display: none;
+    }
+    #main-nav.menu-open{
+        display: block;
+    } */
+
     #bottom-nav {
         display: flex; /* Show bottom nav on mobile */
     }
-      footer {
-        margin-bottom: 60px;
+  footer {
+        margin-bottom: 60px; /*Adjust the amount of space as needed*/
+    }
+}
+
+@media (min-width: 768px) {
+    /* Desktop Styles */
+    #main-nav {
+        display: flex !important; /* Always show as flex on desktop */
+        position: static; /* Remove fixed positioning */
+        width: auto; /* Let it take natural width */
+        height: auto; /* Let it take natural height */
+        overflow-y: visible; /* Remove scrollbar */
+        padding-top: 0;
+        background-color: transparent; /* Remove background */
+        left: 0; /* Reset position*/
+      transform: none !important;
+    outline: none; /*Remove outline*/
+
+    }
+  #main-nav ul {
+      flex-direction: row; /* Horizontal layout on desktop */
+      padding-left: 0;
+        align-items: flex-start;
+  }
+
+    .login-container,
+    .register-container {
+        width: 33.33%; /* Take up 1/3 of the width on larger screens */
+    }
+    #hamburger-button {
+        display: none !important; /* Hide on larger screens */
+    }
+    #bottom-nav {
+        display: none !important;
+    }
+    main {
+        margin-left: 0; /* Reset margin */
+        transition: margin-left: 0.3s ease-in-out; /* Smooth transition for main content */
     }
 }
 /* End of code */
