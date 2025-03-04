@@ -80,6 +80,10 @@ header {
 
 main {
   padding: var(--space-md);
+    /* Center the content vertically and horizontally */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 footer {
@@ -91,6 +95,7 @@ footer {
 
 #app {
     /* Styles for the main content area where views will be rendered */
+     width: 100%; /* Ensure it takes full width available */
 }
 
 /* 4. Basic Styles for Common UI Elements */
@@ -251,6 +256,19 @@ h6 { font-size: 0.875rem; }
   clip: rect(0, 0, 0, 0) !important;
   white-space: nowrap !important;
   border: 0 !important;
+}
+.login-container,
+.register-container {
+    width: 100%; /* Take full width initially */
+    max-width: 400px; /* Limit width on larger screens*/
+    margin: 0 auto; /* Center horizontally */
+}
+
+@media (min-width: 768px) {
+    .login-container,
+    .register-container {
+        width: 33.33%; /* Take up 1/3 of the width on larger screens */
+    }
 }
 
 /* End of code */

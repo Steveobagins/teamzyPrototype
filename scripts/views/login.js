@@ -36,12 +36,12 @@ export function renderLogin() {
       className: 'button', // Use the class from style.css
       id: 'login-button' // Add an ID
   });
-    const registerButton = createButton({
-        type: 'button', // Changed type to button
-        text: 'Register',
-        className: 'button button-secondary',
-        id: 'register-button' // Add unique ID
-    });
+//     const registerButton = createButton({  REMOVED
+//         type: 'button', // Changed type to button
+//         text: 'Register',
+//         className: 'button button-secondary',
+//         id: 'register-button' // Add unique ID
+//     });
 
   // Build the form HTML
   const formHTML = `
@@ -49,7 +49,6 @@ export function renderLogin() {
       ${emailInput}
       ${passwordInput}
       ${submitButton}
-      ${registerButton}
     </form>
   `;
 
@@ -58,6 +57,7 @@ export function renderLogin() {
     <div class="login-container">
       <h2>Login</h2>
       ${formHTML}
+      <p>Don't have an account? <a href="#/register">Register</a></p> 
     </div>
   `;
 
@@ -94,10 +94,9 @@ export function renderLogin() {
         }
     });
 
-        // Add event listener for register button.  Use navigateTo
-        document.getElementById('register-button').addEventListener('click', () => {
-            navigateTo('/register');
-        });
+    //     document.getElementById('register-button').addEventListener('click', () => { REMOVED
+    //         navigateTo('/register');
+    //     });
 
     function displayErrors(errors) {
         // Add new error messages

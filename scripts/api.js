@@ -7,15 +7,15 @@ const API_DELAY = 500; // milliseconds
 
 // Helper function to simulate an API call with a delay
 function simulateApiCall(data, shouldReject = false) {
-return new Promise((resolve, reject) => {
+  return new Promise((resolve, reject) => {
     setTimeout(() => {
-    if (shouldReject) {
+      if (shouldReject) {
         reject(new Error('Simulated API Error'));
-    } else {
+      } else {
         resolve(data);
-    }
+      }
     }, API_DELAY);
-});
+  });
 }
 
 // --- Authentication API ---
@@ -53,6 +53,27 @@ function getUsers() {
 
 function saveUsers(users) {
     localStorage.setItem('users', JSON.stringify(users));
+}
+
+// --- Dashboard Data API ---
+export async function getDashboardData(userId) {
+    // Simulate fetching data based on userId (for now, we just return the same data)
+    const dashboardData = {
+        upcomingEvents: [
+            { eventId: 'e1', name: 'Soccer Practice', date: '2024-03-10', time: '16:00' },
+            { eventId: 'e2', name: 'Swim Meet', date: '2024-03-15', time: '09:00' },
+            { eventId: 'e3', name: 'Team Meeting', date: '2024-03-17', time: '19:30' },
+        ],
+        notifications: [
+            { id: 'n1', message: 'Your payment is due.', type: 'warning' },
+            { id: 'n2', message: 'New event added: "Fundraiser Gala"', type: 'info' },
+        ],
+        progressSummary: {
+            recentActivity: '5 workouts completed this week.',
+            goalsStatus: 'On track to meet your monthly goals.',
+        },
+    };
+    return simulateApiCall(dashboardData);
 }
 
 // End of code

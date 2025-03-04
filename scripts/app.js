@@ -45,10 +45,18 @@ function setupGlobalEventListeners() {
 
 function updateUI(state) {
     const logoutContainer = document.getElementById('logout-container');
+    const loginLinkContainer = document.getElementById('login-link-container');
+    const homeLinkContainer = document.getElementById('home-link-container');
+
+
     if (state.currentUser) {
         logoutContainer.style.display = 'block'; // Show logout button
+        loginLinkContainer.style.display = 'none'; // Hide login link
+        homeLinkContainer.style.display = 'inline'; //Show Home Link
     } else {
         logoutContainer.style.display = 'none'; // Hide logout button
+        loginLinkContainer.style.display = 'inline'; // Show login link
+        homeLinkContainer.style.display = 'none'; //Hide Home Link
     }
 }
 
