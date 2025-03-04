@@ -1,8 +1,8 @@
 // scripts/components/navigation.js
 
-import { menuConfig, roles } from '../config.js'; // Corrected import
+import { menuConfig, roles } from '../config.js';
 
-function renderNavigation(userRole, currentPath, navType = "main") {
+export function renderNavigation(userRole, currentPath, navType = "main") {
     let menu;
 
     // Select the correct set of menu items based on location.
@@ -14,6 +14,7 @@ function renderNavigation(userRole, currentPath, navType = "main") {
 
     // Filter the menu items based on the user's role
     const allowedMenuItems = menu.filter(item => item.roles.includes(userRole));
+    console.log("allowed menu items: "+ JSON.stringify(allowedMenuItems));
 
   // Generate the HTML for each allowed menu item
   let menuItems = '';

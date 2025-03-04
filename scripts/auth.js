@@ -3,7 +3,6 @@
 import { updateState, getState } from './state.js';
 import { navigateTo } from './router.js';
 import * as api from './api.js';
-//import { updateUI } from './app.js'; // REMOVE THIS IMPORT
 
 // Function to handle user login (simulated)
 export async function login(email, password) {
@@ -44,7 +43,6 @@ export function logout() {
   updateState({ currentUser: null });
   localStorage.removeItem('isLoggedIn'); // Clear the login flag
   navigateTo('/login'); // Redirect to login page
-  //updateUI(getState()); // REMOVE THIS LINE
 }
 
 // Function to get the currently logged-in user (simulated)

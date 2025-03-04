@@ -1,12 +1,9 @@
-// scripts/views/profile.js
-
 export function renderProfile() {
-  return `
-    <div class="profile-container">
+  const appContainer = document.getElementById('app');
+    appContainer.innerHTML = `
+    <div class = "profile-container">
       <h2>Profile</h2>
-      <p>This is the Profile page content. Replace this with your actual profile view.</p>
-    </div>
-  `;
+      <p>This is the profile page content.  Replace this with your actual content.</p>
+      </div>
+    `;
 }
-
-// End of code
