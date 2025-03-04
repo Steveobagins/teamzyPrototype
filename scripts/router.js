@@ -6,9 +6,8 @@ import { renderEvents } from './views/events.js';
 import { renderProfile } from './views/profile.js';
 import { renderRegister } from './views/register.js';
 import { renderPayments } from './views/payments.js';
-import { renderChat } from './views/chat.js'; // Correct import
+import { renderChat } from './views/chat.js';
 import { getCurrentUser } from './auth.js';
-//import { renderNavigation } from './components/navigation.js'; // No longer needed
 
 // Define routes and their corresponding view functions
 const routes = {
@@ -25,6 +24,7 @@ const routes = {
 
 // Function to render a view based on the current route
 function renderView(path) {
+console.log(path);
   const viewFunction = routes[path]; // Look up the view function
 
   if (viewFunction) {
@@ -55,6 +55,7 @@ export function navigateTo(path) {
 export function initializeRouter() {
   // Listen for hash changes
   window.addEventListener('hashchange', () => {
+      console.log("hash change");
     const path = window.location.hash.slice(1) || '/login'; // Get path, default to /login
     renderView(path);
   });

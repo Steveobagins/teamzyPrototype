@@ -217,15 +217,15 @@ textarea:focus, select:focus{
 }
 
 /* Hamburger button (mobile) */
-#hamburger-button {
+/* #hamburger-button {
     background: none;
     border: none;
     color: var(--color-background);
     font-size: 1.5rem;
     cursor: pointer;
     padding: var(--space-sm);
-    display: none; /* Initially hidden (desktop first) */
-}
+    display: none;
+} */
 
 /* Bottom Navigation (mobile) */
 #bottom-nav {
@@ -259,6 +259,17 @@ textarea:focus, select:focus{
     margin-bottom: var(--space-xs); /* Space between icon and text */
     font-size: 1.25rem;
 }
+/* Hamburger button (mobile) */
+#hamburger-button {
+    background: none;
+    border: none;
+    color: var(--color-background); /* Or whatever color you want */
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: var(--space-sm);
+    display: none; /* Initially hidden (desktop first) */
+}
+
 /*  Slide-out menu styles (mobile) */
 #main-nav {
   transition: transform 0.3s ease-in-out;
@@ -275,8 +286,8 @@ textarea:focus, select:focus{
 }
 
 #main-nav.menu-open {
-  transform: translateX(100%); /* Corrected: Slide in from the LEFT */
-    display: block !important;
+     transform: translateX(100%); /* Corrected: Slide in from the LEFT */
+     display: block !important;
 }
 
 #main-nav ul {
@@ -286,7 +297,8 @@ textarea:focus, select:focus{
     gap: var(--space-md);
   align-items: flex-start;
     padding-left: var(--space-md);
-}
+} 
+
 /* --- Headings --- */
 h1, h2, h3, h4, h5, h6 {
     font-weight: var(--font-weight-bold);
@@ -339,20 +351,20 @@ h6 { font-size: 0.875rem; }
 /* Media Queries */
 @media (max-width: 767px) {
     /* Mobile Styles */
-    #hamburger-button {
-        display: block; /* Show hamburger button on mobile */
-    }
+     #hamburger-button {
+        display: block;
+    } 
 
     #main-nav {
-      display: none; /* Hide top nav on mobile */
+       display: none;   /* Hide top nav on mobile */
     }
-    #main-nav.menu-open{
-        display: block; /* Show when menu is open */
-    }
+     #main-nav.menu-open{
+        display: block;
+    } 
 
-    #bottom-nav {
-        display: flex; /* Show bottom nav on mobile */
-    }
+     #bottom-nav {
+        display: flex;
+    } 
   footer {
         margin-bottom: 60px; /*Adjust the amount of space as needed*/
     }
@@ -383,12 +395,12 @@ h6 { font-size: 0.875rem; }
     .register-container {
         width: 33.33%; /* Take up 1/3 of the width on larger screens */
     }
-    #hamburger-button {
-        display: none !important; /* Hide on larger screens */
+    /* #hamburger-button {
+        display: none !important;
     }
     #bottom-nav {
         display: none !important;
-    }
+    } */
     main {
         margin-left: 0; /* Reset margin */
         transition: margin-left 0.3s ease-in-out; /* Smooth transition for main content */

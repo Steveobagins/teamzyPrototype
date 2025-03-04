@@ -1,12 +1,11 @@
-/// scripts/views/chat.js
+// scripts/views/chat.js
 
 export function renderChat() {
-  return `
-    <div class="chat-container">
-      <h2>Chat</h2>
-      <p>This is the Chat page content. Replace this with your actual chat view.</p>
-    </div>
-  `;
+    const appContainer = document.getElementById('app');
+    appContainer.innerHTML = `
+        <h2>Chat</h2>
+        <p>Welcome to the chat!</p>
+        `;
 }
 
 // End of code
