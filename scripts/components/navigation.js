@@ -1,38 +1,39 @@
 // scripts/components/navigation.js
-import { menuConfig } from '../data/menuConfig.js';
-import { navigateTo } from '../router.js';
 
-export function renderNavigation(userRole, currentPath, navType = "main") {
-    console.log("renderNavigation called with:", { userRole, currentPath, navType }); // ADD THIS
-    const menuItems = menuConfig[userRole] || []; // Fallback to empty array if role not found
-    console.log("menuItems:", menuItems); // ADD THIS
-    let navItemsHTML = "";
+import { menuConfig } from '../config.js'; // Assuming you have a config file
 
-    if (navType === "main") {
-        // Filter out items that should not be on main menu
-        const mainItems = menuItems.filter(item => item.showOnMain);
-        console.log("mainItems:", mainItems); // ADD THIS
-        navItemsHTML = mainItems.map(item => {
-            const isActive = currentPath === item.path; // Check if this is the active item
-            const activeClass = isActive ? 'active' : ''; // Add 'active' class if it is
+function renderNavigation(userRole, currentPath, navLocation = "main") {
+    let menuItems = '';
 
-            return `
-                <li><a href="#${item.path}" class="${activeClass}" data-path="${item.path}">${item.label}</a></li>
+    // Select the correct set of menu items based on location.
+    const menu = (navLocation === "bottom") ? menuConfig.bottomNavigation : menuConfig.mainNavigation;
+
+    // Filter the menu items based on the user's role
+    const allowedMenuItems = menu.filter(item => item.roles.includes(userRole));
+
+  // Generate the HTML for each allowed menu item
+    allowedMenuItems.forEach(item => {
+    const activeClass = currentPath === item.path ? 'active' : ''; // Check for active path
+        if(navLocation === "bottom"){
+             menuItems += `
+            <li>
+                <a href="${item.path}" class="${activeClass}" data-navigo>
+                 <i class="${item.icon}"></i>
+                   <span>${item.label}</span>
+                </a>
+            </li>
             `;
-        }).join('');
-    } else {
-        const bottomItems = menuItems.filter(item => item.showOnBottom);
-        console.log("bottomItems:", bottomItems); // ADD THIS
-        navItemsHTML = bottomItems.map(item => {
-            const isActive = currentPath === item.path; // Check if this is the active item
-            const activeClass = isActive ? 'active' : ''; // Add 'active' class if it is
-
-            return `
-                <li><a href="#${item.path}" class="${activeClass}" data-path="${item.path}">${item.icon ? `<i class="${item.icon}"></i>` : ''}<span>${item.label}</span></a></li>
+        } else {
+            menuItems += `
+            <li>
+                <a href="${item.path}" class="${activeClass} nav-button" data-navigo>${item.label}</a>
+            </li>
             `;
-        }).join('');
-    }
-    console.log("navItemsHTML:", navItemsHTML); // ADD THIS
-    return navItemsHTML;
+        }
+    });
+
+    return menuItems; // Return the generated menu items (without wrapping in <ul>)
 }
-// End of code
+
+
+export { renderNavigation };

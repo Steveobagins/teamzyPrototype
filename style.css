@@ -4,8 +4,8 @@
 
 :root {
   /* Color Palette */
-  --color-primary: #007bff; /* Blue */
-  --color-secondary: #ff7f50; /* Coral */
+  --color-primary: #007bff;
+  --color-secondary: #ff7f50;
   --color-accent: #ffcc00;
   --color-background: #fff;
   --color-background-light: #f8f9fa;
@@ -42,7 +42,7 @@
   --transition: all 0.2s ease-in-out;
 
     /* Menu */
-    --menu-width: 80%; /*  Width of the slide-out menu */
+    --menu-width: 80%; /* Width of the slide-out menu */
 }
 
 /* 2. Basic Reset and Global Styles */
@@ -156,7 +156,8 @@ select {
 input[type="text"]:focus,
 input[type="email"]:focus,
 input[type="password"]:focus,
-textarea:focus, select:focus{
+textarea:focus,
+select:focus {
   outline: none;
   border-color: var(--color-primary);
   box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
@@ -334,52 +335,12 @@ h6 { font-size: 0.875rem; }
 }
 /* Media Queries */
 @media (max-width: 767px) {
-    /* Mobile Styles */
-    #hamburger-button {
-        display: block; /* Show hamburger button on mobile */
-    }
-   #main-nav ul {
-        align-items: stretch; /* Make menu items fill the menu width */
-    }
-    footer {
-        margin-bottom: 60px; /*Adjust the amount of space as needed*/
-    }
-}
-
-@media (min-width: 768px) {
-    /* Desktop Styles */
-    #main-nav {
-        display: flex !important; /* Always show as flex on desktop */
-        position: static; /* Remove fixed positioning */
-        width: auto; /* Let it take natural width */
-        height: auto; /* Let it take natural height */
-        overflow-y: visible; /* Remove scrollbar */
-        padding-top: 0;
-        background-color: transparent; /* Remove background */
-        left: 0; /* Reset position*/
-      transform: none !important;
-    outline: none; /*Remove outline*/
-
-    }
-  #main-nav ul {
-      flex-direction: row; /* Horizontal layout on desktop */
-      padding-left: 0;
-        align-items: flex-start;
+  footer {
+    margin-bottom: 60px; /*Adjust the amount of space as needed*/
   }
-
-    .login-container,
-    .register-container {
-        width: 33.33%; /* Take up 1/3 of the width on larger screens */
-    }
-    #hamburger-button {
-        display: none !important; /* Hide on larger screens */
-    }
-    #bottom-nav {
-        display: none !important;
-    }
-    main {
-        margin-left: 0; /* Reset margin */
-        transition: margin-left: 0.3s ease-in-out; /* Smooth transition for main content */
+    /* Mobile Styles */
+    #main-nav ul {
+        align-items: stretch; /* Make menu items fill the menu width */
     }
 }
 /* End of code */

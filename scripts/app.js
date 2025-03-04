@@ -5,46 +5,33 @@ import { initializeState, subscribeToStateChanges, getState } from './state.js';
 import { setupAuthentication, logout } from './auth.js';
 import { renderNavigation } from './components/navigation.js';
 
-
 function initializeApp() {
-    // 1. Initialize State
     initializeState();
-
-    // 2. Initialize Router
     initializeRouter();
-
-    // 3.  Initialize Authentication
     setupAuthentication();
-
-    // 4. Set up global event listeners
     setupGlobalEventListeners();
-
-    // 5. Subscribe to state changes to update UI - MUST BE BEFORE INITIAL RENDER
     subscribeToStateChanges(updateUI);
-
-    // Initial UI update - MUST BE AFTER subscribeToStateChanges
     updateUI(getState());
 }
 
 function setupGlobalEventListeners() {
-    document.body.addEventListener('click', (event) => { // Use event delegation on body
-        if (event.target.tagName === 'A' && event.target.closest('nav')) { //Listen to clicks on a tags within nav
+    document.body.addEventListener('click', (event) => {
+        if (event.target.tagName === 'A' && event.target.closest('nav')) {
             event.preventDefault();
             const href = event.target.getAttribute('href');
             navigateTo(href);
         }
     });
 
-    // Logout button event listener
-    document.body.addEventListener('click', (event) => { // Use event delegation
+    document.body.addEventListener('click', (event) => {
         if (event.target.id === 'logout-button') {
             logout();
         }
     });
 
-    // Hamburger menu toggle
+    // Hamburger menu toggle.  Now targets the *only* nav element.
     const hamburgerButton = document.getElementById('hamburger-button');
-    const mainNav = document.getElementById('main-nav-mobile'); // Corrected ID
+    const mainNav = document.getElementById('main-nav');  // Correct ID
 
     if (hamburgerButton) {
         hamburgerButton.addEventListener('click', () => {
@@ -52,56 +39,51 @@ function setupGlobalEventListeners() {
         });
     }
 }
-function updateUI(state) {
 
+function updateUI(state) {
     const logoutContainer = document.getElementById('logout-container');
     const loginLinkContainer = document.getElementById('login-link-container');
-    const menuItemsContainer = document.getElementById('menu-items-container-mobile'); // Use mobile container
+    const menuItemsContainer = document.getElementById('menu-items-container'); // Correct ID
     const bottomMenuItemsContainer = document.getElementById('bottom-menu-items-container');
-    const hamburgerButton = document.getElementById('hamburger-button');
-  const bottomNav = document.getElementById('bottom-nav');
-    const mainNav = document.getElementById('main-nav-mobile'); // Get main-nav - Use mobile ID
-    const currentPath = window.location.hash.slice(1) || '/'; // Get current route
+    const hamburgerButton = document.getElementById('hamburger-button'); // Get hamburger button
+    const bottomNav = document.getElementById('bottom-nav');
 
     if (state.currentUser) {
         // Logged in
-        renderMenuItems(state.currentUser.role, currentPath); // Now rendering menu items
-        if(logoutContainer) logoutContainer.style.display = 'block';
-        if(loginLinkContainer) loginLinkContainer.style.display = 'none';
-        if(hamburgerButton) hamburgerButton.style.display = 'block'; // Show on mobile
-      if(bottomNav) bottomNav.style.display = 'flex';
-        if(mainNav) mainNav.style.display = 'block'; // Ensure menu is visible
+        renderMenuItems(state.currentUser.role, window.location.hash.slice(1) || '/');
+        if (logoutContainer) logoutContainer.style.display = 'block';
+        if (loginLinkContainer) loginLinkContainer.style.display = 'none';
+        if (hamburgerButton) hamburgerButton.style.display = 'block'; // Always show
+        if (bottomNav && window.innerWidth <= 768) bottomNav.style.display = 'flex';
 
 
     } else {
         // Logged out
-        if(logoutContainer) logoutContainer.style.display = 'none';
-        if(menuItemsContainer) menuItemsContainer.innerHTML = ""; // Clear main menu
-        if(bottomMenuItemsContainer) bottomMenuItemsContainer.innerHTML = ""; //Clear bottom menu
+        if (logoutContainer) logoutContainer.style.display = 'none';
+        if (menuItemsContainer) menuItemsContainer.innerHTML = ''; // Clear menu
+        if (bottomMenuItemsContainer) bottomMenuItemsContainer.innerHTML = '';
+        if (hamburgerButton) hamburgerButton.style.display = 'block'; // Always show
+      if (bottomNav) bottomNav.style.display = 'none';
 
+
+        const currentPath = window.location.hash.slice(1) || '/';
         if (currentPath === '/login' || currentPath === '/register') {
-            if(loginLinkContainer) loginLinkContainer.style.display = 'none';
-            if(hamburgerButton) hamburgerButton.style.display = 'none'; // Hide on login
-          if(bottomNav) bottomNav.style.display = 'none';
-            if(mainNav) mainNav.style.display = 'none';
+            if (loginLinkContainer) loginLinkContainer.style.display = 'none';
         } else {
-            if(loginLinkContainer) loginLinkContainer.style.display = 'inline'; // Show login link
+            if (loginLinkContainer) loginLinkContainer.style.display = 'inline';
         }
     }
 }
-
-function renderMenuItems(userRole, currentPath){
-    const menuItemsContainer = document.getElementById('menu-items-container-mobile'); // Use mobile ID
+function renderMenuItems(userRole, currentPath) {
+    const menuItemsContainer = document.getElementById('menu-items-container'); // Correct ID
     const bottomMenuItemsContainer = document.getElementById('bottom-menu-items-container');
 
-    if(menuItemsContainer) {
+    if (menuItemsContainer) {
         menuItemsContainer.innerHTML = renderNavigation(userRole, currentPath);
     }
-    if (bottomMenuItemsContainer){
-        bottomMenuItemsContainer.innerHTML = renderNavigation(userRole, currentPath, "bottom"); //For bottom nav
+    if (bottomMenuItemsContainer) {
+         bottomMenuItemsContainer.innerHTML = renderNavigation(userRole, currentPath, "bottom"); //For bottom nav
     }
 }
-// Call initializeApp when the DOM is fully loaded
-document.addEventListener('DOMContentLoaded', initializeApp);
 
-// End of code
+document.addEventListener('DOMContentLoaded', initializeApp);
