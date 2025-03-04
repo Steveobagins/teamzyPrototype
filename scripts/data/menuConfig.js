@@ -1,3 +1,4 @@
+// scripts/data/menuConfig.js
 export const menuConfig = {
     member: [
       { label: 'Home', path: '/dashboard', showOnMain: false, showOnBottom: false},
@@ -19,3 +20,5 @@ export const menuConfig = {
     ],
     // Add other roles as needed
   };
+
+// End of code

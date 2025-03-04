@@ -5,6 +5,8 @@ import { renderLogin } from './views/login.js';
 import { renderEvents } from './views/events.js';
 import { renderProfile } from './views/profile.js';
 import { renderRegister } from './views/register.js';
+import { renderPayments } from './views/payments.js';
+import { renderChat } from './views/chat.js';
 import { getCurrentUser } from './auth.js';
 //import { renderNavigation } from './components/navigation.js'; // No longer needed
 
@@ -16,8 +18,8 @@ const routes = {
   '/events': renderEvents,
     '/profile': renderProfile,
     '/register': renderRegister,
-    '/payments': renderDashboard, //TEMP
-    '/chat': renderDashboard, //TEMP
+    '/payments': renderPayments,
+    '/chat': renderChat,
   // Add more routes as needed
 };
 
@@ -28,7 +30,7 @@ function renderView(path) {
   if (viewFunction) {
     // Route Guard (Simulated Authentication Check)
     // Check if the route requires authentication, *excluding* login and register
-    const requiresAuth = ['/dashboard', '/profile', '/events'].includes(path);
+    const requiresAuth = ['/dashboard', '/profile', '/events','/payments','/chat'].includes(path);
     const user = getCurrentUser();
     if (requiresAuth && !user) {
       // If authentication is required and the user is not logged in, redirect to login

@@ -28,7 +28,7 @@ function initializeApp() {
 
 function setupGlobalEventListeners() {
     document.body.addEventListener('click', (event) => { // Use event delegation on body
-        if (event.target.tagName === 'A') { //Correctly listen to all A tag clicks
+        if (event.target.tagName === 'A' && event.target.closest('nav')) { //Listen to clicks on a tags within nav
             event.preventDefault();
             const href = event.target.getAttribute('href');
             navigateTo(href);
@@ -42,7 +42,7 @@ function setupGlobalEventListeners() {
         }
     });
 
-    // Hamburger menu toggle
+    // Hamburger menu toggle - Separate handler
     const hamburgerButton = document.getElementById('hamburger-button');
     const mainNav = document.getElementById('main-nav');
 
@@ -58,6 +58,8 @@ function updateUI(state) {
     const loginLinkContainer = document.getElementById('login-link-container');
     const menuItemsContainer = document.getElementById('menu-items-container');
     const bottomMenuItemsContainer = document.getElementById('bottom-menu-items-container');
+    const hamburgerButton = document.getElementById('hamburger-button');
+  const bottomNav = document.getElementById('bottom-nav');
     const currentPath = window.location.hash.slice(1) || '/'; // Get current route
 
     if (state.currentUser) {
@@ -65,6 +67,8 @@ function updateUI(state) {
         renderMenuItems(state.currentUser.role, currentPath);
         if(logoutContainer) logoutContainer.style.display = 'block';
         if(loginLinkContainer) loginLinkContainer.style.display = 'none';
+        if(hamburgerButton) hamburgerButton.style.display = 'block'; // Show on mobile
+      if(bottomNav) bottomNav.style.display = 'flex';
 
     } else {
         // Logged out
@@ -74,6 +78,8 @@ function updateUI(state) {
 
         if (currentPath === '/login' || currentPath === '/register') {
             if(loginLinkContainer) loginLinkContainer.style.display = 'none';
+            if(hamburgerButton) hamburgerButton.style.display = 'none'; // Hide on login
+          if(bottomNav) bottomNav.style.display = 'none';
         } else {
             if(loginLinkContainer) loginLinkContainer.style.display = 'inline'; // Show login link
         }
