@@ -93,7 +93,7 @@ footer {
     /* Styles for the main content area where views will be rendered */
 }
 
-/* 4. Basic Styles for Common UI Elements (Placeholders) */
+/* 4. Basic Styles for Common UI Elements */
 
 /* --- Buttons --- */
 .button {
@@ -110,19 +110,20 @@ footer {
 }
 
 .button:hover {
-  background-color: darken(var(--color-primary), 10%); /* Slightly darker on hover */
+  background-color: darken(var(--color-primary), 10%);
   color: var(--color-text); /* Set text color on hover */
 }
 
 .button-secondary {
   background-color: var(--color-secondary);
 }
+
 .button-secondary:hover {
      background-color: darken(var(--color-secondary), 10%);
      color: var(--color-text); /* Set text color on hover */
 }
+
 /* --- Forms --- */
-/* (Add styles for input fields, labels, textareas, etc. later) */
 .form-group {
   margin-bottom: var(--space-md);
 }
@@ -147,7 +148,7 @@ select
   border-radius: var(--border-radius);
   font-size: var(--font-size-base);
   font-family: var(--font-family-sans);
-  transition: border-color var(--transition); /* Smooth border color change */
+  transition: border-color var(--transition);
 }
 
 /* Focus style for form inputs */
@@ -156,8 +157,8 @@ input[type="email"]:focus,
 input[type="password"]:focus,
 textarea:focus, select:focus{
   outline: none;
-  border-color: var(--color-primary); /* Highlight on focus */
-  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25); /* Add a subtle glow */
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
 }
 
 /* --- Cards --- */
@@ -175,7 +176,7 @@ textarea:focus, select:focus{
     list-style: none;
     display:flex;
     gap: var(--space-md);
-    align-items: center; /* Add this line */
+    align-items: center; /* Vertical alignment */
 }
 
 #main-nav a {
@@ -186,13 +187,12 @@ textarea:focus, select:focus{
 }
 
 #main-nav a:hover {
-    background-color: rgba(255, 255, 255, 0.2); /* Light background on hover*/
+    background-color: rgba(255, 255, 255, 0.2);
 }
 
-#main-nav a:visited {
+#main-nav a:visited { /* Add visited style */
     color: var(--color-background);
 }
-
 
 .nav-button {
     background: none;
@@ -207,28 +207,8 @@ textarea:focus, select:focus{
 }
 
 .nav-button:hover {
-     background-color: rgba(255, 255, 255, 0.2); /* Light background on hover*/
+     background-color: rgba(255, 255, 255, 0.2);
 }
-#main-nav a:visited { /* Add visited style */
-    color: var(--color-background);
-}
-
-.nav-button {
-    background: none; /* Remove background */
-    border: none;    /* Remove border */
-    color: var(--color-background);  /* Use link color */
-    padding: var(--space-sm);      /* Use link padding */
-    cursor: pointer;  /* Show pointer cursor */
-    font-size: inherit; /* Inherit font size from parent */
-    font-family: inherit; /* Inherit font family */
-    text-decoration: none; /* Remove underline */
-    border-radius: var(--border-radius); /* Match other links*/
-}
-
-.nav-button:hover {
-     background-color: rgba(255, 255, 255, 0.2); /* Light background on hover*/
-}
-
 
 /* --- Headings --- */
 h1, h2, h3, h4, h5, h6 {
@@ -244,6 +224,13 @@ h4 { font-size: 1.25rem; }
 h5 { font-size: 1rem; }
 h6 { font-size: 0.875rem; }
 
+/* --- Dashboard Grid --- */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--space-md);
+}
+
 /* --- Utility Classes --- */
 
 .text-center { text-align: center; }
@@ -254,7 +241,7 @@ h6 { font-size: 0.875rem; }
 .mb-md { margin-bottom: var(--space-md); }
 .mb-lg { margin-bottom: var(--space-lg); }
 
-.visually-hidden { /* For accessibility - hides elements visually but keeps them accessible to screen readers */
+.visually-hidden {
   position: absolute !important;
   width: 1px !important;
   height: 1px !important;
@@ -265,3 +252,5 @@ h6 { font-size: 0.875rem; }
   white-space: nowrap !important;
   border: 0 !important;
 }
+
+/* End of code */
