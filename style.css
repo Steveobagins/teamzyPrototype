@@ -4,19 +4,19 @@
 
 :root {
   /* Color Palette */
-  --color-primary: #007bff; /* Blue - Replace with your logo's blue */
-  --color-secondary: #ff7f50; /* Coral - Example contrasting color */
-  --color-accent: #ffcc00; /* Yellow - Example accent color */
-  --color-background: #fff; /* White */
-  --color-background-light: #f8f9fa; /* Light Gray */
-  --color-text: #333; /* Dark Gray */
-  --color-text-light: #666; /* Lighter Gray for less important text */
-  --color-border: #ddd; /* Light Gray for borders */
-  --color-error: #dc3545; /* Red for errors */
-  --color-success: #28a745; /* Green for success */
+  --color-primary: #007bff; /* Blue */
+  --color-secondary: #ff7f50; /* Coral */
+  --color-accent: #ffcc00;
+  --color-background: #fff;
+  --color-background-light: #f8f9fa;
+  --color-text: #333;
+  --color-text-light: #666;
+  --color-border: #ddd;
+  --color-error: #dc3545;
+  --color-success: #28a745;
 
   /* Typography */
-  --font-family-sans: 'Open Sans', sans-serif; /* Or Roboto, Lato, etc. */
+  --font-family-sans: 'Open Sans', sans-serif;
   --font-size-base: 16px;
   --font-size-small: 0.875rem; /* 14px */
   --font-size-large: 1.25rem;  /* 20px */
@@ -25,15 +25,15 @@
   --line-height: 1.5;
 
   /* Spacing */
-  --space-xs: 0.25rem;  /* 4px */
-  --space-sm: 0.5rem;   /* 8px */
-  --space-md: 1rem;    /* 16px */
-  --space-lg: 1.5rem;   /* 24px */
-  --space-xl: 2rem;    /* 32px */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
 
   /* Border Radius */
   --border-radius: 8px;
-  --border-radius-pill: 50px; /* For pill-shaped buttons */
+  --border-radius-pill: 50px;
 
   /* Box Shadow */
   --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -42,7 +42,7 @@
   --transition: all 0.2s ease-in-out;
 
     /* Menu */
-    --menu-width: 250px; /* Width of the slide-out menu */
+    --menu-width: 80%; /*  Width of the slide-out menu */
 }
 
 /* 2. Basic Reset and Global Styles */
@@ -60,11 +60,11 @@ body {
   line-height: var(--line-height);
   color: var(--color-text);
   background-color: var(--color-background);
-  -webkit-font-smoothing: antialiased; /* Improve font rendering */
-  -moz-osx-font-smoothing: grayscale;  /* Improve font rendering */
-  display: flex; /* Use flexbox for the body */
-  flex-direction: column; /* Stack header, main, footer vertically */
-  min-height: 100vh; /* Ensure at least full viewport height */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 /* 3. Basic Layout */
@@ -76,6 +76,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+    position: relative; /* For hamburger positioning */
 }
 
 main {
@@ -83,7 +84,7 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex: 1; /* Allow main content to grow and take up remaining space */
+    flex: 1;
 }
 
 footer {
@@ -94,12 +95,11 @@ footer {
 }
 
 #app {
-     width: 100%; /* Ensure it takes full width available */
+    width: 100%;
 }
 
-/* 4. Basic Styles for Common UI Elements */
+/* 4. Common UI Elements */
 
-/* --- Buttons --- */
 .button {
   display: inline-block;
   padding: var(--space-sm) var(--space-md);
@@ -115,7 +115,7 @@ footer {
 
 .button:hover {
   background-color: darken(var(--color-primary), 10%);
-  color: var(--color-text); /* Set text color on hover */
+  color: var(--color-text);
 }
 
 .button-secondary {
@@ -123,11 +123,10 @@ footer {
 }
 
 .button-secondary:hover {
-     background-color: darken(var(--color-secondary), 10%);
-     color: var(--color-text); /* Set text color on hover */
+    background-color: darken(var(--color-secondary), 10%);
+    color: var(--color-text);
 }
 
-/* --- Forms --- */
 .form-group {
   margin-bottom: var(--space-md);
 }
@@ -144,8 +143,7 @@ input[type="password"],
 input[type="date"],
 input[type="number"],
 textarea,
-select
- {
+select {
   width: 100%;
   padding: var(--space-sm);
   border: 1px solid var(--color-border);
@@ -155,7 +153,6 @@ select
   transition: border-color var(--transition);
 }
 
-/* Focus style for form inputs */
 input[type="text"]:focus,
 input[type="email"]:focus,
 input[type="password"]:focus,
@@ -165,7 +162,6 @@ textarea:focus, select:focus{
   box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
 }
 
-/* --- Cards --- */
 .card {
   background-color: var(--color-background);
   border: 1px solid var(--color-border);
@@ -175,31 +171,68 @@ textarea:focus, select:focus{
   margin-bottom: var(--space-md);
 }
 
-/* --- Navigation ---*/
-/*  Base styles for top nav (desktop) */
+/* --- Navigation --- */
+/* Styles for the main navigation (both mobile and desktop) */
+
+/* Hamburger button */
+#hamburger-button {
+    background: none;
+    border: none;
+    color: var(--color-background);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: var(--space-sm);
+    position: absolute; /* Position absolutely within header */
+    left: var(--space-md); /* Align to the left edge */
+    top: 50%;           /* Center vertically */
+    transform: translateY(-50%); /* Center vertically */
+}
+
+/* Slide-out menu */
+#main-nav {
+  transition: transform 0.3s ease-in-out;
+  background-color: var(--color-primary);
+  position: fixed;
+  top: 0;
+    left: -100%;  /* Initially hidden off-screen */
+    width: var(--menu-width);
+    height: 100vh;
+    z-index: 100;
+  overflow-y: auto; /* Allow scrolling if the content overflows */
+  padding-top: var(--space-md); /* Space from the top */
+}
+
+/* Class to open the menu */
+#main-nav.menu-open {
+  transform: translateX(100%); /* Slide in from the left */
+}
+
+/* Menu item styles */
 #main-nav ul {
-    list-style: none;
-    display:flex;
+    list-style: none; /* Remove bullet points */
+  display: flex;
+  flex-direction: column; /* Vertical layout */
     gap: var(--space-md);
-    align-items: center; /* Vertical alignment */
+  align-items: flex-start; /* Align to the start */
+    padding-left: var(--space-md); /* Add some left padding */
 }
 
 #main-nav a {
     color: var(--color-background);
     text-decoration: none;
     padding: var(--space-sm);
-    border-radius: var(--border-radius);
-    display: block; /* For consistent sizing */
+    display: block;      /* Make the links block-level for easier tapping */
+    width: 100%;        /* Ensure they take up the full width */
+    border-radius: var(--border-radius); /* Apply border-radius */
 }
 
 #main-nav a:hover {
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.2); /* Light background on hover */
 }
 
-#main-nav a:visited { /* Add visited style */
+#main-nav a:visited {
     color: var(--color-background);
 }
-
 .nav-button {
     background: none;
     border: none;
@@ -211,20 +244,8 @@ textarea:focus, select:focus{
     text-decoration: none;
     border-radius: var(--border-radius);
 }
-
 .nav-button:hover {
-     background-color: rgba(255, 255, 255, 0.2);
-}
-
-/* Hamburger button (mobile) */
-#hamburger-button {
-    background: none;
-    border: none;
-    color: var(--color-background);
-    font-size: 1.5rem;
-    cursor: pointer;
-    padding: var(--space-sm);
-    display: none; /* Initially hidden (desktop first) */
+    background-color: rgba(255, 255, 255, 0.2);
 }
 
 /* Bottom Navigation (mobile) */
@@ -259,34 +280,7 @@ textarea:focus, select:focus{
     margin-bottom: var(--space-xs); /* Space between icon and text */
     font-size: 1.25rem;
 }
-/*  Slide-out menu styles (mobile) */
-#main-nav {
-  transition: transform 0.3s ease-in-out;
-  background-color: var(--color-primary);
-  position: fixed;
-  top: 0;
-  left: -100%; /* Initially hide menu off-screen to the left */
-  width: var(--menu-width);
-  height: 100vh;
-  z-index: 100;
-  overflow-y: auto;
-  padding-top: var(--space-md); /* Add some top padding*/
-  outline: none; /* Remove the focus outline WHEN HIDDEN */
-}
 
-#main-nav.menu-open {
-  transform: translateX(100%); /* Corrected: Slide in from the LEFT */
-    display: block !important;
-}
-
-#main-nav ul {
-    list-style: none;
-  display: flex;
-    flex-direction: column;
-    gap: var(--space-md);
-  align-items: flex-start;
-    padding-left: var(--space-md);
-}
 /* --- Headings --- */
 h1, h2, h3, h4, h5, h6 {
     font-weight: var(--font-weight-bold);
@@ -335,25 +329,19 @@ h6 { font-size: 0.875rem; }
     max-width: 400px; /* Limit width on larger screens*/
     margin: 0 auto; /* Center horizontally */
 }
-
+.active{
+    font-weight: var(--font-weight-bold);
+}
 /* Media Queries */
 @media (max-width: 767px) {
     /* Mobile Styles */
     #hamburger-button {
         display: block; /* Show hamburger button on mobile */
     }
-
-    #main-nav {
-      display: none; /* Hide top nav on mobile */
+   #main-nav ul {
+        align-items: stretch; /* Make menu items fill the menu width */
     }
-    #main-nav.menu-open{
-        display: block; /* Show when menu is open */
-    }
-
-    #bottom-nav {
-        display: flex; /* Show bottom nav on mobile */
-    }
-  footer {
+    footer {
         margin-bottom: 60px; /*Adjust the amount of space as needed*/
     }
 }
@@ -391,7 +379,7 @@ h6 { font-size: 0.875rem; }
     }
     main {
         margin-left: 0; /* Reset margin */
-        transition: margin-left 0.3s ease-in-out; /* Smooth transition for main content */
+        transition: margin-left: 0.3s ease-in-out; /* Smooth transition for main content */
     }
 }
 /* End of code */

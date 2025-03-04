@@ -19,11 +19,11 @@ function initializeApp() {
     // 4. Set up global event listeners
     setupGlobalEventListeners();
 
-    // 5. Subscribe to state changes to update UI
+    // 5. Subscribe to state changes to update UI - MUST BE BEFORE INITIAL RENDER
     subscribeToStateChanges(updateUI);
 
-    // Initial UI update
-    updateUI(getState()); //NOW WE UPDATE
+    // Initial UI update - MUST BE AFTER subscribeToStateChanges
+    updateUI(getState());
 }
 
 function setupGlobalEventListeners() {
@@ -44,7 +44,7 @@ function setupGlobalEventListeners() {
 
     // Hamburger menu toggle
     const hamburgerButton = document.getElementById('hamburger-button');
-    const mainNav = document.getElementById('main-nav');
+    const mainNav = document.getElementById('main-nav-mobile'); // Corrected ID
 
     if (hamburgerButton) {
         hamburgerButton.addEventListener('click', () => {
@@ -53,27 +53,28 @@ function setupGlobalEventListeners() {
     }
 }
 function updateUI(state) {
+
     const logoutContainer = document.getElementById('logout-container');
     const loginLinkContainer = document.getElementById('login-link-container');
-    const menuItemsContainer = document.getElementById('menu-items-container');
+    const menuItemsContainer = document.getElementById('menu-items-container-mobile'); // Use mobile container
     const bottomMenuItemsContainer = document.getElementById('bottom-menu-items-container');
     const hamburgerButton = document.getElementById('hamburger-button');
   const bottomNav = document.getElementById('bottom-nav');
-    const mainNav = document.getElementById('main-nav'); // Get main-nav
+    const mainNav = document.getElementById('main-nav-mobile'); // Get main-nav - Use mobile ID
     const currentPath = window.location.hash.slice(1) || '/'; // Get current route
 
     if (state.currentUser) {
-        // Logged in.  Render menu items, and ensure correct elements are visible
-        renderMenuItems(state.currentUser.role, currentPath);
+        // Logged in
+        renderMenuItems(state.currentUser.role, currentPath); // Now rendering menu items
         if(logoutContainer) logoutContainer.style.display = 'block';
         if(loginLinkContainer) loginLinkContainer.style.display = 'none';
-        if(hamburgerButton && window.innerWidth <= 767) hamburgerButton.style.display = 'block'; // Show on mobile
-      if(bottomNav && window.innerWidth <= 767) bottomNav.style.display = 'flex';
+        if(hamburgerButton) hamburgerButton.style.display = 'block'; // Show on mobile
+      if(bottomNav) bottomNav.style.display = 'flex';
         if(mainNav) mainNav.style.display = 'block'; // Ensure menu is visible
 
 
     } else {
-        // Logged out.
+        // Logged out
         if(logoutContainer) logoutContainer.style.display = 'none';
         if(menuItemsContainer) menuItemsContainer.innerHTML = ""; // Clear main menu
         if(bottomMenuItemsContainer) bottomMenuItemsContainer.innerHTML = ""; //Clear bottom menu
@@ -90,7 +91,7 @@ function updateUI(state) {
 }
 
 function renderMenuItems(userRole, currentPath){
-    const menuItemsContainer = document.getElementById('menu-items-container');
+    const menuItemsContainer = document.getElementById('menu-items-container-mobile'); // Use mobile ID
     const bottomMenuItemsContainer = document.getElementById('bottom-menu-items-container');
 
     if(menuItemsContainer) {
