@@ -1,15 +1,19 @@
 // scripts/components/navigation.js
-
-import { menuConfig } from '../config.js'; // Assuming you have a config file
+import { menuConfig, roles } from '../config.js'; // Corrected import - NOW from config.js
 
 function renderNavigation(userRole, currentPath, navLocation = "main") {
     let menuItems = '';
-
+    let menu;
     // Select the correct set of menu items based on location.
-    const menu = (navLocation === "bottom") ? menuConfig.bottomNavigation : menuConfig.mainNavigation;
+  if (navLocation === "bottom") {
+    menu = menuConfig.bottomNavigation;
+    } else {
+        menu = menuConfig.sideNavigation; // Use sideNavigation for the main menu
+    }
 
     // Filter the menu items based on the user's role
     const allowedMenuItems = menu.filter(item => item.roles.includes(userRole));
+    console.log("allowed menu items: "+ JSON.stringify(allowedMenuItems));
 
   // Generate the HTML for each allowed menu item
     allowedMenuItems.forEach(item => {
@@ -32,8 +36,6 @@ function renderNavigation(userRole, currentPath, navLocation = "main") {
         }
     });
 
-    return menuItems; // Return the generated menu items (without wrapping in <ul>)
+    return menuItems;
 }
-
-
 export { renderNavigation };

@@ -53,52 +53,48 @@ function setupGlobalEventListeners() {
     }
 }
 function updateUI(state) {
-    const logoutContainer = document.getElementById('logout-container');
-    const loginLinkContainer = document.getElementById('login-link-container');
-    const menuItemsContainer = document.getElementById('menu-items-container-mobile'); //Mobile
+
+  const logoutContainer = document.getElementById('logout-container');
+  const loginLinkContainer = document.getElementById('login-link-container');
+  const menuItemsContainer = document.getElementById('menu-items-container');
     const bottomMenuItemsContainer = document.getElementById('bottom-menu-items-container');
-    const hamburgerButton = document.getElementById('hamburger-button');
+  const hamburgerButton = document.getElementById('hamburger-button');
     const bottomNav = document.getElementById('bottom-nav');
-    const mainNav = document.getElementById('main-nav-mobile'); // Get main-nav - Use mobile ID
-  const desktopNav = document.getElementById('main-nav-desktop'); // Get desktop nav - This is no longer in use
-    const currentPath = window.location.hash.slice(1) || '/'; // Get current route
+  const currentPath = window.location.hash.slice(1) || '/'; // Get current route, default to '/'
 
-  // ALWAYS render menu items, based on current state and route
-    renderMenuItems(state.currentUser ? state.currentUser.role : 'guest', currentPath);
-
-
-    if (state.currentUser) {
-        // Logged in
-        if(logoutContainer) logoutContainer.style.display = 'block';
-        if(loginLinkContainer) loginLinkContainer.style.display = 'none';
-        if(hamburgerButton) hamburgerButton.style.display = 'block'; // Show on mobile
+  if (state.currentUser) {
+    // Logged in: Render menu items and show logout button
+    renderMenuItems(state.currentUser.role, currentPath);
+        if (logoutContainer) {
+            logoutContainer.style.display = 'block'; // Show logout button container
+        }
+    if(loginLinkContainer) loginLinkContainer.style.display = 'none';
+    if(hamburgerButton) hamburgerButton.style.display = 'block'; // Show on mobile
       if(bottomNav) bottomNav.style.display = 'flex';
-        if(mainNav) mainNav.style.display = 'block'; // Ensure menu is visible
 
-
-    } else {
+  } else {
         // Logged out
         if(logoutContainer) logoutContainer.style.display = 'none';
-        // if(menuItemsContainer) menuItemsContainer.innerHTML = ""; // Clear main menu - NO! Let renderMenuItems handle it
-        // if(bottomMenuItemsContainer) bottomMenuItemsContainer.innerHTML = ""; //Clear bottom menu - NO!
+        if(menuItemsContainer) menuItemsContainer.innerHTML = ""; // Clear main menu
+        if(bottomMenuItemsContainer) bottomMenuItemsContainer.innerHTML = ""; //Clear bottom menu
 
         if (currentPath === '/login' || currentPath === '/register') {
             if(loginLinkContainer) loginLinkContainer.style.display = 'none';
             if(hamburgerButton) hamburgerButton.style.display = 'none'; // Hide on login
           if(bottomNav) bottomNav.style.display = 'none';
-            if(mainNav) mainNav.style.display = 'none';
         } else {
             if(loginLinkContainer) loginLinkContainer.style.display = 'inline'; // Show login link
         }
+        renderMenuItems('guest', currentPath); // Show guest menu items.
     }
 }
 
 function renderMenuItems(userRole, currentPath){
-    const menuItemsContainer = document.getElementById('menu-items-container-mobile'); // Use mobile ID
-    const bottomMenuItemsContainer = document.getElementById('bottom-menu-items-container');
+    const menuItemsContainer = document.getElementById('menu-items-container');
+  const bottomMenuItemsContainer = document.getElementById('bottom-menu-items-container');
 
     if(menuItemsContainer) {
-      menuItemsContainer.innerHTML = renderNavigation(userRole, currentPath);
+        menuItemsContainer.innerHTML = renderNavigation(userRole, currentPath, "main");
     }
     if (bottomMenuItemsContainer){
         bottomMenuItemsContainer.innerHTML = renderNavigation(userRole, currentPath, "bottom"); //For bottom nav

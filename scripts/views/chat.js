@@ -1,11 +1,8 @@
-// scripts/views/chat.js
-
+//Placeholder for chat
 export function renderChat() {
     const appContainer = document.getElementById('app');
     appContainer.innerHTML = `
         <h2>Chat</h2>
-        <p>Welcome to the chat!</p>
+        <p>This is where the chat interface will go.</p>
         `;
 }
-
-// End of code
