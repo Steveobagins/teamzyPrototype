@@ -7,28 +7,28 @@ import { renderNavigation } from './components/navigation.js';
 
 
 function initializeApp() {
-  // 1. Initialize State
-  initializeState();
+    // 1. Initialize State
+    initializeState();
 
-  // 2. Initialize Router
-  initializeRouter();
+    // 2. Initialize Router
+    initializeRouter();
 
-  // 3.  Initialize Authentication
+    // 3.  Initialize Authentication
     setupAuthentication();
 
     // 4. Set up global event listeners
     setupGlobalEventListeners();
 
-    // 5. Subscribe to state changes to update UI
+    // 5. Subscribe to state changes to update UI - MUST BE BEFORE INITIAL RENDER
     subscribeToStateChanges(updateUI);
 
-    // Initial UI update
+    // Initial UI update - MUST BE AFTER subscribeToStateChanges
     updateUI(getState());
 }
 
 function setupGlobalEventListeners() {
-    document.getElementById('main-nav').addEventListener('click', (event) => {
-        if (event.target.tagName === 'A') {
+    document.body.addEventListener('click', (event) => { // Use event delegation on body
+        if (event.target.tagName === 'A' && event.target.closest('#main-nav')) {
             event.preventDefault();
             const href = event.target.getAttribute('href');
             navigateTo(href);
@@ -36,87 +36,61 @@ function setupGlobalEventListeners() {
     });
 
     // Logout button event listener
-    const logoutButton = document.getElementById('logout-button');
-    if (logoutButton) {
-        logoutButton.addEventListener('click', () => {
+    document.body.addEventListener('click', (event) => { // Use event delegation
+        if (event.target.id === 'logout-button') {
             logout();
-        });
-    }
+        }
+    });
 
     // Hamburger menu toggle
     const hamburgerButton = document.getElementById('hamburger-button');
     const mainNav = document.getElementById('main-nav');
-    if(hamburgerButton){
+
+    if (hamburgerButton) {
         hamburgerButton.addEventListener('click', () => {
-          mainNav.classList.toggle('menu-open');
+            mainNav.classList.toggle('menu-open');
         });
     }
 }
-
 function updateUI(state) {
+
     const logoutContainer = document.getElementById('logout-container');
     const loginLinkContainer = document.getElementById('login-link-container');
-    //const homeLinkContainer = document.getElementById('home-link-container'); //Removed
-
+    const menuItemsContainer = document.getElementById('menu-items-container');
+    const bottomMenuItemsContainer = document.getElementById('bottom-menu-items-container');
     const currentPath = window.location.hash.slice(1) || '/'; // Get current route
-  const mainNav = document.getElementById('main-nav');
+
+    if (state.currentUser) {
+        // Logged in
+        renderMenuItems(state.currentUser.role, currentPath);
+        if(logoutContainer) logoutContainer.style.display = 'block';
+        if(loginLinkContainer) loginLinkContainer.style.display = 'none';
+
+    } else {
+        // Logged out
+        if(logoutContainer) logoutContainer.style.display = 'none';
+        if(menuItemsContainer) menuItemsContainer.innerHTML = ""; // Clear main menu
+        if(bottomMenuItemsContainer) bottomMenuItemsContainer.innerHTML = ""; //Clear bottom menu
+
+        if (currentPath === '/login' || currentPath === '/register') {
+            if(loginLinkContainer) loginLinkContainer.style.display = 'none';
+        } else {
+            if(loginLinkContainer) loginLinkContainer.style.display = 'inline'; // Show login link
+        }
+    }
+}
+
+function renderMenuItems(userRole, currentPath){
     const menuItemsContainer = document.getElementById('menu-items-container');
     const bottomMenuItemsContainer = document.getElementById('bottom-menu-items-container');
 
-
-    if (state.currentUser) {
-        // Logged in: Show Logout, hide Login
-       if (logoutContainer) {
-            logoutContainer.style.display = 'block';
-        }
-        if (loginLinkContainer){
-            loginLinkContainer.style.display = 'none';
-        }
-        //homeLinkContainer.style.display = 'inline'; // Removed
-
-        // Render the navigation items *inside* the ul
-        if(menuItemsContainer) {
-          menuItemsContainer.innerHTML = renderNavigation(state.currentUser.role, currentPath);
-        }
-      if (bottomMenuItemsContainer){
-          bottomMenuItemsContainer.innerHTML = renderNavigation(state.currentUser.role, currentPath, "bottom"); //For bottom nav
-      }
-      if(mainNav) {
-        mainNav.style.display = 'block'; // Ensure menu is visible (for desktop)
-      }
-
-    } else {
-        // Logged out: Show Login, hide Home and Logout
-        if (logoutContainer) {
-            logoutContainer.style.display = 'none';
-        }
-         if (currentPath === '/login' || currentPath === '/register') {
-            if (loginLinkContainer){
-                loginLinkContainer.style.display = 'none'; //Hide on login screen
-            }
-         } else {
-            if (loginLinkContainer){
-                loginLinkContainer.style.display = 'inline'; // Show login link
-            }
-         }
-        //homeLinkContainer.style.display = 'none'; // Removed
-      // Clear the menu items when logged out.
-      if(menuItemsContainer){
-        menuItemsContainer.innerHTML = "";
-      }
-      if (bottomMenuItemsContainer){
-          bottomMenuItemsContainer.innerHTML = "";
-      }
-      if (mainNav){
-          mainNav.style.display = 'none'; // Ensure menu is hidden on login/register pages
-      }
+    if(menuItemsContainer) {
+        menuItemsContainer.innerHTML = renderNavigation(userRole, currentPath);
     }
-    //Remove Home Link containers - //Removed
-    // if (homeLinkContainer){
-    //     homeLinkContainer.remove();
-    // }
+    if (bottomMenuItemsContainer){
+        bottomMenuItemsContainer.innerHTML = renderNavigation(userRole, currentPath, "bottom"); //For bottom nav
+    }
 }
-
 // Call initializeApp when the DOM is fully loaded
 document.addEventListener('DOMContentLoaded', initializeApp);
 
