@@ -3,46 +3,46 @@
 /* 1. CSS Variables (Custom Properties) - for Theming */
 
 :root {
-    /* Color Palette */
-    --color-primary: #007bff;  /* Blue */
-    --color-secondary: #ff7f50; /* Coral */
-    --color-accent: #ffcc00;   /* Yellow */
-    --color-background: #fff;   /* White */
-    --color-background-light: #f8f9fa; /* Light Gray */
-    --color-text: #333;      /* Dark Gray */
-    --color-text-light: #666;  /* Lighter Gray */
-    --color-border: #ddd;    /* Light Gray for borders */
-    --color-error: #dc3545;   /* Red */
-    --color-success: #28a745; /* Green */
+  /* Color Palette */
+  --color-primary: #007bff; /* Blue */
+  --color-secondary: #ff7f50; /* Coral */
+  --color-accent: #ffcc00; /* Yellow */
+  --color-background: #fff; /* White */
+  --color-background-light: #f8f9fa; /* Light Gray */
+  --color-text: #333; /* Dark Gray */
+  --color-text-light: #666; /* Lighter Gray */
+  --color-border: #ddd; /* Light Gray for borders */
+  --color-error: #dc3545; /* Red */
+  --color-success: #28a745; /* Green */
 
-    /* Typography */
-    --font-family-sans: 'Open Sans', sans-serif;
-    --font-size-base: 16px;
-    --font-size-small: 0.875rem;  /* 14px */
-    --font-size-large: 1.25rem;   /* 20px */
-    --font-weight-normal: 400;
-    --font-weight-bold: 700;
-    --line-height: 1.5;
+  /* Typography */
+  --font-family-sans: 'Open Sans', sans-serif;
+  --font-size-base: 16px;
+  --font-size-small: 0.875rem; /* 14px */
+  --font-size-large: 1.25rem;  /* 20px */
+  --font-weight-normal: 400;
+  --font-weight-bold: 700;
+  --line-height: 1.5;
 
-    /* Spacing */
-    --space-xs: 0.25rem;
-    --space-sm: 0.5rem;
-    --space-md: 1rem;
-    --space-lg: 1.5rem;
-    --space-xl: 2rem;
+  /* Spacing */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
 
-    /* Border Radius */
-    --border-radius: 8px;
-    --border-radius-pill: 50px; /* For pill-shaped buttons */
+  /* Border Radius */
+  --border-radius: 8px;
+  --border-radius-pill: 50px;
 
-    /* Box Shadow */
-    --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  /* Box Shadow */
+  --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
-    /* Transition */
-    --transition: all 0.2s ease-in-out;
+  /* Transition */
+  --transition: all 0.2s ease-in-out;
 
-    /* Menu */
-    --menu-width: 80%;
+  /* Menu */
+  --menu-width: 80%; /* Width of the slide-out menu */
 }
 
 /* 2. Basic Reset and Global Styles */
@@ -60,11 +60,11 @@ body {
   line-height: var(--line-height);
   color: var(--color-text);
   background-color: var(--color-background);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+  -webkit-font-smoothing: antialiased; /* Improve font rendering */
+  -moz-osx-font-smoothing: grayscale;  /* Improve font rendering */
+  display: flex; /* Use flexbox for the body */
+  flex-direction: column; /* Stack header, main, footer vertically */
+  min-height: 100vh; /* Ensure at least full viewport height */
 }
 
 /* 3. Basic Layout */
@@ -84,7 +84,7 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex: 1;
+    flex: 1; /* Allow main content to grow and take up remaining space */
 }
 
 footer {
@@ -177,37 +177,34 @@ textarea:focus, select:focus{
 }
 
 /* --- Navigation ---*/
-
 #profile-picture-container {
-    /* Removed positioning styles */
-}
+    display: inline-block; /* Make the container wrap its content */
+    /* Removed position relative */
 
+}
 #profile-picture {
     width: 40px;
     height: 40px;
     border-radius: 50%;
     background-color: var(--color-background-light);
     cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* Keep other styles, but remove positioning */
+    display: flex; /* Use flexbox to center the "P" */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    /* Keep other styles for appearance (border, etc.) */
 }
-
 #profile-dropdown {
-    position: absolute; /* Keep absolute positioning */
-    top: 60px;        /* Position it below header */
-    left: 0;          /* Now aligned to the left */
-    background-color: var(--color-background);
-    border: 1px solid var(--color-border);
-    border-radius: 0;  /* Remove border-radius */
+    position: absolute;
+    top:  100%;
+    right: 0;
+    background-color: var(--color-primary);
+    border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
     padding: var(--space-sm);
     min-width: 150px;
-    z-index: 101;     /* Ensure it's above bottom-nav, and other content */
-    display: none;     /* Initially hidden */
+    z-index: 101;
+    display: none;
 }
-
 
 #profile-dropdown ul {
     list-style: none;
@@ -218,28 +215,24 @@ textarea:focus, select:focus{
 #profile-dropdown li {
     padding: var(--space-xs) 0;
 }
-
-/* Style the logout button within the dropdown */
-#profile-dropdown button#logout-button {
+#profile-dropdown a, .nav-button {
     background: none;
     border: none;
-    color: var(--color-text);
+    color: var(--color-background);
     padding: var(--space-sm);
     cursor: pointer;
     font-size: inherit;
     font-family: inherit;
     text-decoration: none;
     border-radius: var(--border-radius);
-    display: block; /* Ensure it takes up full width */
+    display: block;
     width: 100%;
-    text-align: left; /* Align text to the left */
+    text-align: left;
 }
-
+/* Style the logout button within the dropdown */
 #profile-dropdown button#logout-button:hover {
     background-color: rgba(255, 255, 255, 0.2); /* Or any hover effect */
 }
-
-/* --- Bottom Nav --- */
 
 /* Bottom Navigation (mobile) */
 #bottom-nav {
@@ -249,6 +242,7 @@ textarea:focus, select:focus{
     bottom: 0;
     left: 0;
     width: 100%;
+    display: none; /* Hidden by default (desktop first) */
     z-index: 100; /* Ensure it's above other content */
 }
 
@@ -272,7 +266,6 @@ textarea:focus, select:focus{
     margin-bottom: var(--space-xs); /* Space between icon and text */
     font-size: 1.25rem;
 }
-
 /* --- Headings --- */
 h1, h2, h3, h4, h5, h6 {
     font-weight: var(--font-weight-bold);
@@ -321,11 +314,13 @@ h6 { font-size: 0.875rem; }
     max-width: 400px; /* Limit width on larger screens*/
     margin: 0 auto; /* Center horizontally */
 }
-
+.active{
+    font-weight: bold;
+}
 /* Media Queries */
 @media (max-width: 767px) {
     /* Mobile Styles */
-  footer {
+    footer {
         margin-bottom: 60px; /*Adjust the amount of space as needed*/
     }
 }
