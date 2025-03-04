@@ -40,6 +40,9 @@
 
   /* Transition */
   --transition: all 0.2s ease-in-out;
+
+    /* Menu */
+    --menu-width: 250px; /* Width of the slide-out menu */
 }
 
 /* 2. Basic Reset and Global Styles */
@@ -59,15 +62,12 @@ body {
   background-color: var(--color-background);
   -webkit-font-smoothing: antialiased; /* Improve font rendering */
   -moz-osx-font-smoothing: grayscale;  /* Improve font rendering */
+  display: flex; /* Use flexbox for the body */
+  flex-direction: column; /* Stack header, main, footer vertically */
+  min-height: 100vh; /* Ensure at least full viewport height */
 }
 
-/* 3. Basic Layout (using CSS Grid - can be changed to Flexbox if preferred) */
-
-body {
-  display: grid;
-  grid-template-rows: auto 1fr auto; /* Header, Main Content, Footer */
-  min-height: 100vh; /* Ensure the body takes at least the full viewport height */
-}
+/* 3. Basic Layout */
 
 header {
   background-color: var(--color-primary);
@@ -80,10 +80,10 @@ header {
 
 main {
   padding: var(--space-md);
-    /* Center the content vertically and horizontally */
     display: flex;
     justify-content: center;
     align-items: center;
+    flex: 1; /* Allow main content to grow and take up remaining space */
 }
 
 footer {
@@ -94,7 +94,6 @@ footer {
 }
 
 #app {
-    /* Styles for the main content area where views will be rendered */
      width: 100%; /* Ensure it takes full width available */
 }
 
@@ -177,6 +176,7 @@ textarea:focus, select:focus{
 }
 
 /* --- Navigation ---*/
+/*  Base styles for top nav (desktop) */
 #main-nav ul {
     list-style: none;
     display:flex;
@@ -189,6 +189,7 @@ textarea:focus, select:focus{
     text-decoration: none;
     padding: var(--space-sm);
     border-radius: var(--border-radius);
+    display: block; /* For consistent sizing */
 }
 
 #main-nav a:hover {
@@ -215,6 +216,75 @@ textarea:focus, select:focus{
      background-color: rgba(255, 255, 255, 0.2);
 }
 
+/* Hamburger button (mobile) */
+#hamburger-button {
+    background: none;
+    border: none;
+    color: var(--color-background);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: var(--space-sm);
+    display: none; /* Initially hidden (desktop first) */
+}
+
+/* Bottom Navigation (mobile) */
+#bottom-nav {
+    background-color: var(--color-primary);
+    color: var(--color-background);
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    display: none; /* Hidden by default (desktop first) */
+    z-index: 100; /* Ensure it's above other content */
+}
+
+#bottom-nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+    padding: var(--space-sm);
+    margin: 0;
+}
+
+#bottom-nav a {
+    color: var(--color-background);
+    text-decoration: none;
+    display: flex; /* Use flexbox for centering */
+    flex-direction: column; /* Stack icon and text vertically */
+    align-items: center; /* Center horizontally */
+}
+
+#bottom-nav i {
+    margin-bottom: var(--space-xs); /* Space between icon and text */
+    font-size: 1.25rem;
+}
+/*  Slide-out menu styles (mobile) */
+#main-nav {
+  transition: transform 0.3s ease-in-out;
+  background-color: var(--color-primary);
+  position: fixed;
+  top: 0;
+  left: -100%; /* Initially hide menu off-screen to the left */
+  width: var(--menu-width);
+  height: 100vh;
+  z-index: 100;
+  overflow-y: auto;
+  padding-top: var(--space-md); /* Add some top padding*/
+}
+
+#main-nav.menu-open {
+    transform: translateX(100%); /* Slide menu in from the left */
+}
+
+#main-nav ul {
+    list-style: none;
+  display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  align-items: flex-start;
+    padding-left: var(--space-md);
+}
 /* --- Headings --- */
 h1, h2, h3, h4, h5, h6 {
     font-weight: var(--font-weight-bold);
@@ -264,11 +334,73 @@ h6 { font-size: 0.875rem; }
     margin: 0 auto; /* Center horizontally */
 }
 
+/* Media Queries */
+@media (max-width: 767px) {
+    /* Mobile Styles */
+    body {
+        /* Removed grid layout */
+    }
+
+    #hamburger-button {
+        display: block; /* Show hamburger button on mobile */
+    }
+
+    #main-nav {
+      display: none; /* Hide top nav on mobile */
+    }
+    #main-nav.menu-open{
+        display: block; /* Show when menu is open */
+    }
+
+    #bottom-nav {
+        display: flex; /* Show bottom nav on mobile */
+    }
+  footer {
+        margin-bottom: 60px; /*Adjust the amount of space as needed*/
+    }
+}
+
 @media (min-width: 768px) {
+    /* Desktop Styles */
+    body{
+          /* Removed grid layout */
+
+    }
+    #main-nav {
+        display: block !important; /* Always show as block on desktop */
+        position: static; /* Remove fixed positioning */
+        width: auto; /* Let it take natural width */
+        height: auto; /* Let it take natural height */
+        overflow-y: visible; /* Remove scrollbar */
+        padding-top: 0;
+        background-color: transparent; /* Remove background */
+
+    }
+  #main-nav ul {
+      flex-direction: row; /* Horizontal layout on desktop */
+      padding-left: 0;
+  }
+
     .login-container,
     .register-container {
         width: 33.33%; /* Take up 1/3 of the width on larger screens */
     }
+    .page-container {
+        /* Removed to allow normal layout*/
+    }
+    #hamburger-button {
+        display: none !important; /* Hide on larger screens */
+    }
+    #bottom-nav {
+        display: none !important;
+    }
+    main {
+        margin-left: 0; /* Reset margin */
+        transition: margin-left 0.3s ease-in-out; /* Smooth transition for main content */
+    }
+      /* Removed to prevent conflict */
+/*   .menu-open ~ main {
+    margin-left: var(--menu-width);
+  } */
 }
-
 /* End of code */

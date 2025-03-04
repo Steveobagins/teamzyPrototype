@@ -6,18 +6,20 @@ import { renderEvents } from './views/events.js';
 import { renderProfile } from './views/profile.js';
 import { renderRegister } from './views/register.js';
 import { getCurrentUser } from './auth.js';
+//import { renderNavigation } from './components/navigation.js'; // No longer needed
 
 // Define routes and their corresponding view functions
-const routes = {
-  '/': renderLogin, // Default route should be login
-  '/dashboard': renderDashboard,
-  '/login': renderLogin,
-  '/events': renderEvents,
-    '/profile': renderProfile,
-    '/register': renderRegister,
-  // Add more routes as needed
-};
-
+  const routes = {
+      '/': renderLogin, // Default route should be login
+      '/dashboard': renderDashboard,
+      '/login': renderLogin,
+      '/events': renderEvents,
+        '/profile': renderProfile,
+        '/register': renderRegister,
+        '/payments': renderDashboard, //TEMP
+        '/chat': renderDashboard, //TEMP
+      // Add more routes as needed
+    };
 // Function to render a view based on the current route
 function renderView(path) {
   const viewFunction = routes[path]; // Look up the view function
@@ -32,6 +34,7 @@ function renderView(path) {
       navigateTo('/login');
       return; // Stop execution
     }
+    // Render Navigation - Now handled in app.js
 
     viewFunction(); // Call the view function to render the content
   } else {

@@ -4,7 +4,7 @@ export function renderProfile() {
     const appContainer = document.getElementById('app');
     appContainer.innerHTML = `
         <h2>Profile</h2>
-        <p>Your Profile (Placeholder Content)</p>
+        <p>Your Profile details will appear here.(Placeholder Content)</p>
         `;
 }
 

@@ -3,6 +3,7 @@
 import { initializeRouter, navigateTo } from './router.js';
 import { initializeState, subscribeToStateChanges, getState } from './state.js';
 import { setupAuthentication, logout } from './auth.js';
+import { renderNavigation } from './components/navigation.js';
 
 
 function initializeApp() {
@@ -41,12 +42,26 @@ function setupGlobalEventListeners() {
             logout();
         });
     }
+
+    // Hamburger menu toggle
+    const hamburgerButton = document.getElementById('hamburger-button');
+    const mainNav = document.getElementById('main-nav');
+    if(hamburgerButton){
+        hamburgerButton.addEventListener('click', () => {
+          mainNav.classList.toggle('menu-open');
+        });
+    }
 }
 
 function updateUI(state) {
     const logoutContainer = document.getElementById('logout-container');
     const loginLinkContainer = document.getElementById('login-link-container');
+    //const homeLinkContainer = document.getElementById('home-link-container'); //Removed
+
     const currentPath = window.location.hash.slice(1) || '/'; // Get current route
+  const mainNav = document.getElementById('main-nav');
+    const menuItemsContainer = document.getElementById('menu-items-container');
+    const bottomMenuItemsContainer = document.getElementById('bottom-menu-items-container');
 
 
     if (state.currentUser) {
@@ -57,8 +72,21 @@ function updateUI(state) {
         if (loginLinkContainer){
             loginLinkContainer.style.display = 'none';
         }
+        //homeLinkContainer.style.display = 'inline'; // Removed
+
+        // Render the navigation items *inside* the ul
+        if(menuItemsContainer) {
+          menuItemsContainer.innerHTML = renderNavigation(state.currentUser.role, currentPath);
+        }
+      if (bottomMenuItemsContainer){
+          bottomMenuItemsContainer.innerHTML = renderNavigation(state.currentUser.role, currentPath, "bottom"); //For bottom nav
+      }
+      if(mainNav) {
+        mainNav.style.display = 'block'; // Ensure menu is visible (for desktop)
+      }
+
     } else {
-        // Logged out
+        // Logged out: Show Login, hide Home and Logout
         if (logoutContainer) {
             logoutContainer.style.display = 'none';
         }
@@ -71,7 +99,22 @@ function updateUI(state) {
                 loginLinkContainer.style.display = 'inline'; // Show login link
             }
          }
+        //homeLinkContainer.style.display = 'none'; // Removed
+      // Clear the menu items when logged out.
+      if(menuItemsContainer){
+        menuItemsContainer.innerHTML = "";
+      }
+      if (bottomMenuItemsContainer){
+          bottomMenuItemsContainer.innerHTML = "";
+      }
+      if (mainNav){
+          mainNav.style.display = 'none'; // Ensure menu is hidden on login/register pages
+      }
     }
+    //Remove Home Link containers - //Removed
+    // if (homeLinkContainer){
+    //     homeLinkContainer.remove();
+    // }
 }
 
 // Call initializeApp when the DOM is fully loaded
