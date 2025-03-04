@@ -28,7 +28,7 @@ function initializeApp() {
 
 function setupGlobalEventListeners() {
     document.body.addEventListener('click', (event) => { // Use event delegation on body
-        if (event.target.tagName === 'A' && event.target.closest('#main-nav')) {
+        if (event.target.tagName === 'A') { //Correctly listen to all A tag clicks
             event.preventDefault();
             const href = event.target.getAttribute('href');
             navigateTo(href);
@@ -93,5 +93,3 @@ function renderMenuItems(userRole, currentPath){
 }
 // Call initializeApp when the DOM is fully loaded
 document.addEventListener('DOMContentLoaded', initializeApp);
-
-// End of code
