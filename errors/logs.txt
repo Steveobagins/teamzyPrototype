@@ -1,0 +1,11 @@
+/dashboard
+app.js:65 updateUI called. Current state: {currentUser: {…}, events: Array(0), clubs: Array(0)}
+app.js:77 User is logged in. Role: member
+app.js:104 renderMenuItems called: member /dashboard
+navigation.js:16 allowed menu items: []
+app.js:110 Menu items HTML: 
+navigation.js:16 allowed menu items: []
+favicon.ico:1 
+            
+            
+            GET http://192.168.6.113:8080/favicon.ico 404 (Not Found)

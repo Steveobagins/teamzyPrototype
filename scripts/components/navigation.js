@@ -1,11 +1,12 @@
 // scripts/components/navigation.js
-import { menuConfig, roles } from '../config.js'; // Corrected import - NOW from config.js
 
-function renderNavigation(userRole, currentPath, navLocation = "main") {
-    let menuItems = '';
+import { menuConfig, roles } from '../config.js'; // Corrected import
+
+function renderNavigation(userRole, currentPath, navType = "main") {
     let menu;
+
     // Select the correct set of menu items based on location.
-  if (navLocation === "bottom") {
+  if (navType === "bottom") {
     menu = menuConfig.bottomNavigation;
     } else {
         menu = menuConfig.sideNavigation; // Use sideNavigation for the main menu
@@ -16,9 +17,10 @@ function renderNavigation(userRole, currentPath, navLocation = "main") {
     console.log("allowed menu items: "+ JSON.stringify(allowedMenuItems));
 
   // Generate the HTML for each allowed menu item
+  let menuItems = '';
     allowedMenuItems.forEach(item => {
     const activeClass = currentPath === item.path ? 'active' : ''; // Check for active path
-        if(navLocation === "bottom"){
+        if(navType === "bottom"){
              menuItems += `
             <li>
                 <a href="${item.path}" class="${activeClass}" data-navigo>

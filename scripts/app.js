@@ -19,10 +19,10 @@ function initializeApp() {
     // 4. Set up global event listeners
     setupGlobalEventListeners();
 
-    // 5. Subscribe to state changes to update UI - MUST BE BEFORE INITIAL RENDER
+    // 5. Subscribe to state changes to update UI
     subscribeToStateChanges(updateUI);
 
-    // Initial UI update - MUST BE AFTER subscribeToStateChanges
+    // Initial UI update
     updateUI(getState());
 }
 
@@ -47,33 +47,44 @@ function setupGlobalEventListeners() {
     const mainNav = document.getElementById('main-nav');
 
     if (hamburgerButton) {
-        hamburgerButton.addEventListener('click', () => {
+        hamburgerButton.addEventListener('click', (event) => {
             mainNav.classList.toggle('menu-open');
+            event.stopPropagation(); // Prevent clicks on button from closing menu
         });
     }
-}
-function updateUI(state) {
 
-  const logoutContainer = document.getElementById('logout-container');
-  const loginLinkContainer = document.getElementById('login-link-container');
-  const menuItemsContainer = document.getElementById('menu-items-container');
-    const bottomMenuItemsContainer = document.getElementById('bottom-menu-items-container');
-  const hamburgerButton = document.getElementById('hamburger-button');
-    const bottomNav = document.getElementById('bottom-nav');
-  const currentPath = window.location.hash.slice(1) || '/'; // Get current route, default to '/'
-
-  if (state.currentUser) {
-    // Logged in: Render menu items and show logout button
-    renderMenuItems(state.currentUser.role, currentPath);
-        if (logoutContainer) {
-            logoutContainer.style.display = 'block'; // Show logout button container
+    //Close menu when click outside
+    document.addEventListener('click', function(event) {
+        if (mainNav.classList.contains('menu-open') && !mainNav.contains(event.target) && event.target.id !=='hamburger-button') {
+            mainNav.classList.remove('menu-open');
         }
-    if(loginLinkContainer) loginLinkContainer.style.display = 'none';
-    if(hamburgerButton) hamburgerButton.style.display = 'block'; // Show on mobile
+    });
+}
+
+function updateUI(state) {
+    console.log("updateUI called. Current state:", state);
+
+    const logoutContainer = document.getElementById('logout-container');
+    const loginLinkContainer = document.getElementById('login-link-container');
+    const menuItemsContainer = document.getElementById('menu-items-container');
+    const bottomMenuItemsContainer = document.getElementById('bottom-menu-items-container');
+    const hamburgerButton = document.getElementById('hamburger-button');
+      const bottomNav = document.getElementById('bottom-nav');
+    const currentPath = window.location.hash.slice(1) || '/'; // Get current route
+
+    if (state.currentUser) {
+        // Logged in.  Render menu, and ensure correct elements are visible.
+        console.log("User is logged in. Role:", state.currentUser.role);
+        renderMenuItems(state.currentUser.role, currentPath); // Pass role and path
+        if(logoutContainer) logoutContainer.style.display = 'block';
+        if(loginLinkContainer) loginLinkContainer.style.display = 'none';
+        if(hamburgerButton) hamburgerButton.style.display = 'block'; // Show on mobile
       if(bottomNav) bottomNav.style.display = 'flex';
 
-  } else {
+
+    } else {
         // Logged out
+        console.log("User is NOT logged in.");
         if(logoutContainer) logoutContainer.style.display = 'none';
         if(menuItemsContainer) menuItemsContainer.innerHTML = ""; // Clear main menu
         if(bottomMenuItemsContainer) bottomMenuItemsContainer.innerHTML = ""; //Clear bottom menu
@@ -85,21 +96,24 @@ function updateUI(state) {
         } else {
             if(loginLinkContainer) loginLinkContainer.style.display = 'inline'; // Show login link
         }
-        renderMenuItems('guest', currentPath); // Show guest menu items.
+        renderMenuItems('guest', currentPath); // Show the guest menu
     }
 }
 
 function renderMenuItems(userRole, currentPath){
+    console.log("renderMenuItems called:", userRole, currentPath)
     const menuItemsContainer = document.getElementById('menu-items-container');
-  const bottomMenuItemsContainer = document.getElementById('bottom-menu-items-container');
+    const bottomMenuItemsContainer = document.getElementById('bottom-menu-items-container');
 
     if(menuItemsContainer) {
-        menuItemsContainer.innerHTML = renderNavigation(userRole, currentPath, "main");
+        menuItemsContainer.innerHTML = renderNavigation(userRole, currentPath);
+        console.log("Menu items HTML:", menuItemsContainer.innerHTML);
     }
     if (bottomMenuItemsContainer){
         bottomMenuItemsContainer.innerHTML = renderNavigation(userRole, currentPath, "bottom"); //For bottom nav
     }
 }
+
 // Call initializeApp when the DOM is fully loaded
 document.addEventListener('DOMContentLoaded', initializeApp);
 
