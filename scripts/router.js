@@ -8,6 +8,7 @@ import { renderRegister } from './views/register.js';
 import { renderPayments } from './views/payments.js';
 import { renderChat } from './views/chat.js';
 import { getCurrentUser } from './auth.js';
+//import { renderNavigation } from './components/navigation.js'; // No longer needed
 
 // Define routes and their corresponding view functions
 const routes = {

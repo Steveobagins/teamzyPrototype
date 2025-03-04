@@ -10,7 +10,18 @@
 <body>
     <header>
         <h1>Teamzy</h1>
-        </header>
+        <div id="profile-picture-container">
+            <div id="profile-picture">P</div>
+            <div id="profile-dropdown" style="display: none;">
+                <ul>
+                    <li>Profile</li>
+                    <li>Settings</li>
+                    <li><button id="logout-button" class="nav-button">Logout</button></li>
+
+                </ul>
+            </div>
+        </div>
+    </header>
 
     <main>
         <div id="app">
@@ -20,6 +31,11 @@
     <footer>
         <p>&copy; 2023 Teamzy</p>
     </footer>
+
+    <nav id="bottom-nav">
+        <ul id="bottom-menu-items-container">
+        </ul>
+     </nav>
 
     <script type="module" src="scripts/app.js"></script>
 </body>

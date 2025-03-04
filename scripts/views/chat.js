@@ -6,3 +6,4 @@ export function renderChat() {
         <p>This is where the chat interface will go.</p>
         `;
 }
+ // End of code

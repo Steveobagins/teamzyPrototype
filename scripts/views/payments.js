@@ -6,3 +6,4 @@ export function renderPayments() {
         <p>This is where payment information will go.</p>
         `;
 }
+// End of code
