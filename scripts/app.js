@@ -10,7 +10,7 @@ function initializeApp() {
     // 1. Initialize State
     initializeState();
 
-    // 2. Initialize Router  - Router MUST be initialized before updateUI is called
+    // 2. Initialize Router
     initializeRouter();
 
     // 3.  Initialize Authentication
@@ -22,8 +22,8 @@ function initializeApp() {
     // 5. Subscribe to state changes to update UI - MUST BE BEFORE INITIAL RENDER
     subscribeToStateChanges(updateUI);
 
-    // Initial UI update - Router handles this now.
-
+    // Initial UI update - MUST BE AFTER subscribeToStateChanges
+    updateUI(getState());
 }
 
 function setupGlobalEventListeners() {
