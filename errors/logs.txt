@@ -1,11 +1,25 @@
 /dashboard
-app.js:65 updateUI called. Current state: {currentUser: {…}, events: Array(0), clubs: Array(0)}
-app.js:77 User is logged in. Role: member
-app.js:104 renderMenuItems called: member /dashboard
-navigation.js:16 allowed menu items: []
-app.js:110 Menu items HTML: 
-navigation.js:16 allowed menu items: []
-favicon.ico:1 
-            
-            
-            GET http://192.168.6.113:8080/favicon.ico 404 (Not Found)
+app.js:56 updateUI called. Current state: {currentUser: {…}, events: Array(0), clubs: Array(0)}
+app.js:68 User is logged in. Role: member
+app.js:95 renderMenuItems called with: member /dashboard
+navigation.js:6 renderNavigation called with: {userRole: 'member', currentPath: '/dashboard', navType: 'main'}currentPath: "/dashboard"navType: "main"userRole: "member"[[Prototype]]: Objectconstructor: ƒ Object()hasOwnProperty: ƒ hasOwnProperty()isPrototypeOf: ƒ isPrototypeOf()propertyIsEnumerable: ƒ propertyIsEnumerable()toLocaleString: ƒ toLocaleString()toString: ƒ toString()valueOf: ƒ valueOf()__defineGetter__: ƒ __defineGetter__()__defineSetter__: ƒ __defineSetter__()__lookupGetter__: ƒ __lookupGetter__()__lookupSetter__: ƒ __lookupSetter__()__proto__: (...)get __proto__: ƒ __proto__()set __proto__: ƒ __proto__()
+navigation.js:16 Selected menu: (7) [{…}, {…}, {…}, {…}, {…}, {…}, {…}]0: {path: '/', label: 'Home', roles: Array(3)}1: {path: '/dashboard', label: 'Dashboard', roles: Array(2)}2: {path: '/events', label: 'Events', roles: Array(2)}3: {path: '/profile', label: 'My Profile', roles: Array(2)}4: {path: '/chat', label: 'Chat', roles: Array(2)}5: {path: '/payments', label: 'Payments', roles: Array(2)}6: {path: '/login', label: 'Logout', roles: Array(2)}length: 7[[Prototype]]: Array(0)at: ƒ at()concat: ƒ concat()constructor: ƒ Array()copyWithin: ƒ copyWithin()entries: ƒ entries()every: ƒ every()fill: ƒ fill()filter: ƒ filter()find: ƒ find()findIndex: ƒ findIndex()findLast: ƒ findLast()findLastIndex: ƒ findLastIndex()flat: ƒ flat()flatMap: ƒ flatMap()forEach: ƒ forEach()includes: ƒ includes()indexOf: ƒ indexOf()join: ƒ join()keys: ƒ keys()lastIndexOf: ƒ lastIndexOf()length: 0map: ƒ map()pop: ƒ pop()push: ƒ push()reduce: ƒ reduce()reduceRight: ƒ reduceRight()reverse: ƒ reverse()shift: ƒ shift()slice: ƒ slice()some: ƒ some()sort: ƒ sort()splice: ƒ splice()toLocaleString: ƒ toLocaleString()toReversed: ƒ toReversed()toSorted: ƒ toSorted()toSpliced: ƒ toSpliced()toString: ƒ toString()unshift: ƒ unshift()values: ƒ values()with: ƒ with()Symbol(Symbol.iterator): ƒ values()Symbol(Symbol.unscopables): {at: true, copyWithin: true, entries: true, fill: true, find: true, …}[[Prototype]]: Object
+navigation.js:20 Checking item: {path: '/', label: 'Home', roles: Array(3)} for role: member Result: false
+navigation.js:20 Checking item: {path: '/dashboard', label: 'Dashboard', roles: Array(2)}label: "Dashboard"path: "/dashboard"roles: (2) ['user', 'admin'][[Prototype]]: Object for role: member Result: false
+navigation.js:20 Checking item: {path: '/events', label: 'Events', roles: Array(2)} for role: member Result: false
+navigation.js:20 Checking item: {path: '/profile', label: 'My Profile', roles: Array(2)}label: "My Profile"path: "/profile"roles: (2) ['user', 'admin'][[Prototype]]: Object for role: member Result: false
+navigation.js:20 Checking item: {path: '/chat', label: 'Chat', roles: Array(2)} for role: member Result: false
+navigation.js:20 Checking item: {path: '/payments', label: 'Payments', roles: Array(2)}label: "Payments"path: "/payments"roles: (2) ['user', 'admin'][[Prototype]]: Object for role: member Result: false
+navigation.js:20 Checking item: {path: '/login', label: 'Logout', roles: Array(2)} for role: member Result: false
+navigation.js:23 allowedMenuItems: []length: 0[[Prototype]]: Array(0)
+app.js:102 Main Nav HTML: 
+navigation.js:6 renderNavigation called with: {userRole: 'member', currentPath: '/dashboard', navType: 'bottom'}
+navigation.js:16 Selected menu: (6) [{…}, {…}, {…}, {…}, {…}, {…}]0: {path: '/', label: 'Home', roles: Array(3), icon: 'fa-solid fa-house'}1: {path: '/dashboard', label: 'Dashboard', roles: Array(2), icon: 'fa-solid fa-gauge'}2: {path: '/events', label: 'Events', roles: Array(2), icon: 'fa-solid fa-calendar-days'}3: {path: '/profile', label: 'My Profile', roles: Array(2), icon: 'fa-solid fa-user'}4: {path: '/chat', label: 'Chat', roles: Array(2), icon: 'fa-solid fa-comments'}5: {path: '/payments', label: 'Payments', roles: Array(2), icon: 'fa-solid fa-money-bill'}length: 6[[Prototype]]: Array(0)
+navigation.js:20 Checking item: {path: '/', label: 'Home', roles: Array(3), icon: 'fa-solid fa-house'} for role: member Result: false
+navigation.js:20 Checking item: {path: '/dashboard', label: 'Dashboard', roles: Array(2), icon: 'fa-solid fa-gauge'} for role: member Result: false
+navigation.js:20 Checking item: {path: '/events', label: 'Events', roles: Array(2), icon: 'fa-solid fa-calendar-days'} for role: member Result: false
+navigation.js:20 Checking item: {path: '/profile', label: 'My Profile', roles: Array(2), icon: 'fa-solid fa-user'} for role: member Result: false
+navigation.js:20 Checking item: {path: '/chat', label: 'Chat', roles: Array(2), icon: 'fa-solid fa-comments'} for role: member Result: false
+navigation.js:20 Checking item: {path: '/payments', label: 'Payments', roles: Array(2), icon: 'fa-solid fa-money-bill'} for role: member Result: false
+navigation.js:23 allowedMenuItems: []length: 0[[Prototype]]: Array(0)
+app.js:107 Bottom Nav HTML: 
