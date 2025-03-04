@@ -1,6 +1,9 @@
 // scripts/data/menuConfig.js
 
 export const menuConfig = {
+	guest: [ 
+        { label: 'Login', path: '/login', showOnMain: true, showOnBottom: false, icon: null }
+    ],
     member: [
         { label: 'Home', path: '/dashboard', showOnMain: true, showOnBottom: false, icon: null }, //Example
         { label: 'Events', path: '/events', showOnMain: true, showOnBottom: true, icon: 'fa-solid fa-calendar-days' },

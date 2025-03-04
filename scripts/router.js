@@ -1,46 +1,70 @@
 // scripts/router.js
 
-import { renderHomePage } from './views/home.js';
-import { renderLoginPage } from './views/login.js';
-import { renderRegisterPage } from './views/register.js';
-import { renderDashboardPage } from './views/dashboard.js'; // Import dashboard
-import { getState } from './state.js';
-import Navigo from '../vendor/navigo.js';
+import { renderDashboard } from './views/dashboard.js';
+import { renderLogin } from './views/login.js';
+import { renderEvents } from './views/events.js';
+import { renderProfile } from './views/profile.js';
+import { renderRegister } from './views/register.js';
+import { renderPayments } from './views/payments.js';
+import { renderChat } from './views/chat.js';
+import { getCurrentUser } from './auth.js';
 
-let router;  //Defined it outside, so all methods can use it
+// Define routes and their corresponding view functions
+const routes = {
+  '/': renderLogin, // Default route should be login
+  '/dashboard': renderDashboard,
+  '/login': renderLogin,
+  '/events': renderEvents,
+    '/profile': renderProfile,
+    '/register': renderRegister,
+    '/payments': renderPayments,
+    '/chat': renderChat,
+  // Add more routes as needed
+};
 
-function initializeRouter() {
-    const root = null;
-    const useHash = true;
-    const hash = '#';
-    router = new Navigo(root, useHash, hash);
+// Function to render a view based on the current route
+function renderView(path) {
+console.log(path);
+  const viewFunction = routes[path]; // Look up the view function
 
-    router.on({
-        '/': () => {
-            const state = getState();
-            if (state.currentUser) {
-                router.navigate('/dashboard'); // Redirect to dashboard if logged in
-            } else {
-                renderHomePage(router);
-            }
-        },
-        '/login': () => { renderLoginPage(router); },
-        '/register': () => { renderRegisterPage(router); },
-        '/dashboard': () => {
-            const state = getState(); //Dashboard now needs user authentication
-            if (state.currentUser) {
-                renderDashboardPage(router);
-            }
-            else {
-                router.navigate('/');
-            }
-        }
-    }).resolve();
+  if (viewFunction) {
+    // Route Guard (Simulated Authentication Check)
+    // Check if the route requires authentication, *excluding* login and register
+    const requiresAuth = ['/dashboard', '/profile', '/events','/payments','/chat'].includes(path);
+    const user = getCurrentUser();
+    if (requiresAuth && !user) {
+      // If authentication is required and the user is not logged in, redirect to login
+      navigateTo('/login');
+      return; // Stop execution
+    }
+    // Render Navigation - Now handled in app.js
 
-    return router;
+    viewFunction(); // Call the view function to render the content
+  } else {
+    // Handle 404 Not Found (optional)
+    document.getElementById('app').innerHTML = '<h1>404 Not Found</h1>';
+  }
 }
 
-function navigateTo(path) {
-    router.navigate(path);
+// Function to handle navigation
+export function navigateTo(path) {
+  window.location.hash = path; // Change the URL hash
 }
-export { initializeRouter, navigateTo };
+
+// Function to initialize the router
+export function initializeRouter() {
+  // Listen for hash changes
+  window.addEventListener('hashchange', () => {
+      console.log("hash change");
+    const path = window.location.hash.slice(1) || '/login'; // Get path, default to /login
+    renderView(path);
+  });
+
+  // Ensure we start at /login if there's no hash
+    if (!window.location.hash) {
+        window.location.hash = '/login';
+    }
+      // Call renderView with the current hash *immediately*
+      renderView(window.location.hash.slice(1));
+}
+// End of code
