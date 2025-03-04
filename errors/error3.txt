@@ -1,0 +1,13 @@
+updateUI called. Current state: {currentUser: {…}, events: Array(0), clubs: Array(0)}
+app.js:64 Current path: /dashboard
+app.js:68 User is logged in. Role: member
+app.js:110 Rendering bottom menu items for role: member path: /dashboard
+app.js:112 Rendered bottom menu HTML: 
+app.js:73 logoutContainer not found
+app.js:78 loginLinkContainer not found
+app.js:81 Setting profilePicture to inline-block
+app.js:86 Setting bottomNav to flex
+favicon.ico:1 
+            
+            
+            GET http://192.168.6.113:8080/favicon.ico 404 (Not Found)
