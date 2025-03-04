@@ -8,7 +8,7 @@ export function renderNavigation(userRole, currentPath, navType = "main") {
 
     if (navType === "main") {
         // Filter out items that should not be on main menu
-        const mainItems = menuItems.filter(item => item.showOnMain);
+        const mainItems = menuItems.filter(item => item.showOnMain); // Corrected line
         navItemsHTML = mainItems.map(item => {
             const isActive = currentPath === item.path; // Check if this is the active item
             const activeClass = isActive ? 'active' : ''; // Add 'active' class if it is
@@ -24,7 +24,7 @@ export function renderNavigation(userRole, currentPath, navType = "main") {
             const activeClass = isActive ? 'active' : ''; // Add 'active' class if it is
 
             return `
-                <li><a href="#${item.path}" class="${activeClass}" data-path="${item.path}">${item.icon ? `<i class=${item.icon}></i>` : ''}<span>${item.label}</span></a></li>
+                <li><a href="#${item.path}" class="${activeClass}" data-path="${item.path}">${item.icon ? `<i class="${item.icon}"></i>` : ''}<span>${item.label}</span></a></li>
             `;
         }).join('');
     }
