@@ -1,44 +1,43 @@
 // scripts/components/navigation.js
 
-import { menuConfig, roles } from '../config.js'; // Corrected import
+import { menuConfig } from '../config.js';
+import { getCurrentUser } from '../auth.js';
 
-function renderNavigation(userRole, currentPath, navType = "main") {
-    let menu;
+function renderNavigation(userRole, currentPath, navType = "bottom") {
+    console.log("renderNavigation called with userRole:", userRole, "currentPath:", currentPath, "navType", navType);
+    const menuItems = getMenuItems(userRole, navType);
 
-    // Select the correct set of menu items based on location.
-  if (navType === "bottom") {
-    menu = menuConfig.bottomNavigation;
-    } else {
-        menu = menuConfig.sideNavigation; // Use sideNavigation for the main menu
+    if (menuItems.length === 0) {
+        return ''; // Return an empty string if there are no menu items
     }
 
-    // Filter the menu items based on the user's role
-    const allowedMenuItems = menu.filter(item => item.roles.includes(userRole));
-    console.log("allowed menu items: "+ JSON.stringify(allowedMenuItems));
-
-  // Generate the HTML for each allowed menu item
-  let menuItems = '';
-    allowedMenuItems.forEach(item => {
-    const activeClass = currentPath === item.path ? 'active' : ''; // Check for active path
-        if(navType === "bottom"){
-             menuItems += `
+    const navLinks = menuItems.map(item => {
+        const activeClass = currentPath === item.path ? 'active' : '';
+        return `
             <li>
-                <a href="${item.path}" class="${activeClass}" data-navigo>
-                 <i class="${item.icon}"></i>
-                   <span>${item.label}</span>
+                <a href="#${item.path}" class="${activeClass}" data-path="${item.path}">
+                    ${item.icon ? `<i class="${item.icon}"></i>` : ''}
+                    <span>${item.label}</span>
                 </a>
             </li>
-            `;
-        } else {
-            menuItems += `
-            <li>
-                <a href="${item.path}" class="${activeClass} nav-button" data-navigo>${item.label}</a>
-            </li>
-            `;
-        }
-    });
+        `;
+    }).join('');
 
-    return menuItems;
+    // Only return the ul, no outer nav.  The index.html provides the nav.
+    return `
+        ${navLinks}
+    `;
 }
-export { renderNavigation }; // Corrected export
-// End of code
+
+function getMenuItems(userRole, navType) {
+    if (!menuConfig[navType + "Navigation"]) {
+        return []; // Return an empty array if the navigation type is invalid
+    }
+    return menuConfig[navType + "Navigation"].filter(item =>
+        item.roles.includes(userRole)
+    );
+}
+
+export { renderNavigation };
+
+//End of code
