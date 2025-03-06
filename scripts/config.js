@@ -2,7 +2,6 @@
 
 const menuConfig = {
     bottomNavigation: [
-      { path: '/', label: 'Home', roles: ['guest', 'member', 'admin'], icon: 'fa-solid fa-house' },
       { path: '/dashboard', label: 'Dashboard', roles: ['member', 'admin'], icon: 'fa-solid fa-gauge' },
       { path: '/events', label: 'Events', roles: ['member', 'admin'], icon: 'fa-solid fa-calendar-days' },
      { path: '/profile', label: 'My Profile', roles: ['member', 'admin'], icon: 'fa-solid fa-user' },

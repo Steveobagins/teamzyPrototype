@@ -7,13 +7,13 @@ import { renderProfile } from './views/profile.js';
 import { renderRegister } from './views/register.js';
 import { renderPayments } from './views/payments.js';
 import { renderChat } from './views/chat.js';
-import { renderHome } from './views/home.js';
+//import { renderHome } from './views/home.js'; //REMOVED
 import { getCurrentUser } from './auth.js';
 
 // Define routes and their corresponding view functions
 const routes = {
   '/': renderLogin,
-  '/home': renderHome,
+  //'/home': renderHome, //REMOVED
   '/dashboard': renderDashboard,
   '/login': renderLogin,
   '/events': renderEvents,
@@ -30,7 +30,7 @@ function renderView(path) {
     const viewFunction = routes[path];
 
     if (viewFunction) {
-        const requiresAuth = ['/dashboard', '/profile', '/events','/payments','/chat', '/home'].includes(path);
+        const requiresAuth = ['/dashboard', '/profile', '/events','/payments','/chat'].includes(path); //removed /home
         const user = getCurrentUser();
 
         if (requiresAuth && !user) {

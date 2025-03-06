@@ -41,8 +41,8 @@
   /* Transition */
   --transition: all 0.2s ease-in-out;
 
-  /* Menu */
-  --menu-width: 80%; /* Width of the slide-out menu */
+    /* Menu */
+    --menu-width: 80%; /* Width of the slide-out menu */
 }
 
 /* 2. Basic Reset and Global Styles */
@@ -178,10 +178,9 @@ textarea:focus, select:focus{
 
 /* --- Navigation ---*/
 #profile-picture-container {
-    display: inline-block; /* Make the container wrap its content */
-    /* Removed position relative */
-
+    /* Removed positioning styles */
 }
+
 #profile-picture {
     width: 40px;
     height: 40px;
@@ -195,15 +194,16 @@ textarea:focus, select:focus{
 }
 #profile-dropdown {
     position: absolute;
-    top:  100%;
-    right: 0;
+    top:  60px;        /* Position below the header */
+    right: 0;       /* Align to the right */
     background-color: var(--color-primary);
-    border-radius: var(--border-radius);
+    border: none;
+    border-radius: 0;  /* Remove border-radius */
     box-shadow: var(--box-shadow);
     padding: var(--space-sm);
     min-width: 150px;
-    z-index: 101;
-    display: none;
+    z-index: 101;     /* Ensure it's above other content, including bottom nav */
+    display: none;     /* Initially hidden */
 }
 
 #profile-dropdown ul {
@@ -224,17 +224,16 @@ textarea:focus, select:focus{
     font-size: inherit;
     font-family: inherit;
     text-decoration: none;
-    border-radius: var(--border-radius);
     display: block;
     width: 100%;
     text-align: left;
 }
 /* Style the logout button within the dropdown */
 #profile-dropdown button#logout-button:hover {
-    background-color: rgba(255, 255, 255, 0.2); /* Or any hover effect */
+        background-color: rgba(255, 255, 255, 0.2); /* Or any hover effect */
 }
 
-/* Bottom Navigation (mobile) */
+/* Bottom Navigation */
 #bottom-nav {
     background-color: var(--color-primary);
     color: var(--color-background);
@@ -242,30 +241,39 @@ textarea:focus, select:focus{
     bottom: 0;
     left: 0;
     width: 100%;
-    display: none; /* Hidden by default (desktop first) */
-    z-index: 100; /* Ensure it's above other content */
+    display: none; /* Hidden by default */
+    z-index: 100;
 }
 
 #bottom-nav ul {
     list-style: none;
     display: flex;
-    justify-content: space-around;
-    padding: var(--space-sm);
+    justify-content: space-around; /* Keep this for even spacing */
+    padding: var(--space-sm); /* Keep overall padding */
     margin: 0;
+    width: 100%;
 }
 
 #bottom-nav a {
     color: var(--color-background);
     text-decoration: none;
-    display: flex; /* Use flexbox for centering */
-    flex-direction: column; /* Stack icon and text vertically */
-    align-items: center; /* Center horizontally */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Removed padding here, apply to li instead */
+    font-size: var(--font-size-small);
+    flex: 1; /* Added this */
+}
+
+#bottom-nav li { /* Apply padding to the list items */
+    padding: var(--space-sm);
 }
 
 #bottom-nav i {
-    margin-bottom: var(--space-xs); /* Space between icon and text */
+    margin-bottom: var(--space-xs);
     font-size: 1.25rem;
 }
+
 /* --- Headings --- */
 h1, h2, h3, h4, h5, h6 {
     font-weight: var(--font-weight-bold);
@@ -292,7 +300,7 @@ h6 { font-size: 0.875rem; }
 .text-center { text-align: center; }
 .text-right { text-align: right; }
 .text-muted { color: var(--color-text-light); }
-.mb-0 { margin-bottom: 0; } /* Remove bottom margin */
+.mb-0 { margin-bottom: 0; }
 .mb-sm { margin-bottom: var(--space-sm); }
 .mb-md { margin-bottom: var(--space-md); }
 .mb-lg { margin-bottom: var(--space-lg); }
@@ -308,11 +316,12 @@ h6 { font-size: 0.875rem; }
   white-space: nowrap !important;
   border: 0 !important;
 }
+
 .login-container,
 .register-container {
-    width: 100%; /* Take full width initially */
-    max-width: 400px; /* Limit width on larger screens*/
-    margin: 0 auto; /* Center horizontally */
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
 }
 .active{
     font-weight: bold;
@@ -320,8 +329,11 @@ h6 { font-size: 0.875rem; }
 /* Media Queries */
 @media (max-width: 767px) {
     /* Mobile Styles */
-    footer {
+  footer {
         margin-bottom: 60px; /*Adjust the amount of space as needed*/
+    }
+    #bottom-nav {
+        display: flex; /* Show bottom nav on mobile */
     }
 }
 /* End of code */
