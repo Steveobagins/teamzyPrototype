@@ -1,9 +1,11 @@
+// scripts/views/events.js
+
 export function renderEvents() {
-  const appContainer = document.getElementById('app');
+    const appContainer = document.getElementById('app');
     appContainer.innerHTML = `
-    <div class = "events-container">
-      <h2>Events</h2>
-      <p>This is the events page content.  Replace this with your actual content.</p>
-      </div>
-    `;
+        <h2>Events</h2>
+        <p>This is the events page content.  Replace this with your actual events view.</p>
+        `;
 }
+
+// End of code

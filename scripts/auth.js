@@ -54,5 +54,5 @@ export function getCurrentUser() {
 export function setupAuthentication() {
     //Currently does nothing, but could be used for auto-login, etc.
 }
-
+//v4
 // End of code

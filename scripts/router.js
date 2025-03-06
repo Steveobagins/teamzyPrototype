@@ -69,4 +69,5 @@ export function initializeRouter() {
     }
     renderView(window.location.hash.slice(1) || '/login');
 }
+//v4
 // End of code
