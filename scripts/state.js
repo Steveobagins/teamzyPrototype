@@ -5,6 +5,7 @@ let state = {
   currentUser: null, // Or an object with user details
   events: [],
   clubs: [],
+    currentPath: '/', // Add currentPath to the state
   // Add other state properties as needed
 };
 
@@ -48,5 +49,6 @@ export function unsubscribeFromStateChanges(callback) {
 function publishStateChange() {
   subscribers.forEach(callback => callback(state));
 }
-//v4
+
+//v5
 // End of code

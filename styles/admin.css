@@ -1,0 +1,117 @@
+/* styles/admin.css */
+
+:root {
+    /* Override variables specifically for the admin interface, if needed */
+    /* --color-primary: #28a745;  Green - Example */
+
+    /* Menu */
+    --menu-width: 250px; /* Width of the admin menu */
+    --menu-minimized-width: 70px; /* Width of the minimized menu (icons only) */
+    --header-height: 78.4px; /*  height of the header. */
+--admin-menu-bg: #343a40; /* Dark Gray */
+  --admin-menu-text: #fff; /* White */
+  --admin-menu-hover-bg: rgba(255,255,255, 0.2); /* Lighten on Hover */
+    --admin-menu-active-bg: var(--color-accent);
+}
+
+/* Admin Container */
+#admin-app {
+    display: none; /* Initially hidden.  app.js will show it. */
+}
+
+/* Admin Navigation */
+#admin-nav {
+    position: fixed;
+    top: var(--header-height); /*  below header */
+    left: 0;
+    bottom: 0;
+    width: var(--menu-width);
+  background-color: var(--admin-menu-bg); /* Use new variable */
+  color: var(--admin-menu-text);
+    overflow-y: auto;
+    z-index: 100;
+  transition: width 0.3s ease-in-out; /* Animate the width */
+    border-top: 2px solid var(--color-background); /* White line at the top */
+    padding-top: var(--space-md); /* Space for toggle button */
+}
+
+/* Minimized menu */
+#admin-nav.menu-minimized {
+    width: var(--menu-minimized-width);
+}
+
+/*Admin Menu Toggle Button*/
+#admin-menu-toggle {
+  position: absolute;
+  top: var(--space-sm);
+  right: var(--space-sm);
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+    color: var(--admin-menu-text);
+    z-index: 101; /* Ensure it's above the menu */
+  padding: var(--space-sm) var(--space-md);
+}
+
+/* Style for when admin menu is minimized. */
+#admin-nav.menu-minimized #admin-menu-toggle{
+  left: 10px; /*Need it to still be visible*/
+}
+
+#admin-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  padding-top: calc(2 * var(--space-md)); /*  space for the toggle button */
+}
+
+#admin-nav a {
+    display: flex; /* Use flexbox for layout */
+    align-items: center; /* Vertically center icon and text */
+    padding: var(--space-sm) var(--space-md);
+    color: inherit;
+    text-decoration: none;
+  /* REMOVED border-radius from here */
+}
+
+#admin-nav .menu-text {
+    margin-left: var(--space-sm); /* Space between icon and text */
+  transition: opacity 0.3s ease-in-out;/* Add a transition to the opacity */
+}
+
+/* Hide text when minimized */
+#admin-nav.menu-minimized .menu-text {
+    display: none;
+}
+
+#admin-nav a i {
+    width: 30px;
+  text-align: center;
+    font-size: 1.25rem; /* Example size */
+}
+
+#admin-nav a:hover {
+    background-color: var(--admin-menu-hover-bg); /* use hover variable */
+  /* No border-radius on hover */
+}
+
+#admin-nav a.active {
+    font-weight: bold;
+    background-color: var(--admin-menu-active-bg); /* use active variable */
+    color: var(--color-text); /* Use a contrasting text color */
+}
+
+/* Admin Main Content Area */
+#admin-main {
+    margin-left: var(--menu-width); /*  space for the sidebar */
+    padding: var(--space-md);
+    background-color: var(--color-background); /* Use a consistent background */
+  transition: margin-left 0.3s ease-in-out; /* Smooth transition for margin */
+}
+
+#admin-main.menu-minimized {
+    margin-left: var(--menu-minimized-width); /* Adjust margin when minimized */
+}
+/*v13*/
+/* End of code */

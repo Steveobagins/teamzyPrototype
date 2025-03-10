@@ -1,0 +1,10 @@
+Register form submitted: {firstName: 'admin1', lastName: 'admin1', email: 'adminadmin@admin.com', password: 'adminadmin', confirmPassword: 'adminadmin', …}
+register.js:128 userData: {firstName: 'admin1', lastName: 'admin1', email: 'adminadmin@admin.com', password: 'adminadmin', role: 'admin'}
+auth.js:26 auth.js register called with: {firstName: 'admin1', lastName: 'admin1', email: 'adminadmin@admin.com', password: 'adminadmin', role: 'admin'}
+api.js:35 api.js register called with: {firstName: 'admin1', lastName: 'admin1', email: 'adminadmin@admin.com', password: 'adminadmin', role: 'admin'}
+user.js:4 createUser called with data: {firstName: 'admin1', lastName: 'admin1', email: 'adminadmin@admin.com', password: 'adminadmin', role: 'admin'}
+auth.js:38  Registration Error TypeError: crypto.randomUUID is not a function
+    at createUser (user.js:6:20)
+    at Module.register (api.js:42:21)
+    at register (auth.js:28:35)
+    at HTMLFormElement.<anonymous> (register.js:130:19)

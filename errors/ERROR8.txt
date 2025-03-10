@@ -1,0 +1,14 @@
+Browser message: Registration failed: Cannot read properties of undefined (reading 'filter')
+
+Console error:
+
+auth.js:38  Registration Error TypeError: Cannot read properties of undefined (reading 'filter')
+    at renderNavigation (navigation.js:18:35)
+    at renderAdminMenuItems (app.js:127:39)
+    at updateUI (app.js:82:17)
+    at state.js:49:35
+    at Array.forEach (<anonymous>)
+    at publishStateChange (state.js:49:15)
+    at updateState (state.js:28:3)
+    at register (auth.js:31:13)
+    at async HTMLFormElement.<anonymous> (register.js:130:13)

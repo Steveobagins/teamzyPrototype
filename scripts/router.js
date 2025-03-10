@@ -7,13 +7,17 @@ import { renderProfile } from './views/profile.js';
 import { renderRegister } from './views/register.js';
 import { renderPayments } from './views/payments.js';
 import { renderChat } from './views/chat.js';
-//import { renderHome } from './views/home.js'; //REMOVED
+//import { renderHome } from './views/home.js'; // REMOVED - No home view
 import { getCurrentUser } from './auth.js';
+// Import the admin views
+import { renderAdmin } from './views/admin.js';
+import { renderUsers } from './views/users.js';
+import { renderSettings } from './views/settings.js';
 
 // Define routes and their corresponding view functions
 const routes = {
-  '/': renderLogin,
-  //'/home': renderHome, //REMOVED
+  '/': renderLogin, // Default route should be login
+  //'/home': renderHome, // REMOVED - No home route
   '/dashboard': renderDashboard,
   '/login': renderLogin,
   '/events': renderEvents,
@@ -22,22 +26,34 @@ const routes = {
     '/payments': renderPayments,
     '/chat': renderChat,
   // Add more routes as needed
+    '/admin': renderAdmin,       // ADMIN ROUTE
+  '/admin/users': renderUsers,    // ADMIN ROUTE
+  '/admin/settings': renderSettings, // ADMIN ROUTE
 };
 
 // Function to render a view based on the current route
 function renderView(path) {
     console.log("renderView called with path:", path); // Debug log
-    const viewFunction = routes[path];
+    const viewFunction = routes[path]; // Look up the view function
 
     if (viewFunction) {
-        const requiresAuth = ['/dashboard', '/profile', '/events','/payments','/chat'].includes(path); //removed /home
+        // --- Route Guard ---
+        const requiresAuth = ['/dashboard', '/profile', '/events','/payments','/chat',  '/admin', '/admin/users', '/admin/settings'].includes(path); //Added admin paths
         const user = getCurrentUser();
-
         if (requiresAuth && !user) {
             console.log("Requires auth and user not logged in. Redirecting to /login"); // Debug log
             navigateTo('/login');
-            return;
+            return; // Stop execution
         }
+
+        // Admin check
+        const adminOnly = ['/admin', '/admin/users', '/admin/settings'].includes(path);
+        if (adminOnly && (!user || user.role !== 'admin')) {
+          console.log("Admin-only route accessed by non-admin. Redirecting to /dashboard");
+          navigateTo('/dashboard'); // Redirect to a user-appropriate page
+          return;
+        }
+
         console.log("Rendering view for path:", path); // Debug log
         viewFunction();
     } else {
@@ -49,25 +65,26 @@ function renderView(path) {
 // Function to handle navigation
 export function navigateTo(path) {
     console.log("navigateTo called with path:", path); // Add this for debugging!
-  window.location.hash = path;
+  window.location.hash = path; // Change the URL hash
 }
 
 // Function to initialize the router
 export function initializeRouter() {
   // Listen for hash changes
   window.addEventListener('hashchange', () => {
-    const path = window.location.hash.slice(1) || '/login';
+    const path = window.location.hash.slice(1) || '/login'; // Get path, default to /login
         console.log("Hash changed to:", path); // Debug log
     renderView(path);
   });
 
-  // Initial render (important for initial load)
-  if (!window.location.hash) {
-    console.log("No initial hash.  Setting to /login")
-        window.location.hash = '/login'; // Force /login on initial load if no hash present.
-
+    //Ensure that if there is no current user, always start at login
+    if (!getCurrentUser()){
+      navigateTo('/login');
+        return;
     }
-    renderView(window.location.hash.slice(1) || '/login');
+  // Initial render (important for initial load)
+  const path = window.location.hash.slice(1) || '/login'; // Get path, default to / (login)
+    renderView(path);
 }
-//v4
+//v11
 // End of code

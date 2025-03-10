@@ -1,0 +1,46 @@
+navigateTo called with path: /login
+router.js:76 Hash changed to: /login
+router.js:36 renderView called with path: /login
+router.js:57 Rendering view for path: /login
+auth.js:20  Login error: Error: Simulated API Error
+    at api.js:13:16
+login @ auth.js:20
+await in login
+(anonymous) @ login.js:93
+app.js:68 updateUI called. Current state: {currentUser: {…}, events: Array(0), clubs: Array(0)}clubs: []currentUser: createdAt: "2025-03-06T23:13:24.905Z"email: "as@as.com"firstName: "admin"lastName: "admin"password: "letmein"role: "admin"updatedAt: "2025-03-06T23:13:24.905Z"userId: "1824ac5a-214e-4fa4-8c37-ea5154ae106b"[[Prototype]]: Objectevents: [][[Prototype]]: Object
+app.js:83 Current path: /login
+app.js:87 User is logged in. Role: admin
+app.js:91 Rendering ADMIN interface
+app.js:151 renderAdminMenuItems called with: admin /login
+app.js:156 adminNavContainer.innerHTML: 
+            <li>
+                <a href="#/admin/dashboard" class=" nav-button" data-navigo="">
+                <i class="fa-solid fa-screwdriver-wrench"></i>
+                <span class="menu-text">Admin Dashboard</span></a>
+            </li>
+            
+            <li>
+                <a href="#/admin/users" class=" nav-button" data-navigo="">
+                <i class="fa-solid fa-users"></i>
+                <span class="menu-text">Users</span></a>
+            </li>
+            
+            <li>
+                <a href="#/admin/settings" class=" nav-button" data-navigo="">
+                <i class="fa-solid fa-gear"></i>
+                <span class="menu-text">Settings</span></a>
+            </li>
+            
+            <li>
+                <a href="#/login" class="active nav-button" data-navigo="">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span class="menu-text">Logout</span></a>
+            </li>
+            
+router.js:67 navigateTo called with path: /dashboard
+router.js:76 Hash changed to: /dashboard
+router.js:36 renderView called with path: /dashboard
+router.js:57 Rendering view for path: /dashboard
+router.js:76 Hash changed to: /admin/dashboard
+router.js:36 renderView called with path: /admin/dashboard
+router.js:60 404 Not Found for path: /admin/dashboard

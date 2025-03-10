@@ -32,6 +32,7 @@ export async function login(email, password) {
 }
 
 export async function register(userData) {
+    console.log("api.js register called with:", userData);
     const users = getUsers();
 
     // Check if email already exists
@@ -39,6 +40,7 @@ export async function register(userData) {
         return simulateApiCall(Error('Email already exists'), true); // Return Error object.
     }
     const newUser = createUser(userData);
+    console.log("newUser created:", newUser);
     users.push(newUser);
     saveUsers(users); // Save to local storage
     return simulateApiCall(newUser);
@@ -57,23 +59,60 @@ function saveUsers(users) {
 
 // --- Dashboard Data API ---
 export async function getDashboardData(userId) {
-    // Simulate fetching data based on userId (for now, we just return the same data)
-    const dashboardData = {
-        upcomingEvents: [
-            { eventId: 'e1', name: 'Soccer Practice', date: '2024-03-10', time: '16:00' },
-            { eventId: 'e2', name: 'Swim Meet', date: '2024-03-15', time: '09:00' },
-            { eventId: 'e3', name: 'Team Meeting', date: '2024-03-17', time: '19:30' },
-        ],
-        notifications: [
-            { id: 'n1', message: 'Your payment is due.', type: 'warning' },
-            { id: 'n2', message: 'New event added: "Fundraiser Gala"', type: 'info' },
-        ],
-        progressSummary: {
-            recentActivity: '5 workouts completed this week.',
-            goalsStatus: 'On track to meet your monthly goals.',
-        },
-    };
+    // Initialize dashboardData if it doesn't exist
+    let dashboardData = JSON.parse(localStorage.getItem('dashboardData'));
+    if (!dashboardData) {
+      dashboardData = {
+        upcomingEvents: [],
+        notifications: [],
+        progressSummary: {},
+      };
+      localStorage.setItem('dashboardData', JSON.stringify(dashboardData));
+    }
     return simulateApiCall(dashboardData);
 }
-//v4
+// Function to clear notifications
+export async function clearNotification(notificationId) {
+  let dashboardData = JSON.parse(localStorage.getItem('dashboardData'));
+
+  // Check if dashboardData and notifications exist before filtering
+  if (dashboardData && dashboardData.notifications) {
+    dashboardData.notifications = dashboardData.notifications.filter(n => n.id !== notificationId);
+    localStorage.setItem('dashboardData', JSON.stringify(dashboardData));
+    return simulateApiCall(true);
+  } else {
+    console.warn("dashboardData or notifications is null/undefined.  Returning without clearing.");
+    return simulateApiCall(false); // Or handle the missing data appropriately
+  }
+}
+
+// Function to add a new event (simulated)
+export async function addEvent(eventData) {
+  let dashboardData = JSON.parse(localStorage.getItem('dashboardData') || '{}'); // Default to empty object
+    if (!dashboardData.upcomingEvents) {
+        dashboardData.upcomingEvents = [];
+    }
+  eventData.eventId =  generateUUID(); // Use the generateUUID we just put back
+  dashboardData.upcomingEvents.push(eventData);
+  localStorage.setItem('dashboardData', JSON.stringify(dashboardData));
+  return simulateApiCall(eventData); // Return the new event
+}
+
+// Simple UUID generation (for prototype only - use a library in production)
+function generateUUID() {
+    let d = new Date().getTime();
+    let d2 = ((typeof performance !== 'undefined') && performance.now && (performance.now()*1000)) || 0;
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        let r = Math.random() * 16;
+        if(d > 0){
+            r = (d + r)%16 | 0;
+            d = Math.floor(d/16);
+        } else {
+            r = (d2 + r)%16 | 0;
+            d2 = Math.floor(d2/16);
+        }
+        return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+    });
+}
+//v5
 // End of code

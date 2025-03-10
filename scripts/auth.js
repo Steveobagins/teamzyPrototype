@@ -11,7 +11,12 @@ export async function login(email, password) {
         if (user) {
             updateState({ currentUser: user });
             localStorage.setItem('isLoggedIn', 'true'); // Simple login flag
-            navigateTo('/dashboard'); // Redirect to dashboard on success
+            // Redirect based on role - MODIFIED
+            if (user.role === 'admin') {
+                navigateTo('/admin'); // Go to admin dashboard
+            } else {
+                navigateTo('/dashboard'); // Go to user dashboard
+            }
         } else {
             // Handle login failure (e.g., show an error message)
             alert('Invalid credentials'); // Replace with a better UI element later
@@ -28,7 +33,13 @@ export async function register(userData) {
         if (newUser) {
             updateState({ currentUser: newUser });
             localStorage.setItem('isLoggedIn', 'true');
-            navigateTo('/dashboard');
+            // Redirect based on role.
+            if (newUser.role === 'admin') {
+                navigateTo('/admin');
+              }
+              else{
+                navigateTo('/dashboard');
+              }
         } else {
             alert ('Registration Failed');
         }
@@ -54,5 +65,6 @@ export function getCurrentUser() {
 export function setupAuthentication() {
     //Currently does nothing, but could be used for auto-login, etc.
 }
-//v4
+
+//v6
 // End of code

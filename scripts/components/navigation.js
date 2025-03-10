@@ -8,13 +8,14 @@ function renderNavigation(userRole, currentPath, navType = "main") {
     // Select the correct set of menu items based on location.
   if (navType === "bottom") {
     menu = menuConfig.bottomNavigation;
+    } else if (navType === "admin") { // Added this condition.
+        menu = menuConfig.adminNavigation;
     } else {
-        menu = menuConfig.sideNavigation; // Use sideNavigation for the main menu
+        return ''; //Return nothing if it is not bottom nav
     }
 
     // Filter the menu items based on the user's role
     const allowedMenuItems = menu.filter(item => item.roles.includes(userRole));
-    console.log("allowed menu items: "+ JSON.stringify(allowedMenuItems));
 
   // Generate the HTML for each allowed menu item
   let menuItems = '';
@@ -32,7 +33,9 @@ function renderNavigation(userRole, currentPath, navType = "main") {
         } else {
             menuItems += `
             <li>
-                <a href="#${item.path}" class="${activeClass} nav-button" data-navigo>${item.label}</a>
+                <a href="#${item.path}" class="${activeClass} nav-button" data-navigo>
+                <i class="${item.icon}"></i>
+                <span class="menu-text">${item.label}</span></a>
             </li>
             `;
         }
@@ -41,5 +44,5 @@ function renderNavigation(userRole, currentPath, navType = "main") {
     return menuItems;
 }
 export { renderNavigation };
-//version 6
+//v10
 //End of code

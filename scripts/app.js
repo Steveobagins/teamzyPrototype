@@ -4,6 +4,7 @@ import { initializeRouter, navigateTo } from './router.js';
 import { initializeState, subscribeToStateChanges, getState } from './state.js';
 import { setupAuthentication, logout } from './auth.js';
 import { renderNavigation } from './components/navigation.js';
+import { renderAdminToggleButton } from './views/admin.js'; // Import
 
 function initializeApp() {
     initializeState();
@@ -15,7 +16,7 @@ function initializeApp() {
 }
 
 function setupGlobalEventListeners() {
-    // Event delegation for navigation links.  Handles clicks on any <a> tag within a <nav>.
+    // Event delegation for navigation links.
     document.body.addEventListener('click', (event) => {
         if (event.target.tagName === 'A' && event.target.closest('nav')) {
             event.preventDefault();
@@ -32,12 +33,12 @@ function setupGlobalEventListeners() {
 
     // Profile picture dropdown toggle
     const profilePicture = document.getElementById('profile-picture');
-    if (profilePicture) { // Check if element exists
+    if (profilePicture) {
         profilePicture.addEventListener('click', (event) => {
             const dropdown = document.getElementById('profile-dropdown');
-            if (dropdown) { // Check if element exists
+            if (dropdown) {
                 dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
-                event.stopPropagation(); // Prevent the click from immediately closing the menu (event bubbling).
+                event.stopPropagation(); // Prevent click from immediately closing.
             }
         });
     }
@@ -50,45 +51,86 @@ function setupGlobalEventListeners() {
           dropdown.style.display = 'none';
       }
     });
+  // Event listener for the admin menu toggle button.
+    document.body.addEventListener('click', (event) => { // Use event delegation
+        if (event.target.closest('#admin-menu-toggle')) {
+            const adminNav = document.getElementById('admin-nav');
+            if(adminNav) {
+              adminNav.classList.toggle('menu-minimized');
+              document.getElementById('admin-main').classList.toggle('menu-minimized');
+            }
+        }
+    });
 }
 
 
 function updateUI(state) {
-    console.log("updateUI called. Current state:", state);
-
-    const logoutContainer = document.getElementById('logout-container'); // Note: logout is *inside* dropdown now
+    const logoutContainer = document.getElementById('logout-container');
     const loginLinkContainer = document.getElementById('login-link-container');
     const bottomMenuItemsContainer = document.getElementById('bottom-menu-items-container');
     const profilePicture = document.getElementById('profile-picture-container');
     const bottomNav = document.getElementById('bottom-nav');
+    const adminNavContainer = document.getElementById('admin-menu-items-container'); //Admin
     const currentPath = window.location.hash.slice(1) || '/';
+      // Enable/disable admin stylesheet based on user role
+    const adminStylesheet = document.getElementById('admin-styles');
 
-    console.log("Current path:", currentPath)
+    const appContainer = document.getElementById('app'); // User app container
+    const adminAppContainer = document.getElementById('admin-app'); // Admin app container
 
     if (state.currentUser) {
         // Logged in
-        console.log("User is logged in. Role:", state.currentUser.role); //Debugging
+      if (state.currentUser.role === 'admin') {
+            // ADMIN LOGIC
+            if (appContainer) appContainer.style.display = 'none'; // Hide user UI
+          if(bottomNav) bottomNav.style.display = 'none';
+        if (adminStylesheet) adminStylesheet.disabled = false; // Enable admin styles
 
-        renderMenuItems(state.currentUser.role, currentPath); // Render bottom nav items
-        if(logoutContainer) logoutContainer.style.display = 'none';  // Correctly hide.
+            if (adminAppContainer) {
+                adminAppContainer.style.display = 'block'; // Show admin UI
+                renderAdminMenuItems(state.currentUser.role, currentPath); // Render admin menu
+              renderAdminToggleButton(); // Add this line to render button
+              //Initially minimise menu.
+              const adminNav = document.getElementById('admin-nav');
+              const adminMain = document.getElementById('admin-main');
+              if(adminNav){
+                adminNav.classList.add('menu-minimized');
+              }
+              if(adminMain){
+                adminMain.classList.add('menu-minimized')
+              }
+              if (profilePicture) profilePicture.style.display = 'inline-block'; // Show in header
+
+            }
+        } else {
+            // REGULAR USER LOGIC
+          if (adminStylesheet) adminStylesheet.disabled = true; // Disable admin styles and functionality
+            if (adminAppContainer) adminAppContainer.style.display = 'none'; // Hide admin UI
+            if (appContainer) appContainer.style.display = 'block'; // Show user UI
+            renderMenuItems(state.currentUser.role, currentPath); // Render bottom nav items
+          if(profilePicture) profilePicture.style.display = 'inline-block'; // Show profile picture
+            if(bottomNav) bottomNav.style.display = 'flex';
+
+        }
+      //Logout moved to here, so always in same place.
+      if(logoutContainer) logoutContainer.style.display = 'none';
         if(loginLinkContainer) loginLinkContainer.style.display = 'none';
-        if(profilePicture) profilePicture.style.display = 'inline-block'; // Show profile picture
-        if(bottomNav) bottomNav.style.display = 'flex'; // Show bottom navigation
 
     } else {
         // Logged out
-        console.log("User is NOT logged in.");
+        if (adminStylesheet) adminStylesheet.disabled = true; // Always disable on logout
       if(profilePicture) profilePicture.style.display = 'none';
         if(bottomMenuItemsContainer) bottomMenuItemsContainer.innerHTML = ""; // Clear bottom menu
-        if(logoutContainer) logoutContainer.style.display = 'none';
-        if(bottomNav) bottomNav.style.display = 'none'; // Hide bottom nav
+        if(adminNavContainer) adminNavContainer.innerHTML = ""; //Clear admin area
+      if(bottomNav) bottomNav.style.display = 'none'; // Hide bottom nav
+        if (adminAppContainer) adminAppContainer.style.display = 'none'; // Hide admin interface
+        if (appContainer) appContainer.style.display = 'block'; // Show user interface
 
         if (currentPath === '/login' || currentPath === '/register') {
             if(loginLinkContainer) loginLinkContainer.style.display = 'none';
         } else {
             if(loginLinkContainer) loginLinkContainer.style.display = 'inline'; // Show login link (shouldn't normally get here)
         }
-        // No menu items for guests.
     }
 }
 
@@ -97,10 +139,17 @@ function renderMenuItems(userRole, currentPath){
 
     if (bottomMenuItemsContainer){
         bottomMenuItemsContainer.innerHTML = renderNavigation(userRole, currentPath, "bottom"); //For bottom nav
-      console.log("bottomMenuItemsContainer.innerHTML", bottomMenuItemsContainer.innerHTML);
+    }
+}
+function renderAdminMenuItems(userRole, currentPath) {
+  console.log("rendering admin menu")
+    const adminNavContainer = document.getElementById('admin-menu-items-container');
+    if (adminNavContainer) {
+        adminNavContainer.innerHTML = renderNavigation(userRole, currentPath, "admin"); // Render admin menu
     }
 }
 
 document.addEventListener('DOMContentLoaded', initializeApp);
-//version 7
+
+//v24
 // End of code

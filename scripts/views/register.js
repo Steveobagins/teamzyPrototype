@@ -4,10 +4,8 @@ import { register } from '../auth.js';
 import { createInput } from '../components/input.js';
 import { createButton } from '../components/button.js';
 import { navigateTo } from '../router.js';
-import * as api from '../api.js';
 import { isRequired, isValidEmail, minLength, maxLength, passwordsMatch } from '../utils/validationUtils.js'; // Import validation functions
-import { createErrorMessage } from '../components/errorMessage.js';
-
+import { createErrorMessage } from '../components/errorMessage.js'; //Import
 
 export function renderRegister() {
     const appContainer = document.getElementById('app');
@@ -21,7 +19,17 @@ export function renderRegister() {
     const emailInput = createInput({ type: 'email', id: 'email', name: 'email', placeholder: 'Enter your email', label: 'Email', required: true });
     const passwordInput = createInput({ type: 'password', id: 'password', name: 'password', placeholder: 'Enter your password', label: 'Password', required: true });
     const confirmPasswordInput = createInput({ type: 'password', id: 'confirmPassword', name: 'confirmPassword', placeholder: 'Confirm your password', label: 'Confirm Password', required: true });
-
+  const roleSelect = createInput({ // Use a select element for role selection.
+    type: 'select',
+    id: 'role',
+    name: 'role',
+    label: 'Role',
+    options: [
+        { value: 'user', text: 'User' }, // User option
+        { value: 'admin', text: 'Admin' } // Admin option
+    ],
+     required: true
+  });
     const submitButton = createButton({ type: 'submit', text: 'Register', className: 'button', id: 'register-submit' });
 
     // Build the form HTML
@@ -32,6 +40,7 @@ export function renderRegister() {
       ${emailInput}
       ${passwordInput}
       ${confirmPasswordInput}
+      ${roleSelect}
       ${submitButton}
     </form>
   `;
@@ -55,6 +64,9 @@ export function renderRegister() {
         const email = document.getElementById('email').value;
         const password = document.getElementById('password').value;
         const confirmPassword = document.getElementById('confirmPassword').value;
+        const role = document.getElementById('role').value; // Get selected role
+
+        console.log("Register form submitted:", { firstName, lastName, email, password, confirmPassword, role }); // ADD THIS
 
         // --- Validation ---
         let isValid = true;
@@ -111,14 +123,16 @@ export function renderRegister() {
                 lastName,
                 email,
                 password,
-                role: 'member',  //Default to member for now
+                role,  // Include selected role
             };
+          console.log("userData:", userData); // ADD THIS
 
             await register(userData);
         }
     });
 
     function displayErrors(errors) {
+
         // Add new error messages
         for (const field in errors) {
           if (errors.hasOwnProperty(field)) { // Best practice with for...in loops
@@ -134,4 +148,5 @@ export function renderRegister() {
     }
 }
 
+//v6
 // End of code

@@ -80,11 +80,8 @@ header {
 }
 
 main {
-  padding: var(--space-md);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex: 1; /* Allow main content to grow and take up remaining space */
+    padding: var(--space-md);
+    flex: 1; /* Allow main content to grow - keep this */
 }
 
 footer {
@@ -241,15 +238,15 @@ textarea:focus, select:focus{
     bottom: 0;
     left: 0;
     width: 100%;
-    display: none; /* Hidden by default */
     z-index: 100;
+    display: none; /* Initially hidden */
 }
 
 #bottom-nav ul {
     list-style: none;
     display: flex;
-    justify-content: space-around; /* Keep this for even spacing */
-    padding: var(--space-sm); /* Keep overall padding */
+    justify-content: space-around; /* Distribute items evenly */
+    padding: var(--space-sm);
     margin: 0;
     width: 100%;
 }
@@ -260,13 +257,10 @@ textarea:focus, select:focus{
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* Removed padding here, apply to li instead */
-    font-size: var(--font-size-small);
-    flex: 1; /* Added this */
-}
-
-#bottom-nav li { /* Apply padding to the list items */
     padding: var(--space-sm);
+  font-size: var(--font-size-small); /* Use defined variable */
+    flex: 1; /* Distribute space evenly */
+  text-align: center; /* Ensure text is centered */
 }
 
 #bottom-nav i {
@@ -329,12 +323,12 @@ h6 { font-size: 0.875rem; }
 /* Media Queries */
 @media (max-width: 767px) {
     /* Mobile Styles */
-  footer {
-        margin-bottom: 60px; /*Adjust the amount of space as needed*/
-    }
     #bottom-nav {
         display: flex; /* Show bottom nav on mobile */
     }
+  footer {
+        margin-bottom: 60px; /*Adjust the amount of space as needed*/
+    }
 }
-/* v4 */
 /* End of code */
+/*version 10*/

@@ -1,35 +1,52 @@
 // scripts/components/input.js
 
 export function createInput(options) {
-  const { type, id, name, placeholder, label, required, value } = options;
+  const { type, id, name, placeholder, label, required, value, options: selectOptions } = options;
 
-  // Start building the HTML string
   let inputHTML = `<div class="form-group">`;
 
-  // Add label if provided
   if (label) {
     inputHTML += `<label for="${id}">${label}</label>`;
   }
 
-  // Add the input element
-  inputHTML += `<input type="${type}" id="${id}" name="${name}"`;
+    if (type === 'select') { // Handle select element
+        inputHTML += `<select id="${id}" name="${name}"`;
+        if (required) {
+          inputHTML += ` required`;
+        }
+        inputHTML += `>`;
 
-  if (placeholder) {
-    inputHTML += ` placeholder="${placeholder}"`;
-  }
+        if (selectOptions) { // Check if options exist
+          selectOptions.forEach(option => {
+            // Add selected attribute if value matches
+            const selected = option.value === value ? 'selected' : '';
+            inputHTML += `<option value="${option.value}" ${selected}>${option.text}</option>`;
+        });
+        }
+        inputHTML += `</select>`;
 
-  if (required) {
-    inputHTML += ` required`;
-  }
+    } else {
+        // Handle other input types
+        inputHTML += `<input type="${type}" id="${id}" name="${name}"`;
 
-    if (value) {
-        inputHTML += `value="${value}"`;
+      if (placeholder) {
+        inputHTML += ` placeholder="${placeholder}"`;
+      }
+
+      if (required) {
+        inputHTML += ` required`;
+      }
+
+        if (value) {
+            inputHTML += ` value="${value}"`;
+        }
+
+      inputHTML += `>`;
     }
 
-  inputHTML += `>`; // Close the input tag
-  inputHTML += `</div>`; // Close the form-group div
+  inputHTML += `</div>`;
 
   return inputHTML;
 }
-
+//v5
 // End of code

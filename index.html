@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Teamzy</title>
     <link rel="stylesheet" href="style.css">
+    <link id="admin-styles" rel="stylesheet" href="styles/admin.css" disabled>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="manifest" href="manifest.json">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -27,8 +28,19 @@
     </header>
 
     <main>
-        <div id="app">
-            </div>
+      <div id="app">
+        </div>
+      <div id="admin-app" style="display: none;">
+            <nav id="admin-nav">
+            <button id="admin-menu-toggle" aria-label="Toggle Admin Menu">
+                <span>&#x21C4;</span> </button>
+                <ul id="admin-menu-items-container">
+                    </ul>
+            </nav>
+            <main id="admin-main">
+
+                </main>
+        </div>
     </main>
 
     <footer>
@@ -43,4 +55,3 @@
     <script type="module" src="scripts/app.js"></script>
 </body>
 </html>
-//Version 7
