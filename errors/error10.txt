@@ -1,0 +1,186 @@
+rendering admin menu
+navigation.js:47 Generated HTML for item: {path: '/admin/dashboard', label: 'Admin Dashboard', roles: Array(1), icon: 'fa-solid fa-screwdriver-wrench'} HTML: 
+                <li>
+                    <a href="#/admin/dashboard" class=" nav-button" data-navigo>
+                        <i class="fa-solid fa-screwdriver-wrench"></i>
+                        <span class="menu-text">Admin Dashboard</span>
+                    </a>
+                </li>
+            
+navigation.js:47 Generated HTML for item: {path: '/admin/users', label: 'Users', roles: Array(1), icon: 'fa-solid fa-users'} HTML: 
+                <li>
+                    <a href="#/admin/users" class=" nav-button" data-navigo>
+                        <i class="fa-solid fa-users"></i>
+                        <span class="menu-text">Users</span>
+                    </a>
+                </li>
+            
+navigation.js:47 Generated HTML for item: {path: '/admin/settings', label: 'Settings', roles: Array(1), icon: 'fa-solid fa-gear'} HTML: 
+                <li>
+                    <a href="#/admin/settings" class="active nav-button" data-navigo>
+                        <i class="fa-solid fa-gear"></i>
+                        <span class="menu-text">Settings</span>
+                    </a>
+                </li>
+            
+navigation.js:47 Generated HTML for item: {path: '/login', label: 'Logout', roles: Array(3), icon: 'fa-solid fa-right-from-bracket'} HTML: 
+                <li>
+                    <a href="#/login" class=" nav-button" data-navigo>
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                        <span class="menu-text">Logout</span>
+                    </a>
+                </li>
+            
+navigation.js:49 Complete menu HTML for admin : 
+                <li>
+                    <a href="#/admin/dashboard" class=" nav-button" data-navigo>
+                        <i class="fa-solid fa-screwdriver-wrench"></i>
+                        <span class="menu-text">Admin Dashboard</span>
+                    </a>
+                </li>
+            
+                <li>
+                    <a href="#/admin/users" class=" nav-button" data-navigo>
+                        <i class="fa-solid fa-users"></i>
+                        <span class="menu-text">Users</span>
+                    </a>
+                </li>
+            
+                <li>
+                    <a href="#/admin/settings" class="active nav-button" data-navigo>
+                        <i class="fa-solid fa-gear"></i>
+                        <span class="menu-text">Settings</span>
+                    </a>
+                </li>
+            
+                <li>
+                    <a href="#/login" class=" nav-button" data-navigo>
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                        <span class="menu-text">Logout</span>
+                    </a>
+                </li>
+            
+app.js:145 rendering admin menu
+navigation.js:47 Generated HTML for item: {path: '/admin/dashboard', label: 'Admin Dashboard', roles: Array(1), icon: 'fa-solid fa-screwdriver-wrench'} HTML: 
+                <li>
+                    <a href="#/admin/dashboard" class=" nav-button" data-navigo>
+                        <i class="fa-solid fa-screwdriver-wrench"></i>
+                        <span class="menu-text">Admin Dashboard</span>
+                    </a>
+                </li>
+            
+navigation.js:47 Generated HTML for item: {path: '/admin/users', label: 'Users', roles: Array(1), icon: 'fa-solid fa-users'} HTML: 
+                <li>
+                    <a href="#/admin/users" class=" nav-button" data-navigo>
+                        <i class="fa-solid fa-users"></i>
+                        <span class="menu-text">Users</span>
+                    </a>
+                </li>
+            
+navigation.js:47 Generated HTML for item: {path: '/admin/settings', label: 'Settings', roles: Array(1), icon: 'fa-solid fa-gear'} HTML: 
+                <li>
+                    <a href="#/admin/settings" class="active nav-button" data-navigo>
+                        <i class="fa-solid fa-gear"></i>
+                        <span class="menu-text">Settings</span>
+                    </a>
+                </li>
+            
+navigation.js:47 Generated HTML for item: {path: '/login', label: 'Logout', roles: Array(3), icon: 'fa-solid fa-right-from-bracket'} HTML: 
+                <li>
+                    <a href="#/login" class=" nav-button" data-navigo>
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                        <span class="menu-text">Logout</span>
+                    </a>
+                </li>
+            
+navigation.js:49 Complete menu HTML for admin : 
+                <li>
+                    <a href="#/admin/dashboard" class=" nav-button" data-navigo>
+                        <i class="fa-solid fa-screwdriver-wrench"></i>
+                        <span class="menu-text">Admin Dashboard</span>
+                    </a>
+                </li>
+            
+                <li>
+                    <a href="#/admin/users" class=" nav-button" data-navigo>
+                        <i class="fa-solid fa-users"></i>
+                        <span class="menu-text">Users</span>
+                    </a>
+                </li>
+            
+                <li>
+                    <a href="#/admin/settings" class="active nav-button" data-navigo>
+                        <i class="fa-solid fa-gear"></i>
+                        <span class="menu-text">Settings</span>
+                    </a>
+                </li>
+            
+                <li>
+                    <a href="#/login" class=" nav-button" data-navigo>
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                        <span class="menu-text">Logout</span>
+                    </a>
+                </li>
+            
+app.js:145 rendering admin menu
+navigation.js:47 Generated HTML for item: {path: '/admin/dashboard', label: 'Admin Dashboard', roles: Array(1), icon: 'fa-solid fa-screwdriver-wrench'} HTML: 
+                <li>
+                    <a href="#/admin/dashboard" class="active nav-button" data-navigo>
+                        <i class="fa-solid fa-screwdriver-wrench"></i>
+                        <span class="menu-text">Admin Dashboard</span>
+                    </a>
+                </li>
+            
+navigation.js:47 Generated HTML for item: {path: '/admin/users', label: 'Users', roles: Array(1), icon: 'fa-solid fa-users'} HTML: 
+                <li>
+                    <a href="#/admin/users" class=" nav-button" data-navigo>
+                        <i class="fa-solid fa-users"></i>
+                        <span class="menu-text">Users</span>
+                    </a>
+                </li>
+            
+navigation.js:47 Generated HTML for item: {path: '/admin/settings', label: 'Settings', roles: Array(1), icon: 'fa-solid fa-gear'} HTML: 
+                <li>
+                    <a href="#/admin/settings" class=" nav-button" data-navigo>
+                        <i class="fa-solid fa-gear"></i>
+                        <span class="menu-text">Settings</span>
+                    </a>
+                </li>
+            
+navigation.js:47 Generated HTML for item: {path: '/login', label: 'Logout', roles: Array(3), icon: 'fa-solid fa-right-from-bracket'} HTML: 
+                <li>
+                    <a href="#/login" class=" nav-button" data-navigo>
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                        <span class="menu-text">Logout</span>
+                    </a>
+                </li>
+            
+navigation.js:49 Complete menu HTML for admin : 
+                <li>
+                    <a href="#/admin/dashboard" class="active nav-button" data-navigo>
+                        <i class="fa-solid fa-screwdriver-wrench"></i>
+                        <span class="menu-text">Admin Dashboard</span>
+                    </a>
+                </li>
+            
+                <li>
+                    <a href="#/admin/users" class=" nav-button" data-navigo>
+                        <i class="fa-solid fa-users"></i>
+                        <span class="menu-text">Users</span>
+                    </a>
+                </li>
+            
+                <li>
+                    <a href="#/admin/settings" class=" nav-button" data-navigo>
+                        <i class="fa-solid fa-gear"></i>
+                        <span class="menu-text">Settings</span>
+                    </a>
+                </li>
+            
+                <li>
+                    <a href="#/login" class=" nav-button" data-navigo>
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                        <span class="menu-text">Logout</span>
+                    </a>
+                </li>
+            

@@ -41,7 +41,7 @@
   /* Transition */
   --transition: all 0.2s ease-in-out;
 
-    /* Menu */
+  /* Menu */
     --menu-width: 80%; /* Width of the slide-out menu */
 }
 
@@ -70,18 +70,24 @@ body {
 /* 3. Basic Layout */
 
 header {
-  background-color: var(--color-primary);
-  color: var(--color-background);
-  padding: var(--space-md);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-    position: relative; /* Added for absolute positioning of hamburger */
+   background-color: var(--color-primary);
+    color: var(--color-background);
+    padding: var(--space-md);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;   /* Make the header sticky */
+    top: 0;            /* Stick to the top */
+    z-index: 102;      /* Ensure it's above other content */
 }
 
 main {
     padding: var(--space-md);
     flex: 1; /* Allow main content to grow - keep this */
+    /* display: flex; Removed to allow for full width content */
+    /* justify-content: center; Removed to allow for full width */
+    /* align-items: center;      Removed to allow for full width */
+
 }
 
 footer {
@@ -240,6 +246,7 @@ textarea:focus, select:focus{
     width: 100%;
     z-index: 100;
     display: none; /* Initially hidden */
+    justify-content: center;
 }
 
 #bottom-nav ul {
@@ -249,6 +256,7 @@ textarea:focus, select:focus{
     padding: var(--space-sm);
     margin: 0;
     width: 100%;
+    max-width: var(--menu-width);
 }
 
 #bottom-nav a {
@@ -331,4 +339,4 @@ h6 { font-size: 0.875rem; }
     }
 }
 /* End of code */
-/*version 10*/
+/*v11*/

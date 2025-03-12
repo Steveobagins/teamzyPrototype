@@ -26,14 +26,13 @@ const routes = {
     '/payments': renderPayments,
     '/chat': renderChat,
   // Add more routes as needed
-    '/admin': renderAdmin,       // ADMIN ROUTE
+    '/admin': renderAdmin,       // ADMIN ROUTE - should render admin dashboard
   '/admin/users': renderUsers,    // ADMIN ROUTE
   '/admin/settings': renderSettings, // ADMIN ROUTE
 };
 
 // Function to render a view based on the current route
 function renderView(path) {
-    console.log("renderView called with path:", path); // Debug log
     const viewFunction = routes[path]; // Look up the view function
 
     if (viewFunction) {
@@ -41,7 +40,6 @@ function renderView(path) {
         const requiresAuth = ['/dashboard', '/profile', '/events','/payments','/chat',  '/admin', '/admin/users', '/admin/settings'].includes(path); //Added admin paths
         const user = getCurrentUser();
         if (requiresAuth && !user) {
-            console.log("Requires auth and user not logged in. Redirecting to /login"); // Debug log
             navigateTo('/login');
             return; // Stop execution
         }
@@ -49,22 +47,17 @@ function renderView(path) {
         // Admin check
         const adminOnly = ['/admin', '/admin/users', '/admin/settings'].includes(path);
         if (adminOnly && (!user || user.role !== 'admin')) {
-          console.log("Admin-only route accessed by non-admin. Redirecting to /dashboard");
           navigateTo('/dashboard'); // Redirect to a user-appropriate page
           return;
         }
-
-        console.log("Rendering view for path:", path); // Debug log
         viewFunction();
     } else {
-        console.log("404 Not Found for path:", path); // Debug log
         document.getElementById('app').innerHTML = '<h1>404 Not Found</h1>';
     }
 }
 
 // Function to handle navigation
 export function navigateTo(path) {
-    console.log("navigateTo called with path:", path); // Add this for debugging!
   window.location.hash = path; // Change the URL hash
 }
 
@@ -73,7 +66,6 @@ export function initializeRouter() {
   // Listen for hash changes
   window.addEventListener('hashchange', () => {
     const path = window.location.hash.slice(1) || '/login'; // Get path, default to /login
-        console.log("Hash changed to:", path); // Debug log
     renderView(path);
   });
 
@@ -86,5 +78,5 @@ export function initializeRouter() {
   const path = window.location.hash.slice(1) || '/login'; // Get path, default to / (login)
     renderView(path);
 }
-//v11
+//v15
 // End of code

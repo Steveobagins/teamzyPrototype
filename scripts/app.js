@@ -80,6 +80,10 @@ function updateUI(state) {
 
     if (state.currentUser) {
         // Logged in
+        if(logoutContainer) logoutContainer.style.display = 'none';
+        if(loginLinkContainer) loginLinkContainer.style.display = 'none';
+        if(profilePicture) profilePicture.style.display = 'inline-block'; // Show profile picture
+
       if (state.currentUser.role === 'admin') {
             // ADMIN LOGIC
             if (appContainer) appContainer.style.display = 'none'; // Hide user UI
@@ -90,17 +94,7 @@ function updateUI(state) {
                 adminAppContainer.style.display = 'block'; // Show admin UI
                 renderAdminMenuItems(state.currentUser.role, currentPath); // Render admin menu
               renderAdminToggleButton(); // Add this line to render button
-              //Initially minimise menu.
-              const adminNav = document.getElementById('admin-nav');
-              const adminMain = document.getElementById('admin-main');
-              if(adminNav){
-                adminNav.classList.add('menu-minimized');
-              }
-              if(adminMain){
-                adminMain.classList.add('menu-minimized')
-              }
-              if (profilePicture) profilePicture.style.display = 'inline-block'; // Show in header
-
+              setAdminMenuTop();
             }
         } else {
             // REGULAR USER LOGIC
@@ -108,13 +102,9 @@ function updateUI(state) {
             if (adminAppContainer) adminAppContainer.style.display = 'none'; // Hide admin UI
             if (appContainer) appContainer.style.display = 'block'; // Show user UI
             renderMenuItems(state.currentUser.role, currentPath); // Render bottom nav items
-          if(profilePicture) profilePicture.style.display = 'inline-block'; // Show profile picture
-            if(bottomNav) bottomNav.style.display = 'flex';
+          if(bottomNav) bottomNav.style.display = 'flex';
 
         }
-      //Logout moved to here, so always in same place.
-      if(logoutContainer) logoutContainer.style.display = 'none';
-        if(loginLinkContainer) loginLinkContainer.style.display = 'none';
 
     } else {
         // Logged out
@@ -133,7 +123,16 @@ function updateUI(state) {
         }
     }
 }
-
+//New function to set top of menu
+function setAdminMenuTop() {
+    const header = document.querySelector('header');
+    const adminNav = document.getElementById('admin-nav');
+    if (header && adminNav) {
+        const headerHeight = header.offsetHeight;
+        adminNav.style.top = `${headerHeight}px`;
+        console.log("set menu top",headerHeight)
+    }
+}
 function renderMenuItems(userRole, currentPath){
     const bottomMenuItemsContainer = document.getElementById('bottom-menu-items-container');
 
@@ -142,7 +141,6 @@ function renderMenuItems(userRole, currentPath){
     }
 }
 function renderAdminMenuItems(userRole, currentPath) {
-  console.log("rendering admin menu")
     const adminNavContainer = document.getElementById('admin-menu-items-container');
     if (adminNavContainer) {
         adminNavContainer.innerHTML = renderNavigation(userRole, currentPath, "admin"); // Render admin menu
@@ -151,5 +149,5 @@ function renderAdminMenuItems(userRole, currentPath) {
 
 document.addEventListener('DOMContentLoaded', initializeApp);
 
-//v24
+//v25
 // End of code
